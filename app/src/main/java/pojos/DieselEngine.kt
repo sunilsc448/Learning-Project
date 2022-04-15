@@ -1,7 +1,12 @@
 package pojos
 
-class PetrolEngine:Engine {
+import javax.inject.Inject
+
+class DieselEngine:Engine {
+    @Inject
+    constructor(){}
+
     override fun start() {
-        println("Petrol Engine Started...")
+        println("Diesel Engine Started.....")
     }
 }

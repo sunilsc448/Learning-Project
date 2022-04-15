@@ -1,4 +1,7 @@
 package pojos
 
-class Engine {
+import javax.inject.Inject
+
+interface Engine {
+   fun start()
 }

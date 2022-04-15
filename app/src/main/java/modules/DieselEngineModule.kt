@@ -2,13 +2,15 @@ package modules
 
 import dagger.Module
 import dagger.Provides
+import pojos.DieselEngine
 import pojos.Engine
 import pojos.PetrolEngine
+import javax.inject.Inject
 
 @Module
-class PetrolEngineModule {
+class DieselEngineModule {
     @Provides
-    fun getEngine(petrolEngine: PetrolEngine):Engine{
-        return petrolEngine
+    fun getEngine(dieselEngine: DieselEngine):Engine{
+        return dieselEngine
     }
 }
