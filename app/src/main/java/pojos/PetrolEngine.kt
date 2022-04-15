@@ -1,0 +1,4 @@
+package pojos
+
+interface PetrolEngine {
+}

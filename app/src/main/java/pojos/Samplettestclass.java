@@ -1,0 +1,3 @@
+package pojos;
+   class Samplettestclass   {
+}
