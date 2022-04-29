@@ -36,4 +36,14 @@ public class Samplettestclass {
             return 1.0 * ((data.get(len / 2 - 1)) + mid) / 2;
         }
     }
+
+    private int counter = 0;
+
+    public void inc1() {
+        counter++;
+    }
+
+    public void inc2() {
+        counter++;
+    }
 }

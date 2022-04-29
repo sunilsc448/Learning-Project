@@ -16,7 +16,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import pojos.KotlinTestFile;
 import pojos.Samplettestclass;
+import pojos.TreeNode;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,7 +53,10 @@ public class MainActivity extends AppCompatActivity {
 //        int[][] arr = {{0,1,0},{0,0,1},{1,1,1},{0,0,0}};
 //        gameOfLife(arr);
 //        String[] input = {"683339452288515879","7846081062003424420","4805719838","4840666580043","83598933472122816064","522940572025909479","615832818268861533","65439878015","499305616484085","97704358112880133","23861207501102","919346676","60618091901581","5914766072","426842450882100996","914353682223943129","97","241413975523149135","8594929955620533","55257775478129","528","5110809","7930848872563942788","758","4","38272299275037314530","9567700","28449892665","2846386557790827231","53222591365177739","703029","3280920242869904137","87236929298425799136","3103886291279"};
-        kthLargestNumber(new String[]{"2","21","12","1"}, 3);
+//        kthLargestNumber(new String[]{"2","21","12","1"}, 3);
+//        removeOutsideRange(getBSTree(), -13, 13);
+
+        firstFunction();
     }
 
     public int threeSumMulti(int[] arr, int target) {
@@ -460,5 +465,53 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return nums[nums.length - k];
+    }
+
+    //    [3,0,4,null,2,null,null,1]
+    private TreeNodeJava getBSTree() {
+        TreeNodeJava root = new TreeNodeJava(6);
+        root = root.insertBSTNode(root,-13);
+        root = root.insertBSTNode(root,14);
+        root = root.insertBSTNode(root,-8);
+        root = root.insertBSTNode(root,15);
+        root = root.insertBSTNode(root,13);
+        root = root.insertBSTNode(root,7);
+        return root;
+    }
+
+    private TreeNodeJava removeOutsideRange(TreeNodeJava root, int min, int max) {
+        // BASE CASE
+        if(root == null) {
+            return null;
+        }
+
+        root.left = removeOutsideRange(root.left, min, max);
+        root.right = removeOutsideRange(root.right, min, max);
+
+        if(root.key < min) {
+            TreeNodeJava rchild = root.right;
+            root = null;
+            return rchild;
+        }
+
+        if(root.key > max) {
+            TreeNodeJava lchild = root.left;
+            root = null;
+            return lchild;
+        }
+
+        return root;
+    }
+
+    private void firstFunction() {
+        TreeNode node = new TreeNode(5);
+        node.test(10,20);
+//        KotlinTestFile file = new KotlinTestFile();
+//        file.test1();
+        KotlinTestFile ktf = new KotlinTestFile();
+        ktf.add(2,3, 4);
+        KotlinTestFile.sub(2, 3);
+        KotlinTestFile.Companion.sub(2,3);
+//        KotlinSampleFile file = new KotlinSampleFile();
     }
 }

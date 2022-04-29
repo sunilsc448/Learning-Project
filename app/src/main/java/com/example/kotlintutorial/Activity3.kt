@@ -1,12 +1,15 @@
 package com.example.kotlintutorial
 
-import ListNode
+import KotlinSamples.*
+import pojos.ListNode
+import pojos.TreeNode
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.IntegerRes
+import java.math.BigInteger
 import java.util.*
 import kotlin.collections.ArrayDeque
 import kotlin.collections.ArrayList
+
 
 class Activity3 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,11 +37,13 @@ class Activity3 : AppCompatActivity() {
 //        generateMatrix(3)
 
 
-        maxSlidingWindowDeque(intArrayOf(4,1,3,5,1,2,3,2,1,1,5),3)
+//        maxSlidingWindowDeque(intArrayOf(4,1,3,5,1,2,3,2,1,1,5),3)
+//        trimBST(getBSTree(), -13, 14)
+        firstFunction()
     }
 
-    var counter = 0
     private fun areDistinct(inputString:String, i:Int, j:Int) : Boolean{
+        var counter = 0
         val visited:BooleanArray = BooleanArray(26)
         for (k in i until j){
             println("counter >>> $counter++")
@@ -53,6 +58,7 @@ class Activity3 : AppCompatActivity() {
     }
 
     fun longestUniqueSubsttr(str: String): Int {
+        var counter = 0
         val n = str.length
 
         // Result
@@ -88,7 +94,7 @@ class Activity3 : AppCompatActivity() {
         return result
     }
 
-    private fun getNode1():ListNode {
+    private fun getNode1(): ListNode {
         var node1 = ListNode(9)
         var node2 = ListNode(9)
         var node3 = ListNode(9)
@@ -105,7 +111,7 @@ class Activity3 : AppCompatActivity() {
         return node1
     }
 
-    private fun getNode2():ListNode {
+    private fun getNode2(): ListNode {
         var node1 = ListNode(9)
         var node2 = ListNode(9)
         var node3 = ListNode(9)
@@ -119,7 +125,7 @@ class Activity3 : AppCompatActivity() {
     fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
         var list1 = l1; var list2 = l2
         val head = ListNode(0)
-        var current:ListNode? = head
+        var current: ListNode? = head
 
         var carry = 0
         while (list1 != null && list2 != null){
@@ -707,4 +713,293 @@ class Activity3 : AppCompatActivity() {
 
         return resultArray
     }
+
+    fun searchBST(root: TreeNode?, `val`: Int): TreeNode? {
+        if(root == null){
+            return root
+        }
+        if(root?.`val`?.equals(`val`)!!){
+            return root
+        }
+        val leftNode =  searchBST(root?.left,`val`)
+        if(leftNode == null){
+            val rightNode = searchBST(root?.right,`val`)
+            return rightNode
+        }
+        return leftNode
+    }
+
+    fun trimBST(root: TreeNode?, low: Int, high: Int): TreeNode? {
+        if(root == null)
+            return null
+
+        root.left = trimBST(root.left, low, high)
+        root.right = trimBST(root.right, low, high)
+        if(root.`val`!! < low){
+            return root.right
+        }else if(root.`val`!! > high){
+            return root.left
+        }
+        return root
+    }
+
+    //    [3,0,4,null,2,null,null,1]
+    private fun getBSTree(inputs: IntArray): TreeNode? {
+        var root: TreeNode? = null
+        for (i in inputs.indices){
+            val item = inputs.get(i)
+            if(i == 0){
+                root= TreeNode(item)
+            }else{
+                if(item != null)
+                    root = root?.insert(root,item)
+            }
+        }
+        return root
+    }
+
+    var preOrderCounter = 0
+    var preOrderArray:IntArray? = null
+    private fun preOrderTraversal(root: TreeNode?) {
+        if(root == null)
+            return
+        preOrderArray!!.set(preOrderCounter++,root.`val`!!)
+        preOrderTraversal(root.left)
+        preOrderTraversal(root.right)
+    }
+
+    private fun createBinaryTree(inputs: IntArray): TreeNode? {
+        var root: TreeNode? = TreeNode(inputs[0])
+        var queue:Queue<TreeNode> = LinkedList<TreeNode>()
+        queue.add(root)
+
+        for (i in 1 until inputs.size - 1 step 2){
+            var node = queue.poll()
+            val itemLeft = inputs.get(i)
+            val itemRight = inputs.get(i + 1)
+            var leftNode = TreeNode(itemLeft)
+            var rightNode = TreeNode(itemRight)
+            queue.add(leftNode)
+            queue.add(rightNode)
+            node.left = leftNode
+            node.right = rightNode
+        }
+        return root
+    }
+
+    private fun maxOfTwoNums(a:Int, b:Int, c:Int = 0):Int = if(a > b) {
+            print("dsdsdsd")
+            a
+        }else{
+            print("dsdsdsd")
+            b
+        }
+
+    var count = 0
+    fun kthSmallest(root: TreeNode?, k: Int): Int? {
+        val result = kthSmallestFunction(root, k)
+        if(result == null){
+            return null
+        }else{
+            return result.`val`
+        }
+    }
+
+    fun kthSmallestFunction(root: TreeNode?, k: Int): TreeNode? {
+        if(root == null)return root
+        val left = kthSmallestFunction(root.left, k)
+        if(left != null){
+            return left
+        }
+        count++
+        if(count == k)
+            return root
+
+        return kthSmallestFunction(root.right, k)
+    }
+
+    private fun charFunction(){
+//        val input = "UURRD"
+        val input = "URDR"
+        var row = 0
+        var column = 0
+        var result = ""
+        for (i in input.indices){
+            val char = input[i]
+            if(char.equals('U')){
+                row++
+            }else if(char.equals('D')){
+                row--
+            } else if(char.equals('R')){
+                column++
+            }else if(char.equals('L')){
+                column--
+            }
+        }
+        if(row < 0){
+            while (row < 0){
+                result += "D"
+                row++
+            }
+        }else{
+            while (row > 0){
+                result += "U"
+                row--
+            }
+        }
+
+        if(column < 0){
+            while (column < 0){
+                result += "L"
+            }
+        }else{
+            while (column > 0){
+                result += "R"
+                column--
+            }
+        }
+
+        println("result is ${result}")
+    }
+
+    fun fibonacci(n: Int): BigInteger {
+        if(n <= 1)
+            return BigInteger(n.toString())
+
+        var a = BigInteger("0"); var b = BigInteger("1"); var c = BigInteger("0")
+        if(n == 0)
+            return a
+
+        for(i in 2..n){
+            c = a + b
+            a = b
+            b = c
+        }
+        return b
+    }
+
+    tailrec fun fibonacciRec(n:Int, a:BigInteger, b:BigInteger):BigInteger{
+         if(n == 0){
+             return b
+         }else{
+             return fibonacciRec(n-1, a+b, a)
+         }
+    }
+
+    private fun firstFunction() {
+        //trimBST(getBSTree(), -13, 14)
+//        charFunction()
+//        val smallestElement = kthSmallest(getBSTree(), 6)
+//        println(smallestElement)
+//       val x = 1..5
+//        println("the X is $x")
+//        maxOfTwoNums(5,10)
+//        KotlinTestFile.sub(b=2,a=3)
+//        val file = KotlinTestFile()
+//        val s1 = "How you "
+//        val s2 = "doing?"
+//        val s3 = "Hey, "
+//        println(s3.add(s1, s2))
+//        val num = 100
+//        println("is $num modulus of 10? and the answer is ${num.isModulusOfTen()}")
+//        val num = 1000000
+//        var fibnum = fibonacciRec(num, BigInteger("1"), BigInteger("0"))
+//        println("fibonacci number of ${num} is $fibnum")
+//        getBSTree()
+//        createBinaryTree(intArrayOf(1,2,3,4,5,6,7, 8, 9, 10, 11))
+//        val inputArray = intArrayOf(1,3,2)
+//        preOrderArray = IntArray(inputArray.size)
+//        preOrderTraversal(createBinaryTree(inputArray))
+//        val finalNode = getBSTree(preOrderArray!!)
+//        println(finalNode)
+//        findMedianSortedArrays(nums1 =  intArrayOf(1,2), nums2 = intArrayOf(3,4))
+
+//         ArraySample()
+//        MapsSample()
+//         SetSample()
+//        subStringProblem()
+//        HashMapKeySample("sunil")
+//        FilterAndMapSample()
+//        PredicateSample()
+//        SafeCallSample()
+//        LateinitSample()
+//          BackingFieldSample()
+//          LazyInitilisationSample()
+//          HighLevelFunctions()
+//        ScopeFunctionsSample()
+    }
+
+    private fun subStringProblem() {
+        val input = "abc"
+        val n = 10
+        var newString = ""
+
+        val quotient = n/input.length
+        val remainder = n%input.length
+        for(i in 0 until quotient){
+            newString += input
+        }
+
+        for(i in 0 until remainder){
+            newString += input[i]
+        }
+
+        println("newString is $newString")
+
+        var result = 0
+        for(i in 0 until newString.length){
+            if(newString[i] == 'a'){
+                result++
+            }
+        }
+
+        println("the final output is $result")
+    }
+
+
+
+    //Extension functions
+    fun String.add(s1:String, s2:String):String{
+        return this + s1 + s2
+    }
+
+    fun Int.isModulusOfTen():Boolean{
+        return this % 10 == 0
+    }
+
+    fun findMedianSortedArrays(nums1: IntArray, nums2: IntArray): Double {
+        var i = 0; var j = 0
+        var mergeArray = IntArray(nums1.size + nums2.size)
+        var counter = 0
+        while(i < nums1.size && j < nums2.size){
+            if(nums1[i] < nums2[j]){
+                mergeArray[counter++] = nums1[i++]
+            }else{
+                mergeArray[counter++] = nums2[j++]
+            }
+        }
+
+        while(i < nums1.size){
+            mergeArray[counter++] = nums1[i++]
+        }
+
+        while(j < nums2.size){
+            mergeArray[counter++] = nums2[j++]
+        }
+
+        val middle = (mergeArray.size - 1)/2
+
+        var double = 0.0
+        if(mergeArray.size % 2 == 0){
+            double = (mergeArray[middle].toDouble() + mergeArray[middle + 1].toDouble())/2
+        }else{
+            double = mergeArray[middle].toDouble()
+        }
+
+        return double
+    }
+
+
 }
+
+
