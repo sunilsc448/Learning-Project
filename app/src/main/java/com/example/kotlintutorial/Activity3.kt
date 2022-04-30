@@ -886,49 +886,6 @@ class Activity3 : AppCompatActivity() {
          }
     }
 
-    private fun firstFunction() {
-        //trimBST(getBSTree(), -13, 14)
-//        charFunction()
-//        val smallestElement = kthSmallest(getBSTree(), 6)
-//        println(smallestElement)
-//       val x = 1..5
-//        println("the X is $x")
-//        maxOfTwoNums(5,10)
-//        KotlinTestFile.sub(b=2,a=3)
-//        val file = KotlinTestFile()
-//        val s1 = "How you "
-//        val s2 = "doing?"
-//        val s3 = "Hey, "
-//        println(s3.add(s1, s2))
-//        val num = 100
-//        println("is $num modulus of 10? and the answer is ${num.isModulusOfTen()}")
-//        val num = 1000000
-//        var fibnum = fibonacciRec(num, BigInteger("1"), BigInteger("0"))
-//        println("fibonacci number of ${num} is $fibnum")
-//        getBSTree()
-//        createBinaryTree(intArrayOf(1,2,3,4,5,6,7, 8, 9, 10, 11))
-//        val inputArray = intArrayOf(1,3,2)
-//        preOrderArray = IntArray(inputArray.size)
-//        preOrderTraversal(createBinaryTree(inputArray))
-//        val finalNode = getBSTree(preOrderArray!!)
-//        println(finalNode)
-//        findMedianSortedArrays(nums1 =  intArrayOf(1,2), nums2 = intArrayOf(3,4))
-
-//         ArraySample()
-//        MapsSample()
-//         SetSample()
-//        subStringProblem()
-//        HashMapKeySample("sunil")
-//        FilterAndMapSample()
-//        PredicateSample()
-//        SafeCallSample()
-//        LateinitSample()
-//          BackingFieldSample()
-//          LazyInitilisationSample()
-//          HighLevelFunctions()
-//        ScopeFunctionsSample()
-    }
-
     private fun subStringProblem() {
         val input = "abc"
         val n = 10
@@ -955,8 +912,6 @@ class Activity3 : AppCompatActivity() {
 
         println("the final output is $result")
     }
-
-
 
     //Extension functions
     fun String.add(s1:String, s2:String):String{
@@ -999,7 +954,50 @@ class Activity3 : AppCompatActivity() {
         return double
     }
 
+    private fun firstFunction() {
+        //trimBST(getBSTree(), -13, 14)
+//        charFunction()
+//        val smallestElement = kthSmallest(getBSTree(), 6)
+//        println(smallestElement)
+//       val x = 1..5
+//        println("the X is $x")
+//        maxOfTwoNums(5,10)
+//        KotlinTestFile.sub(b=2,a=3)
+//        val file = KotlinTestFile()
+//        val s1 = "How you "
+//        val s2 = "doing?"
+//        val s3 = "Hey, "
+//        println(s3.add(s1, s2))
+//        val num = 100
+//        println("is $num modulus of 10? and the answer is ${num.isModulusOfTen()}")
+//        val num = 1000000
+//        var fibnum = fibonacciRec(num, BigInteger("1"), BigInteger("0"))
+//        println("fibonacci number of ${num} is $fibnum")
+//        getBSTree()
+//        createBinaryTree(intArrayOf(1,2,3,4,5,6,7, 8, 9, 10, 11))
+//        val inputArray = intArrayOf(1,3,2)
+//        preOrderArray = IntArray(inputArray.size)
+//        preOrderTraversal(createBinaryTree(inputArray))
+//        val finalNode = getBSTree(preOrderArray!!)
+//        println(finalNode)
+//        findMedianSortedArrays(nums1 =  intArrayOf(1,2), nums2 = intArrayOf(3,4))
 
+//         ArraySample()
+//        MapsSample()
+//         SetSample()
+//        subStringProblem()
+//        HashMapKeySample("sunil")
+//        FilterAndMapSample()
+//        PredicateSample()
+//        SafeCallSample()
+//        LateinitSample()
+//          BackingFieldSample()
+//          LazyInitilisationSample()
+//          HighLevelFunctions()
+//        ScopeFunctionsSample()
+//        HashMapSample()
+        HMSample()
+    }
 }
 
 
