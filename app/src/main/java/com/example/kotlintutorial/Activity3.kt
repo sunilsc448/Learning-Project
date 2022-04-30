@@ -995,8 +995,7 @@ class Activity3 : AppCompatActivity() {
 //          LazyInitilisationSample()
 //          HighLevelFunctions()
 //        ScopeFunctionsSample()
-//        HashMapSample()
-        HMSample()
+        HashMapSample()
     }
 }
 
