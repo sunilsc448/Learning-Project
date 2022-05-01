@@ -1,5 +1,13 @@
 package KotlinSamples
 
+class KotlinCollections {
+    init {
+        ArraySample()
+        MapsSample()
+        SetSample()
+    }
+}
+
 class ArraySample{
     init {
         val postfixArray = listOf("st", "nd", "rd", "th")
@@ -76,7 +84,7 @@ class MapsSample{
     init {
         val mymap = mapOf(5 to "Yogi", 10 to "Yogi")
         for (key in mymap.keys){
-            println("map element for key$key is ${mymap[key]}")
+            println("map element for key $key is ${mymap[key]}")
         }
     }
 }
