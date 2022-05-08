@@ -3,7 +3,7 @@ package KotlinSamples
 class KotlinCollections {
     init {
         ArraySample()
-        MapsSample()
+        MapSample()
         SetSample()
     }
 }
@@ -80,7 +80,7 @@ class ArraySample{
     }
 }
 
-class MapsSample{
+class MapSample{
     init {
         val mymap = mapOf(5 to "Yogi", 10 to "Yogi")
         for (key in mymap.keys){

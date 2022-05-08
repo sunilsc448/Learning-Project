@@ -47,7 +47,7 @@ class HMCustom<K, V> {
     var arraySize = 16
     val loadFactor = 0.9
     var itemCount = 0
-    var entries:Array<LinkedListSamples<Entri<K, V>>> = Array(arraySize){ LinkedList<Entri<K, V>>() }
+    var entries:Array<LinkedList<Entri<K, V>>> = Array(arraySize){ LinkedList<Entri<K, V>>() }
     fun put(key:K, value:V){
         itemCount ++
         if(itemCount  > (arraySize * loadFactor)){
@@ -56,7 +56,7 @@ class HMCustom<K, V> {
         put(key, value, entries)
     }
 
-    fun put(key:K, value:V, localEntries:Array<LinkedListSamples<Entri<K, V>>>){
+    fun put(key:K, value:V, localEntries:Array<LinkedList<Entri<K, V>>>){
         val newEntri = Entri(key, value)
         val index = createHash(key)
         val linkedList = localEntries[index]

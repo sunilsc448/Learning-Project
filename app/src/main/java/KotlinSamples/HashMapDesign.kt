@@ -57,7 +57,7 @@ class HashMapCustom<K, V> {
 //   private val entries:Array<Entry<K, V>?> = arrayOfNulls(arraySize)
 
     //After Collision
-    private var entries:Array<LinkedListSamples<Entry<K,V>>> = Array(arraySize){ LinkedList<Entry<K,V>>() }
+    private var entries:Array<LinkedList<Entry<K,V>>> = Array(arraySize){ LinkedList<Entry<K,V>>() }
 
     fun get(key: K):V?{
        val index = calculateHashCode(key)
@@ -108,7 +108,7 @@ class HashMapCustom<K, V> {
         put(key, value, entries)
     }
 
-    fun put(key: K, value: V, localEntries: Array<LinkedListSamples<Entry<K, V>>>) {
+    fun put(key: K, value: V, localEntries: Array<LinkedList<Entry<K, V>>>) {
         val index = calculateHashCode(key)
         val newEntry = Entry(key, value)
         //Before Collision
@@ -127,7 +127,7 @@ class HashMapCustom<K, V> {
     private fun increaseCapacity(){
         numberOfEntries = 0
         arraySize *= 2
-        val newEntries:Array<LinkedListSamples<Entry<K, V>>> = Array(arraySize){ LinkedList<Entry<K, V>>() }
+        val newEntries:Array<LinkedList<Entry<K, V>>> = Array(arraySize){ LinkedList<Entry<K, V>>() }
         entries.forEach {
             it.forEach { entry ->
                 put(entry.key, entry.value, newEntries)

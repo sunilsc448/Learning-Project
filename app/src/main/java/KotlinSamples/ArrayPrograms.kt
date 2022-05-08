@@ -8,21 +8,18 @@ import kotlin.collections.HashMap
 
 class ArrayPrograms {
     init {
-        codingChallengePathFunction()
+//        val x = 1..5
+//        println("the X is $x")
+//
+//        maxOfTwoNums(5,10)
+//
+//        val num = 1000000
+//        var fibnum = fibonacciRec(num, BigInteger("1"), BigInteger("0"))
+//        println("fibonacci number of ${num} is $fibnum")
+//
+//        findMedianSortedArrays(nums1 =  intArrayOf(1,2), nums2 = intArrayOf(3,4))
 
-        val x = 1..5
-        println("the X is $x")
-
-        maxOfTwoNums(5,10)
-
-        val num = 1000000
-        var fibnum = fibonacciRec(num, BigInteger("1"), BigInteger("0"))
-        println("fibonacci number of ${num} is $fibnum")
-
-        findMedianSortedArrays(nums1 =  intArrayOf(1,2), nums2 = intArrayOf(3,4))
-        println("result is ${makeAPalindrome("mdaam")}")
-
-        subStringProblem()
+        nextGreatestElement(intArrayOf(4, 5, 2, 25))
     }
 
     fun fibonacci(n: Int): BigInteger {
@@ -56,48 +53,69 @@ class ArrayPrograms {
             b
         }
 
-    private fun codingChallengePathFunction(){
-//        val input = "UURRD"
-        val input = "URDR"
-        var row = 0
-        var column = 0
-        var result = ""
-        for (i in input.indices){
-            val char = input[i]
-            if(char.equals('U')){
-                row++
-            }else if(char.equals('D')){
-                row--
-            } else if(char.equals('R')){
-                column++
-            }else if(char.equals('L')){
-                column--
-            }
-        }
-        if(row < 0){
-            while (row < 0){
-                result += "D"
-                row++
-            }
-        }else{
-            while (row > 0){
-                result += "U"
-                row--
-            }
-        }
+    fun printMedian(arr: IntArray, n: Int) {
+        val output = IntArray(arr.size)
+        var outputCount = 0
+        var i: Int
+        var j: Int
+        var pos: Int
+        var num: Int
+        var count = 1
+        println(
+            """Median after reading ${arr[0]} is $count 
+"""
+        )
+        output[outputCount++] = count
+        i = 1
+        while (i < n) {
+            var median: Float
+            j = i - 1
+            num = arr[i]
 
-        if(column < 0){
-            while (column < 0){
-                result += "L"
-            }
-        }else{
-            while (column > 0){
-                result += "R"
-                column--
-            }
-        }
+            // find position to insert current element in sorted
+            // part of array
+            pos = binarySearch(arr, num, 0, j)
 
-        println("result is ${result}")
+            // move elements to right to create space to insert
+            // the current element
+            while (j >= pos) {
+                arr[j + 1] = arr[j]
+                j--
+            }
+            arr[j + 1] = num
+
+            // increment count of sorted elements in array
+            count++
+
+            // if odd number of integers are read from stream
+            // then middle element in sorted order is median
+            // else average of middle elements is median
+            median = if (count % 2 != 0) {
+                arr[count / 2].toFloat()
+            } else {
+                ((arr[count / 2 - 1] + arr[count / 2]) / 2).toFloat()
+            }
+            output[outputCount++] = median.toInt()
+            println(
+                """Median after reading ${i + 1} is $median 
+"""
+            )
+            i++
+        }
+    }
+
+    fun binarySearch(arr: IntArray, item: Int, low: Int, high: Int): Int {
+        if (low >= high) {
+            return if (item > arr[low]) low + 1 else low
+        }
+        val mid = (low + high) / 2
+        if (item == arr[mid]) return mid + 1
+        return if (item > arr[mid]) binarySearch(arr, item, mid + 1, high) else binarySearch(
+            arr,
+            item,
+            low,
+            mid - 1
+        )
     }
 
     fun findMedianSortedArrays(nums1: IntArray, nums2: IntArray): Double {
@@ -132,127 +150,6 @@ class ArrayPrograms {
         return double
     }
 
-    fun makeAPalindrome(input:String):String{
-        val map = mutableMapOf<Char, Int>()
-//        var map = HashMap<Char, Int>()
-        for (char in input){
-            if (map.containsKey(char)){
-                map.put(char, map.get(char)!! + 1)
-            }else{
-                map.put(char, 1)
-            }
-        }
-        var oddCount = 0
-        var oddChar:Char = '\u0000'
-        map.forEach{
-            if(it.value %2 != 0){
-                oddCount++
-                oddChar = it.key
-            }
-        }
-
-        if(oddCount > 1 || (oddCount == 1 && input.length %2 == 0)){
-            return "Not a Palindrome"
-        }
-
-
-        var leftPart = ""; var rightPart = ""
-        map.forEach{
-            var i = 0
-            var str = ""
-            while (i < it.value/2){
-                str += it.key
-                i++
-            }
-            leftPart = leftPart + str
-            rightPart = str + rightPart
-        }
-
-        return if (oddCount == 1)
-            leftPart + oddChar + rightPart
-        else
-            leftPart + rightPart
-    }
-
-    private fun subStringProblem() {
-        val input = "abc"
-        val n = 10
-        var newString = ""
-
-        val quotient = n/input.length
-        val remainder = n%input.length
-        for(i in 0 until quotient){
-            newString += input
-        }
-
-        for(i in 0 until remainder){
-            newString += input[i]
-        }
-
-        println("newString is $newString")
-
-        var result = 0
-        for(i in 0 until newString.length){
-            if(newString[i] == 'a'){
-                result++
-            }
-        }
-
-        println("the final output is $result")
-    }
-
-    fun longestUniqueSubsttr(str: String): Int {
-        var counter = 0
-        val n = str.length
-
-        // Result
-        var res = 0
-        for (i in 0 until n) {
-            for (j in i until n) {
-                println("counter >>> $counter++")
-                if (areDistinct(str, i, j)) {
-                    res = Math.max(res, j - i + 1)
-                }
-            }
-        }
-        println("RE >>> $counter++")
-        return res
-    }
-
-    fun lengthOfLongestSubstring(s: String): Int {
-        var result = 0
-        val n = s.length
-        for(i in 0 until n){
-            var visitedArray = BooleanArray(256)
-            for(j in i until n){
-                val asciival = s.elementAt(j).toInt()
-                if(visitedArray[asciival] == true){
-                    break;
-                }else{
-                    result = Math.max(result, j-i+1)
-                    visitedArray[asciival] = true
-                }
-            }
-            visitedArray[s.elementAt(i).toInt()] = false
-        }
-        return result
-    }
-
-    private fun areDistinct(inputString:String, i:Int, j:Int) : Boolean{
-        var counter = 0
-        val visited = BooleanArray(26)
-        for (k in i until j){
-            println("counter >>> $counter++")
-            val ascii = inputString.elementAt(k) - 'a'
-            if(visited[ascii]){
-                return false
-            }
-
-            visited[ascii] = true
-        }
-        return true
-    }
-
     fun twoSum(nums: IntArray, target: Int): IntArray {
         var outputArray = IntArray(2)
         var map:HashMap<Int, Int> = HashMap<Int, Int>()
@@ -268,7 +165,7 @@ class ArrayPrograms {
         return outputArray
     }
 
-    fun threeSumMulti(arr: IntArray, target: Int): Int {
+    fun areDistinct(arr: IntArray, target: Int): Int {
         val mod = 1000000007
         var sum = 0
         var map = HashMap<Int, Int>()
@@ -375,6 +272,11 @@ class ArrayPrograms {
         println("printing Area >>>"+Area)
     }
 
+    //Two Pointer Approach
+    fun containerMostWaterBetterApproach(arr:IntArray){
+
+    }
+
     //stones = [2,7,4,1,8,1]
     fun lastStoneWeight(stones: IntArray): Int {
         if(stones.size == 0)
@@ -448,36 +350,109 @@ class ArrayPrograms {
     }
 
     fun kthLargestNumberComparatorApproach(nums: Array<String>, k: Int): String {
-
         Arrays.sort(nums) { a, b ->
             if (a.length !== b.length)
                 a.length - b.length
             else a.compareTo(b)
         }
-
-//        var sortedList = nums.sortedWith (object : Comparator <String> {
-//                override fun compare (num1: String, num2: String) : Int {
-//                    val len1 = num1.length
-//                    val len2 = num2.length
-//                    return if (len1 > len2) {
-//                        1
-//                    } else if (len1 < len2) {
-//                        -1
-//                    } else {
-//                        for (i in 0 until len1) {
-//                            val c1 = num1[i] - '0'
-//                            val c2 = num2[i] - '0'
-//                            if (c1 > c2) {
-//                                return 1
-//                            } else if (c1 < c2) {
-//                                return -1
-//                            }
-//                        }
-//                        0
-//                    }
-//                }
-//            })
-
         return nums[nums.size - k]
+    }
+
+    //13, 7, 6, 12
+    //4, 5, 2, 25
+    fun nextGreatestElement(arr:IntArray){
+        val size = arr.size
+        for (i in 0 until size){
+            var next = -1
+            for (j in i+1 until size){
+                if(arr[j] > arr[i]){
+                    next = arr[j]
+                    break
+                }
+            }
+            println("${arr[i]}'s next element is $next")
+        }
+    }
+
+    private fun maximumSumSlidingProblem(arr: IntArray, m: Int): Int {
+        var maxSum = 0
+        for (i in 0 until arr.size - m) {
+            var sum = 0
+            for (j in i until i + m) {
+                sum += arr[j]
+            }
+            if (sum > maxSum) {
+                maxSum = sum
+            }
+        }
+        return maxSum
+    }
+
+    private fun maximumSumSlidingProblemBetterApproach(arr: IntArray, m: Int): Int {
+        var maxSum = 0
+        var windowSum = 0
+        for (i in 0 until m) {
+            maxSum += arr[i]
+        }
+        windowSum = maxSum
+        for (i in m until arr.size) {
+            windowSum = windowSum + (arr[i] - arr[i - m])
+            maxSum = Math.max(windowSum, maxSum)
+        }
+        return maxSum
+    }
+
+    fun gameOfLife(arr: Array<IntArray>) {
+        val m = arr.size
+        val n: Int = arr[0].size
+        val changed = Array(m) {
+            BooleanArray(
+                n
+            )
+        }
+        for (i in 0 until m) {
+            for (j in 0 until n) {
+                var currentVal = arr[i][j]
+                val countOfLives = count(arr, i, j, m, n, changed) //count live neighbours
+                if (currentVal == 0) {
+                    if (countOfLives == 3) {
+                        changed[i][j] = true
+                        currentVal = 1
+                    }
+                } else {
+                    if (countOfLives < 2) {
+                        changed[i][j] = true
+                        currentVal = 0
+                    } else if (countOfLives > 3) {
+                        changed[i][j] = true
+                        currentVal = 0
+                    }
+                }
+                arr[i][j] = currentVal
+            }
+        }
+    }
+
+    //function for counting the live neighbours of current cell
+    fun count(arr: Array<IntArray>, i: Int, j: Int, m: Int, n: Int, changed: Array<BooleanArray>?): Int {
+        val dis = arrayOf(
+            intArrayOf(-1, -1),
+            intArrayOf(-1, 0),
+            intArrayOf(-1, 1),
+            intArrayOf(0, -1),
+            intArrayOf(0, 1),
+            intArrayOf(1, -1),
+            intArrayOf(1, 0),
+            intArrayOf(1, 1)
+        )
+        var cnt = 0
+        for (k in 0..7) {
+            val x = i + dis[k][0]
+            val y = j + dis[k][1]
+            if (x >= 0 && y >= 0 && x < m && y < n && arr[x][y] == 1) {
+                cnt++
+            }
+        }
+        return cnt
     }
 }

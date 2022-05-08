@@ -21,7 +21,7 @@ class MyHashMap() {
     private var arraySize = 16
     private var numberOfEntries = 0
     private var loadFactor = 0.75
-    private var entries:Array<LinkedListSamples<Entry1>> = Array(arraySize){ LinkedList<Entry1>()}
+    private var entries:Array<LinkedList<Entry1>> = Array(arraySize){ LinkedList<Entry1>()}
     fun put(key: Int, value: Int) {
         numberOfEntries++
 
@@ -32,7 +32,7 @@ class MyHashMap() {
         put(key, value, entries)
     }
 
-    fun put(key: Int, value: Int, localEntries: Array<LinkedListSamples<Entry1>>) {
+    fun put(key: Int, value: Int, localEntries: Array<LinkedList<Entry1>>) {
         val index = calculateHashCode(key)
         val newEntry = Entry1(key, value)
         val slotslinkedList = localEntries[index]
@@ -62,7 +62,7 @@ class MyHashMap() {
     private fun increaseCapacity(){
         numberOfEntries = 0
         arraySize *= 2
-        val newEntries:Array<LinkedListSamples<Entry1>> = Array(arraySize){ LinkedList<Entry1>() }
+        val newEntries:Array<LinkedList<Entry1>> = Array(arraySize){ LinkedList<Entry1>() }
         entries.forEach {
             it.forEach { entry ->
                 put(entry.key, entry.value, newEntries)

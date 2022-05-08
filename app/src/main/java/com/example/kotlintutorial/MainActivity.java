@@ -1,24 +1,13 @@
 package com.example.kotlintutorial;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
-
-import pojos.KotlinTestFile;
 import pojos.Samplettestclass;
-import pojos.TreeNode;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,157 +46,6 @@ public class MainActivity extends AppCompatActivity {
 //        removeOutsideRange(getBSTree(), -13, 13);
 
         firstFunction();
-    }
-
-    public int threeSumMulti(int[] arr, int target) {
-        HashMap<Integer, Integer> hm=new HashMap<>();
-        int mod= 1000000007;
-        hm.put(arr[0], 1);
-        int ans=0;
-        for(int i=1;i<arr.length;i++) {
-            for(int j=i+1;j<arr.length;j++) {
-                if(arr[i]+arr[j]>target)
-                    continue;
-                else {
-                    int re=target-(arr[i]+arr[j]);
-                    if(hm.containsKey(re))
-                        ans=(ans%mod+hm.get(re)%mod)%mod;
-                }
-            }
-            if(hm.containsKey(arr[i]))
-                hm.put(arr[i], hm.get(arr[i])+1);
-
-            else
-                hm.put(arr[i], 1);
-        }
-        return ans;
-    }
-
-    public static Boolean areDistinct(String str, int i, int j) {
-
-        // Note : Default values in visited are false
-        boolean[] visited = new boolean[26];
-
-        for(int k = i; k <= j; k++)
-        {
-            if (visited[str.charAt(k) - 'a'] == true)
-                return false;
-
-            visited[str.charAt(k) - 'a'] = true;
-        }
-        return true;
-    }
-
-    void printMedian(int arr[], int n)
-    {
-        int[] output = new int[arr.length];
-        int outputCount = 0;
-        int i, j, pos, num;
-        int count = 1;
-        System.out.println("Median after reading "+arr[0]+" is "+count+" \n");
-        output[outputCount++] = count;
-        for (i = 1; i < n; i++) {
-            float median;
-            j = i - 1;
-            num = arr[i];
-
-            // find position to insert current element in sorted
-            // part of array
-            pos = binarySearch(arr, num, 0, j);
-
-            // move elements to right to create space to insert
-            // the current element
-            while (j >= pos) {
-                arr[j + 1] = arr[j];
-                j--;
-            }
-
-            arr[j + 1] = num;
-
-            // increment count of sorted elements in array
-            count++;
-
-            // if odd number of integers are read from stream
-            // then middle element in sorted order is median
-            // else average of middle elements is median
-            if (count % 2 != 0) {
-                median = arr[count / 2];
-            }
-            else {
-                median = (arr[(count / 2) - 1] + arr[count / 2]) / 2;
-            }
-            output[outputCount++] = (int)median;
-            System.out.println("Median after reading "+(i + 1)+" is "+median+" \n");
-        }
-    }
-
-    int binarySearch(int arr[], int item, int low, int high)
-    {
-        if (low >= high) {
-            return (item > arr[low]) ? (low + 1) : low;
-        }
-
-        int mid = (low + high) / 2;
-
-        if (item == arr[mid])
-            return mid + 1;
-
-        if (item > arr[mid])
-            return binarySearch(arr, item, mid + 1, high);
-
-        return binarySearch(arr, item, low, mid - 1);
-    }
-
-    private void MedianProblem(int[] input) {
-        int[] output = new int[input.length];
-        for (int i = 0; i < input.length; i++) {
-
-        }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static <T> Object[] convertStreamToArray(Stream<T> stream) {
-        return stream.toArray();
-    }
-
-    int solution() {
-        String doc = "Alex:(486)-619-9812, Maria: 632 831 1993, Donald: 232-618-93200, John: 621) 198 1082";
-        Pattern pattern = Pattern.compile("^(\\+\\d{1,2}\\s)?((\\(\\d{3}\\))|(\\d{3}))[\\s.-]\\d{3}[\\s.-]\\d{4}$");
-        Matcher matches = pattern.matcher(doc);
-        int s = 0;
-        while (matches.find()) {
-            s++;
-        }
-        return s;
-    }
-
-
-    private int validPhoneNumberProblem() {
-        int count = 0;
-        String[] phoneNumbers = {"(486)-619-9812", "632 831 1993", "232-618-93200", "621) 198 1082"};
-        for (int i = 0; i < phoneNumbers.length; i++) {
-            if(isValidPhoneNumber(phoneNumbers[i])){
-                count++;
-            }
-        }
-        System.out.println("count of valid phone numbers is >>>  "+count);
-        return count;
-    }
-
-    private boolean isPhoneNumbersConsistent() {
-        String[] numbers = {"911", "9876543", "9112345"};
-        Arrays.sort(numbers);
-        for (int i = 1; i < numbers.length; i++) {
-            if (numbers[i].startsWith(numbers[i - 1])) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean isValidPhoneNumber(String input){
-        String regex = "^(\\+\\d{1,2}\\s)?((\\(\\d{3}\\))|(\\d{3}))[\\s.-]\\d{3}[\\s.-]\\d{4}$";
-        return input.matches(regex);
     }
 
     private void test() {
@@ -290,8 +128,6 @@ public class MainActivity extends AppCompatActivity {
         return weeks;
     }
 
-
-
     private int getDayIndex(String startDayofTheYear) {
         int retIndex = 0;
         for (int i = 0; i < days.length; i++) {
@@ -329,143 +165,7 @@ public class MainActivity extends AppCompatActivity {
         return totalDays;
     }
 
-    public static int longestUniqueSubsttr(String str) {
-        int n = str.length();
 
-        // Result
-        int res = 0;
-
-        for(int i = 0; i < n; i++)
-        {
-
-            // Note : Default values in visited are false
-            boolean[] visited = new boolean[256];
-
-            for(int j = i; j < n; j++)
-            {
-
-                // If current character is visited
-                // Break the loop
-                if (visited[str.charAt(j)] == true)
-                    break;
-
-                    // Else update the result if
-                    // this window is larger, and mark
-                    // current character as visited.
-                else
-                {
-                    res = Math.max(res, j - i + 1);
-                    visited[str.charAt(j)] = true;
-                }
-            }
-
-            // Remove the first character of previous
-            // window
-            visited[str.charAt(i)] = false;
-        }
-        return res;
-    }
-
-    private int maximumSumSlidingProblem(int[] arr, int m){
-        int maxSum = 0;
-        for (int i = 0; i < arr.length-m; i++) {
-            int sum = 0;
-            for (int j = i; j < i+m; j++) {
-                sum += arr[j];
-            }
-            if(sum > maxSum){
-                maxSum = sum;
-            }
-        }
-        return maxSum;
-    }
-
-    private int maximumSumSlidingProblemBetterApproach(int[] arr, int m){
-        int maxSum = 0;
-        int windowSum = 0;
-        for (int i = 0; i < m; i++) {
-            maxSum += arr[i];
-        }
-
-        windowSum = maxSum;
-        for (int i = m; i < arr.length; i++) {
-           windowSum = windowSum + (arr[i] - arr[i-m]);
-           maxSum = Math.max(windowSum, maxSum);
-        }
-
-        return maxSum;
-    }
-
-    void gameOfLife(int[][] arr) {
-        int m = arr.length;
-        int n = arr[0].length;
-        boolean[][] changed = new boolean[m][n];
-
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                int currentVal = arr[i][j];
-                int countOfLives= count(arr,i,j,m,n,changed); //count live neighbours
-                if(currentVal == 0){
-                    if(countOfLives == 3){
-                        changed[i][j] = true;
-                        currentVal = 1;
-                    }
-                }else{
-                    if(countOfLives < 2){
-                        changed[i][j] = true;
-                        currentVal = 0;
-                    }else if(countOfLives > 3){
-                        changed[i][j] = true;
-                        currentVal = 0;
-                    }
-                }
-                arr[i][j] = currentVal;
-            }
-        }
-    }
-
-    //function for counting the live neighbours of current cell
-    int count(int[][] arr,int i,int j,int m,int n, boolean[][] changed){
-        int[][] dis = {{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1,1}};
-        int cnt=0;
-        for(int k=0;k<8;k++){
-            int x= i+dis[k][0];
-            int y= j+dis[k][1];
-            if(x>=0 && y>=0 && x<m && y<n && arr[x][y] == 1){
-                cnt++;
-            }
-        }
-        return cnt;
-    }
-
-    public String kthLargestNumber(String[] nums, int k) {
-        Arrays.sort(nums, new Comparator<String>() {
-            public int compare(String num1, String num2) {
-                int len1 = num1.length();
-                int len2 = num2.length();
-
-                if (len1 > len2) {
-                    return 1;
-                } else if (len1 < len2) {
-                    return -1;
-                } else {
-                    for (int i = 0; i < len1; i++) {
-                        int c1 = num1.charAt(i) - '0';
-                        int c2 = num2.charAt(i) - '0';
-
-                        if (c1 > c2) {
-                            return 1;
-                        } else if (c1 < c2) {
-                            return -1;
-                        }
-                    }
-                    return 0;
-                }
-            }
-        });
-
-        return nums[nums.length - k];
-    }
 
     //    [3,0,4,null,2,null,null,1]
     private TreeNodeJava getBSTree() {
@@ -504,14 +204,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void firstFunction() {
-        TreeNode node = new TreeNode(5);
-        node.test(10,20);
-//        KotlinTestFile file = new KotlinTestFile();
-//        file.test1();
-        KotlinTestFile ktf = new KotlinTestFile();
-        ktf.add(2,3, 4);
-        KotlinTestFile.sub(2, 3);
-        KotlinTestFile.Companion.sub(2,3);
+//        TreeNode node = new TreeNode(5);
+//        node.test(10,20);
+////        KotlinTestFile file = new KotlinTestFile();
+////        file.test1();
+//        KotlinTestFile ktf = new KotlinTestFile();
+//        ktf.add(2,3, 4);
+//        KotlinTestFile.sub(2, 3);
+//        KotlinTestFile.Companion.sub(2,3);
 //        KotlinSampleFile file = new KotlinSampleFile();
     }
 }

@@ -4,6 +4,8 @@ import pojos.TreeNode
 
 class BinarySearchTree {
     var count = 0
+    var preOrderCounter = 0
+    var preOrderArray:IntArray? = null
 
     init {
 //        trimBST(BinarySearchTree.getBSTree(intArrayOf(1,2,3,4,5,6,7, 8, 9, 10, 11)), -13, 14)
@@ -13,6 +15,11 @@ class BinarySearchTree {
 //
 //        val smallestElement = kthSmallest(BinarySearchTree.getBSTree(intArrayOf(1,2,3,4,5,6,7, 8, 9, 10, 11)), 6)
 //        println(smallestElement)
+
+//        preOrderTraversal(BinaryTree.createBinaryTree(intArrayOf(1, 3, 2)))
+//        preOrderArray?.forEach {
+//            println("preorder BST item is $it")
+//        }
     }
 
     companion object{
@@ -28,6 +35,14 @@ class BinarySearchTree {
             }
             return root
         }
+    }
+
+    fun preOrderTraversal(root: TreeNode?) {
+        if(root == null)
+            return
+        preOrderArray!!.set(preOrderCounter++,root.`val`!!)
+        preOrderTraversal(root.left)
+        preOrderTraversal(root.right)
     }
 
     private fun trimBST(root: TreeNode?, low: Int, high: Int): TreeNode? {

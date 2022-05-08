@@ -20,7 +20,7 @@ class MyHashSet{
     private var arraySize = 16
     private var numberOfEntries = 0
     private var loadFactor = 0.75
-    private var entries:Array<LinkedListSamples<Int>> = Array(arraySize){ LinkedList<Int>() }
+    private var entries:Array<LinkedList<Int>> = Array(arraySize){ LinkedList<Int>() }
 
     fun add(key: Int) {
         numberOfEntries++
@@ -32,7 +32,7 @@ class MyHashSet{
         put(key, entries)
     }
 
-    fun put(key: Int, localEntries: Array<LinkedListSamples<Int>>) {
+    fun put(key: Int, localEntries: Array<LinkedList<Int>>) {
         val index = calculateHashCode(key)
         val slotslinkedList = localEntries[index]
         val indexLinkedList = slotslinkedList.indexOfFirst {it == key}
@@ -61,7 +61,7 @@ class MyHashSet{
     private fun increaseCapacity(){
         numberOfEntries = 0
         arraySize *= 2
-        val newEntries:Array<LinkedListSamples<Int>> = Array(arraySize){ LinkedList<Int>() }
+        val newEntries:Array<LinkedList<Int>> = Array(arraySize){ LinkedList<Int>() }
         entries.forEach {
             it.forEach { entry ->
                 put(entry, newEntries)

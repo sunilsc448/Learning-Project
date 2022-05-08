@@ -1,8 +1,11 @@
 package KotlinSamples
 
+import java.lang.StringBuilder
+import kotlin.math.sign
+
 class MatrixSamples {
     init {
-
+//        zigzagConversion("AB", 1)
     }
 
     fun shiftGrid(grid: Array<IntArray>, k: Int): List<List<Int>> {
@@ -129,5 +132,50 @@ class MatrixSamples {
         }
 
         generateSpiralMatrix(resultArray, n, rowMax, colMax, rowStart + 1, colStart + 1, rowEnd-1, colEnd - 1, counterLocal)
+    }
+
+    //Using Matrix
+    fun zigzagConversion(s: String, numRows: Int):String{
+        val insertCount = 0
+        val numColumns = s.length
+        val array:Array<Array<Char>> = Array(numRows){ Array(numColumns){'\u0000'} }
+        zigzag(numRows,0, insertCount, s, array)
+
+        return getStringFromArrayIteration(array)
+    }
+
+    private fun zigzag(rowcount:Int, colIndex:Int, count:Int, s: String, array: Array<Array<Char>>) {
+        var insertCount = count
+        var columnIndex= colIndex
+        for (i in 0 until rowcount){
+            if(insertCount == s.length){
+                return
+            }
+            array[i][columnIndex] = s[insertCount++]
+        }
+
+        for (i in rowcount-1-1 downTo 1){
+            if(insertCount == s.length){
+                return
+            }
+            array[i][columnIndex + 1] = s[insertCount++]
+            columnIndex++
+        }
+        if(insertCount != s.length){
+            zigzag(rowcount, columnIndex+1, insertCount, s, array)
+        }
+    }
+
+    private fun getStringFromArrayIteration(array: Array<Array<Char>>): String {
+        var retStr = ""
+        for (i in 0 until array.size){
+            for (j in 0 until array[0].size){
+                if(array[i][j] != '\u0000') {
+                    retStr += array[i][j]
+                }
+            }
+        }
+        return retStr
+        //PAHNAPLSIIGYIR
     }
 }
