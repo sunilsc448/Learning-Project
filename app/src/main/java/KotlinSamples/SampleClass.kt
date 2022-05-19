@@ -12,6 +12,10 @@ class Dog(var dogColor: String): Animal(dogColor){
         val student3 = student1.copy(id = 3)
     }
 
+    constructor(color:String, dogBreed:String, i:Int):this(color, dogBreed){
+
+    }
+
     override fun test() {
         super.test()
     }

@@ -12,6 +12,8 @@ class ExtensionFunctionSample {
         println(s3.add(s1, s2))
         val num = 100
         println("is $num modulus of 10? and the answer is ${num.isModulusOfTen()}")
+
+        val obj = SampleObject("Sunil", 31)
     }
     //Extension functions
     fun String.add(s1:String, s2:String):String{
@@ -22,3 +24,5 @@ class ExtensionFunctionSample {
         return this % 10 == 0
     }
 }
+
+data class SampleObject(val name:String, val age:Int)

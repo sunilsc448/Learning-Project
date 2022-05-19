@@ -21,7 +21,16 @@ class HighLevelFunctions {
         val capture:Float = highLevelFunction2(2, lambda3)
 
         sampleInline { println("inline function exceuted") }
+
+        //class literal syntax :: and it is also used in reflections
+//        Class Reference val myClass = MyClass::class
+//        Function Reference this::isEmpty
+//        Property Reference ::someVal.isInitialized
+//        Constructor Reference ::MyClass
+        SqrtClass(::sq_rt)
     }
+
+    fun sq_rt(value:Int) = println("Square root of number $value is ${value * 2}")
 
     fun highLevelFunction(a:Int, b:Int,lambda: (Int, Int) -> Int):Int{
         return lambda.invoke(a,b)
@@ -38,6 +47,12 @@ class HighLevelFunctions {
 //                body()
 //            }
 //        }.run()
+    }
+}
+
+class SqrtClass(var printSqrt:(Int) -> Unit){
+    fun sqrt(`val`:Int){
+        printSqrt(`val`)
     }
 }
 

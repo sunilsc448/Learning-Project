@@ -1,4 +1,4 @@
-import pojos.Samplettestclass;
+package pojos;
 
 class finalClassTest extends Samplettestclass {
     @Override

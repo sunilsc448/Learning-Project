@@ -18,7 +18,7 @@ class StringProblems {
 //        val str = "ca"
 //        println("Longest Palindrom of $str is ${longestPalindromeSubString(str)}")
 
-        stringToInt("9223372036854775808")
+//        stringToInt("9223372036854775808")
     }
 
     private fun codingChallengePathFunction(){
@@ -336,4 +336,5 @@ class StringProblems {
             return num.toInt()
         }
     }
+
 }
