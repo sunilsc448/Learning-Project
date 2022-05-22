@@ -3,10 +3,6 @@ package com.example.kotlintutorial
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import component.DaggerCarComponent
-import kotlinx.android.synthetic.main.activity_main2.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import pojos.Car
 import java.lang.Exception
 import javax.inject.Inject

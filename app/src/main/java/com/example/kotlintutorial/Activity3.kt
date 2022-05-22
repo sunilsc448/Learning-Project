@@ -1,8 +1,7 @@
 package com.example.kotlintutorial
 
 import KotlinSamples.CouroutineSamples
-import KotlinSamples.SingletonSampleClass
-import KotlinSamples.SomeClass
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -36,7 +35,7 @@ class Activity3 : AppCompatActivity() {
     }
 
     private fun firstFunction() {
-
+//          stopWatch()
 //        ArrayPrograms()
 //        BinarySearchTree()
 //        KotlinCollections()
@@ -72,6 +71,7 @@ class Activity3 : AppCompatActivity() {
 //        Handler().postDelayed(Runnable {
 //            CouroutineSamples()
 //        }, 1000)
+
 //        androidCoroutineSample()
 //        androidCoroutineSample_timeout()
 //        androidCoroutineProgressSample()
@@ -83,6 +83,21 @@ class Activity3 : AppCompatActivity() {
 //        structuredConcurrencySample()
 //        miscellaneousEg()
 //        creating_10k_Thread()
+
+//         RandomNumberActivityOnClick()
+//        launchListActivityOnClick()
+    }
+
+//    private fun launchListActivityOnClick() {
+//        btn.setOnClickListener {
+//            startActivity(Intent(this, ListActivity::class.java))
+//        }
+//    }
+
+    private fun RandomNumberActivityOnClick() {
+        btn.setOnClickListener {
+            startActivity(Intent(this, RandomNumberActivity4::class.java))
+        }
     }
 
     private fun miscellaneousEg() {
@@ -602,7 +617,7 @@ class Activity3 : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun stopWatch() {
+    private fun countDownTimer() {
         var time = 1
         object : CountDownTimer(10000, 1000) {
             override fun onTick(millisUntilFinished: Long) {

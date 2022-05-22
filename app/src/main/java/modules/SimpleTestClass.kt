@@ -1,4 +1,4 @@
-package com.example.kotlintutorial
+package modules
 
 class SimpleTestClass {
     fun add(a:Int, b:Int):Int{

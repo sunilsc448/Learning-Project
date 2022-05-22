@@ -3,7 +3,6 @@ package component
 import com.example.kotlintutorial.DaggerSampleActivity
 import dagger.BindsInstance
 import dagger.Component
-import modules.DieselEngineModule
 import modules.PetrolEngineModule
 import modules.WheelsModule
 import pojos.Car

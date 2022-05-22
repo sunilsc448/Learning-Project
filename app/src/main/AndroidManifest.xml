@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.kotlintutorial">
+    package="com.example.kotlintutorial" >
 
-    <application android:name=".AppClassForComponent">
-        <activity
-            android:name=".DaggerSample2Activity"
-            android:exported="false" />
-
-        <activity android:name=".MainActivity" />
+    <application
+        android:name=".AppClassForComponent"
+        android:persistent="true" >
         <activity
             android:name=".Activity3"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
+            android:theme="@style/Theme.Design.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +15,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="DaggerSampleActivity"
+            android:name=".DaggerSample2Activity"
+            android:exported="false" />
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".RandomNumberActivity4"
+            android:persistableMode="persistAcrossReboots"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".DaggerSampleActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
     </application>
 

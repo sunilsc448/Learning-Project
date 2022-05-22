@@ -1,5 +1,6 @@
 package KotlinSamples
 
+import android.util.Log
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
 import java.util.logging.Handler
@@ -25,6 +26,11 @@ class CouroutineSamples {
 //        deferredAsyncAndAwait()
 //        deferredGlobalAsyncAndAwait()
 //          handlingCoroutineExceptions()
+        CoroutineScope(Main).launch {
+            coroutineWithContext()
+//            coroutineWithContextVSAsyncAwait()
+        }
+
 //        coroutinewithTimeout()
 //        coroutinewithTimeoutOrNull()
 
@@ -45,6 +51,52 @@ class CouroutineSamples {
 
 //        println("CoroutineExperiment: lengthyJob finished")
 //        println("CoroutineExperiment: after lengthyJob ${Thread.currentThread().name}")
+    }
+
+    //Task1 and Task2 are serially executed
+    private suspend fun coroutineWithContext() {
+        var resultOne = "GFG"
+        var resultTwo = "Is Best"
+        Log.i("withContext", "Before")
+        resultOne = withContext(Dispatchers.Main) { function1() }
+        resultTwo = withContext(Dispatchers.Main) { function2() }
+        Log.i("withContext", "After")
+        val resultText = resultOne +" "+ resultTwo
+        Log.i("withContext", resultText)
+    }
+
+    private suspend fun coroutineWithContextVSAsyncAwait() {
+        //Async await
+        //Task1 and Task2 are parallelly executed
+        val resultOneDeferred = CoroutineScope(Dispatchers.Main).async { function1() }
+        val resultTwoDeferred = CoroutineScope(Dispatchers.Main).async { function2() }
+        val combinedResult = resultOneDeferred.await() +" "+ resultTwoDeferred.await()
+        Log.i("asyn await", combinedResult)
+
+        //withContext
+        //Task1 and Task2 are serially executed
+//        var resultOne = "GFG"
+//        var resultTwo = "Is Best"
+//        Log.i("withContext", "Before")
+//        resultOne = withContext(Dispatchers.IO) { function1() }
+//        resultTwo = withContext(Dispatchers.IO) { function2() }
+//        Log.i("withContext", "After")
+//        val resultText = resultOne + resultTwo
+//        Log.i("withContext", resultText)
+    }
+
+    suspend fun function1(): String {
+        delay(5000L)
+        val message = "function1"
+        Log.i("withContext", message)
+        return message
+    }
+
+    suspend fun function2(): String {
+        delay(1000L)
+        val message = "function2"
+        Log.i("withContext", message)
+        return message
     }
 
     //lazy load blocking main thread
