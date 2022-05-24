@@ -29,6 +29,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -60,6 +63,7 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-params:5.3.2"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+    //Jetpack
     def lifecycle_version= "1.1.1"
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
@@ -71,5 +75,14 @@ dependencies {
     // For control over item selection of both touch and mouse driven selection\
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
 
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
 
+    //Picasoo
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
 }

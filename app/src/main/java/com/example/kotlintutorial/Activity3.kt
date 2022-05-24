@@ -85,14 +85,14 @@ class Activity3 : AppCompatActivity() {
 //        creating_10k_Thread()
 
 //         RandomNumberActivityOnClick()
-//        launchListActivityOnClick()
+        launchListActivityOnClick()
     }
 
-//    private fun launchListActivityOnClick() {
-//        btn.setOnClickListener {
-//            startActivity(Intent(this, ListActivity::class.java))
-//        }
-//    }
+    private fun launchListActivityOnClick() {
+        btn.setOnClickListener {
+            startActivity(Intent(this, ListActivity::class.java))
+        }
+    }
 
     private fun RandomNumberActivityOnClick() {
         btn.setOnClickListener {

@@ -6,18 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_4.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import observers.Activity4LifeCycleObserver
 import org.greenrobot.eventbus.EventBus
 import viewmodels.Activity4ViewModel
 import android.widget.Toast
 
-import KotlinSamples.MessageEvent
-import androidx.lifecycle.Observer
+import pojos.MessageEvent
 
 import org.greenrobot.eventbus.ThreadMode
 
