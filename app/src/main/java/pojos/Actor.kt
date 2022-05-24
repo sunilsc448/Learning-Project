@@ -1,6 +1,7 @@
 package pojos
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Actor(@SerializedName("name")var name: String,
                  @SerializedName("fullName") var fullName:String,
@@ -8,4 +9,4 @@ data class Actor(@SerializedName("name")var name: String,
                  @SerializedName("Born At") var bornAt:String,
                  @SerializedName("Birthdate") var birthDate:String,
                  @SerializedName("photo") var photo:String,
-                 @SerializedName("industry") var industry:String)
+                 @SerializedName("industry") var industry:String):Serializable

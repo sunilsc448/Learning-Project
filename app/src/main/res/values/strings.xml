@@ -21,4 +21,13 @@
     <string name="add_actor">Add Actor</string>
     <string name="years">years</string>
     <string name="years_format_string">%s years</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="name_format_string">Name: %s</string>
+    <string name="full_name_format_string">Full Name: %s</string>
+    <string name="industry_format_string">Film Industry: %s</string>
+    <string name="born_format_string">Born at: %s</string>
+    <string name="age_format_string">Age: %s</string>
+    <string name="dob_format_string">Date of Birth: %s</string>
 </resources>

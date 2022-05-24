@@ -8,13 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import listeners.IClickListener
 import pojos.Actor
+import java.io.Serializable
 
 class ListActivity : AppCompatActivity(),IClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-        addFragment(FragmentTypeEnum.Actor)
+        addFragment(FragmentTypeEnum.ActorList, null)
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -22,25 +23,35 @@ class ListActivity : AppCompatActivity(),IClickListener {
         }
     }
 
-    private fun addFragment(fragmentTypeEnum: FragmentTypeEnum) {
+    private fun addFragment(fragmentTypeEnum: FragmentTypeEnum, bundle: Bundle?) {
         var fragment:Fragment? = null
+        val txn = supportFragmentManager.beginTransaction()
         when(fragmentTypeEnum){
-            FragmentTypeEnum.Actor -> {
+            FragmentTypeEnum.ActorList -> {
                 fragment = ListViewFragment()
                 fragment.setClickListener(this)
+            }
+            FragmentTypeEnum.ActorDetail -> {
+                fragment = DetailsViewFragment.newInstance(bundle)
+
+                //to open DetailsViewFragment as Dialog popup
+//                (fragment as DetailsViewFragment).show(supportFragmentManager, "DetailsViewFragment")
+//                return
+                txn.addToBackStack(null)
             }
             FragmentTypeEnum.None -> fragment = Fragment()
         }
 
-        val txn = supportFragmentManager.beginTransaction()
-        txn.add(R.id.fragment_list, fragment)
+        txn.replace(R.id.fragment_list, fragment)
         txn.commit()
     }
 
     override fun onClick(position:Int, obj: Any) {
         when(obj){
             obj as Actor -> {
-                println("Request for actor ${obj.name}. information")
+                val bundle = Bundle()
+                bundle.putSerializable("actor", obj as Serializable)
+                addFragment(FragmentTypeEnum.ActorDetail, bundle)
             }
         }
     }

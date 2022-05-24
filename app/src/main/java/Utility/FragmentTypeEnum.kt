@@ -1,6 +1,7 @@
 package Utility
 
 enum class FragmentTypeEnum {
-    Actor,
+    ActorList,
+    ActorDetail,
     None
 }

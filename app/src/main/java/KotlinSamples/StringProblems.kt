@@ -1,5 +1,6 @@
 package KotlinSamples
 
+import android.util.Log
 import java.lang.StringBuilder
 
 class StringProblems {
@@ -19,6 +20,9 @@ class StringProblems {
 //        println("Longest Palindrom of $str is ${longestPalindromeSubString(str)}")
 
 //        stringToInt("9223372036854775808")
+
+//        codingChallenge(arrayOf("baseball", "a,all,b,ball,bas,base,cat,code,d,e,quit,z"))
+//        codingChallenge(arrayOf("abcgefd", "a,ab,abc,abcg,b,c,dog,e,efd,zzzz"))
     }
 
     private fun codingChallengePathFunction(){
@@ -337,4 +341,29 @@ class StringProblems {
         }
     }
 
+//    codingChallenge(arrayOf("baseball", "a,all,b,ball,bas,base,cat,code,d,e,quit,z"))
+//    output >> "base,ball"
+//    codingChallenge(arrayOf("abcgefd", "a,ab,abc,abcg,b,c,dog,e,efd,zzzz"))
+//    output >> "abcg,efd"
+    private fun codingChallenge(list: Array<String>):String {
+        val wordToCompare = list[0]
+        val stringDictionary = list[1]
+        val singleStrings = stringDictionary.split(',')
+        var answerWords = ""
+
+        for (firstWord in singleStrings){
+            val splitMainWordArray = wordToCompare.split(firstWord)
+            if(splitMainWordArray.size > 0){
+                for (word in splitMainWordArray){
+                    val joinedWord = firstWord + word
+                    val reversedWord = joinedWord.reversed()
+                    if(joinedWord == wordToCompare || reversedWord == wordToCompare){
+                        answerWords = "$firstWord,$word"
+                    }
+                }
+            }
+        }
+
+        return answerWords
+    }
 }
