@@ -11,9 +11,11 @@ import pojos.Actor
 
 class DetailsViewFragment : DialogFragment() {
     private lateinit var dataBinding:FragmentDetailsBinding
+    private var mListener:IClickListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dataBinding = FragmentDetailsBinding.inflate(inflater, container, false)
+        dataBinding.setVariable(BR.listener, mListener)
         setBundleDataToBinding()
         return dataBinding.root
     }
@@ -22,6 +24,10 @@ class DetailsViewFragment : DialogFragment() {
         val serzdData = arguments?.getSerializable("actor")
         val actor:Actor = serzdData as Actor
         dataBinding.setVariable(BR.actor, actor)
+    }
+
+    fun setClickListener(listener: IClickListener){
+        mListener = listener
     }
 
     companion object {

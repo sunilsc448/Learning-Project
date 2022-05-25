@@ -6,8 +6,10 @@
 
     <data>
         <import type="pojos.Actor"/>
+        <import type="listeners.IClickListener"/>
 
         <variable name="actor" type="pojos.Actor" />
+        <variable name="listener" type="listeners.IClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +20,7 @@
             android:id="@+id/image_view"
             tools:src="@drawable/placeholder_image"
             loadImage="@{actor.photo}"
+            clickListener="@{listener}"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="200dp"

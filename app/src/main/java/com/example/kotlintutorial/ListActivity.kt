@@ -18,8 +18,14 @@ class ListActivity : AppCompatActivity(),IClickListener {
         addFragment(FragmentTypeEnum.ActorList, null)
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val fragment = supportFragmentManager.fragments.lastOrNull()
+
+            if(fragment is ListViewFragment){
+                fragment.addActor()
+            }else{
+                Snackbar.make(view, "Actor can be added in the list view only", Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show()
+            }
         }
     }
 
@@ -33,7 +39,7 @@ class ListActivity : AppCompatActivity(),IClickListener {
             }
             FragmentTypeEnum.ActorDetail -> {
                 fragment = DetailsViewFragment.newInstance(bundle)
-
+                fragment.setClickListener(this)
                 //to open DetailsViewFragment as Dialog popup
 //                (fragment as DetailsViewFragment).show(supportFragmentManager, "DetailsViewFragment")
 //                return

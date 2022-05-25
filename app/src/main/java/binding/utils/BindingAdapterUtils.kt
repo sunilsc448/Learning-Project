@@ -1,20 +1,24 @@
 package binding.utils
 
 import adapters.RecyclerViewAdapter
+import android.content.Context
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kotlintutorial.R
+import com.squareup.picasso.Picasso
 import listeners.IClickListener
 import pojos.Actor
 import viewmodels.FragmentListViewModel
 
 object BindingAdapterUtils {
-    @BindingAdapter("loadImage")
+    @BindingAdapter("loadImage", "clickListener")
     @JvmStatic
-    fun setImage(imageView: ImageView, url: String?) {
-        Glide.with(imageView.context).load(url).placeholder(R.drawable.placeholder_image).into(imageView)
+    fun setImage(imageView: ImageView, url: String?,clickListener: IClickListener?) {
+//        val activityContext = clickListener as Context
+        Picasso.with(imageView.context).load(url).placeholder(R.drawable.placeholder_image).into(imageView)
+//        Glide.with(imageView.context).load(url).placeholder(R.drawable.placeholder_image).into(imageView)
     }
 
     @BindingAdapter(value = ["viewmodel","actorsList", "clickListener"])

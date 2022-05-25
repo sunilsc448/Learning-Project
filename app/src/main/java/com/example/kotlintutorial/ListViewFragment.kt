@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.example.kotlintutorial.databinding.FragmentListBinding
 import listeners.IClickListener
+import pojos.Actor
 import viewmodels.FragmentListViewModel
 
 class ListViewFragment : Fragment() {
@@ -30,5 +31,9 @@ class ListViewFragment : Fragment() {
 
     fun setClickListener(listener: IClickListener){
         mListener = listener
+    }
+
+    fun addActor(){
+       viewmodel.addActor()
     }
 }

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ListActivity">
 
-    <include layout="@layout/content_list" />
+    <include layout="@layout/content_list"
+        app:layout_constraintBottom_toTopOf="@id/fab"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
