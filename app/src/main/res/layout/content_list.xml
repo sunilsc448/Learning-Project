@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <fragment
-            android:id="@+id/fragment_list"
+            android:id="@+id/fragment_list_view"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:tag="FRAGMENT_LIST_TAG"
             android:layout_width="0dp"
@@ -15,6 +15,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,9 +7,11 @@
     <data>
         <import type="pojos.Actor"/>
         <import type="listeners.IClickListener"/>
+        <import type="viewmodels.FragmentListViewModel"/>
 
         <variable name="actor" type="pojos.Actor" />
         <variable name="listener" type="listeners.IClickListener" />
+        <variable name="viewmodel" type="viewmodels.FragmentListViewModel" />
         <variable name="position" type="Integer" />
     </data>
 
@@ -50,7 +52,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginRight="10dp"
-            android:onClick="@{(view) -> listener.onClick(position, actor)}"
+            android:onClick="@{() -> viewmodel.onItemClicked(position, actor)}"
             app:layout_constraintTop_toTopOf="@id/name_text"
             app:layout_constraintRight_toRightOf="parent"/>
 

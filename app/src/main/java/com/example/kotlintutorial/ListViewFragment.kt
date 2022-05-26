@@ -9,10 +9,12 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.example.kotlintutorial.databinding.FragmentListBinding
 import listeners.IClickListener
-import pojos.Actor
 import viewmodels.FragmentListViewModel
+import viewmodels.ListActivityViewModel
+import viewmodels.ViewModelFactory
 
 class ListViewFragment : Fragment() {
+    private lateinit var parentViewModel: ListActivityViewModel
     private lateinit var viewmodel: FragmentListViewModel
     private var mListener:IClickListener? = null
     private lateinit var dataBinding: FragmentListBinding
@@ -20,7 +22,8 @@ class ListViewFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dataBinding = FragmentListBinding.inflate(inflater, container, false)
         dataBinding.setVariable(BR.listener, mListener)
-        viewmodel = ViewModelProviders.of(this).get(FragmentListViewModel::class.java)
+        parentViewModel = ViewModelProviders.of(activity!!).get(ListActivityViewModel::class.java)
+        viewmodel = ViewModelProviders.of(this, ViewModelFactory(parentViewModel)).get(FragmentListViewModel::class.java)
         dataBinding.viewmodel = viewmodel
         dataBinding.lifecycleOwner = viewLifecycleOwner
         viewmodel.getNoResponse().observe(this, {

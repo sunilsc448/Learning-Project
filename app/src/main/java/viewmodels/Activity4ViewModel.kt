@@ -51,6 +51,8 @@ class Activity4ViewModel: ViewModel() {
     private fun generateNUmber(range: IntRange) {
         val num = Random.nextInt(range.first, range.last)
         randomNumber?.value = "Random Number: $num"
+
+        Thread.sleep(10000)
     }
 
     //this event is ondestroy + isChangingConfigurations = false

@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Dispatchers.IO
+import java.util.*
 import kotlin.system.measureTimeMillis
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -682,6 +683,43 @@ class Activity3 : AppCompatActivity() {
             println("debug: job$input is cancelled as it encountered exception : $e")
             coroutineScope.cancel()
         }
+    }
+
+    fun stopWatch(){
+        object : CountDownTimer(1000, 1000){
+            override fun onTick(millisUntilFinished: Long) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFinish() {
+                TODO("Not yet implemented")
+            }
+
+        }.start()
+
+        object : sampleAbs(1000, 1000) {
+
+        } .start()
+
+        val sam = sampleAbs(1000, 1000)
+        sam.start()
+
+        Timer().scheduleAtFixedRate(object :TimerTask(){
+            override fun run() {
+
+            }
+
+        }, Date(), 1000)
+    }
+}
+
+open class sampleAbs(val millisInFuture:Long, val countdown:Long ): CountDownTimer(millisInFuture, countdown) {
+    override fun onTick(millisUntilFinished: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onFinish() {
+        TODO("Not yet implemented")
     }
 
 }

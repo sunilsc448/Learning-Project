@@ -10,12 +10,14 @@ import observers.Activity4LifeCycleObserver
 import org.greenrobot.eventbus.EventBus
 import viewmodels.Activity4ViewModel
 import android.widget.Toast
+import androidx.lifecycle.Observer
 
 import pojos.MessageEvent
 
 import org.greenrobot.eventbus.ThreadMode
 
 import org.greenrobot.eventbus.Subscribe
+import pojos.Actor
 
 class RandomNumberActivity4 : AppCompatActivity() {
     private val TAG = this.javaClass.name
@@ -30,6 +32,12 @@ class RandomNumberActivity4 : AppCompatActivity() {
 
         Log.i(TAG, "ACTIVITY_ON_CREATE")
         lifecycle.addObserver(Activity4LifeCycleObserver())
+
+        val observer = object: Observer<Actor> {
+            override fun onChanged(t: Actor?) {
+
+            }
+        }
 
         //if viewmodel is not used
         if(savedInstanceState != null && savedInstanceState.containsKey("random-number")){

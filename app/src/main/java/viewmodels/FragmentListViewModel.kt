@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FragmentListViewModel:ViewModel() {
+class FragmentListViewModel(var parentViewModel:ListActivityViewModel):ViewModel() {
     private var mActors:MutableLiveData<List<Actor>> = MutableLiveData()
     fun getActors():LiveData<List<Actor>>{
         return mActors
@@ -68,5 +68,9 @@ class FragmentListViewModel:ViewModel() {
             "https://media-exp1.licdn.com/dms/image/C5603AQGgHlFMgBhMGA/profile-displayphoto-shrink_800_800/0/1627566028598?e=1658966400&v=beta&t=JkEev4OPDK2JbTKkGm00AfogDHxM_h_XuMKDaDgaHVE",
              "Sandalwood"))
         mActors.postValue(actors)
+    }
+
+    fun onItemClicked(position:Int, actor: Actor){
+      parentViewModel.onItemClicked(actor)
     }
 }

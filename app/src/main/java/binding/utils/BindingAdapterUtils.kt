@@ -27,7 +27,7 @@ object BindingAdapterUtils {
         if (viewmodel != null && actorsList != null) {
             var adapter = recyclerView.adapter
             if (adapter == null){
-                adapter = RecyclerViewAdapter(actorsList, clickListener)
+                adapter = RecyclerViewAdapter(actorsList, clickListener, viewmodel)
                 recyclerView.adapter = adapter
             }else{
                 (adapter as RecyclerViewAdapter).updateData(actorsList)

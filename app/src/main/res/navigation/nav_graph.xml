@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listViewFragment">
 
+    <fragment
+        android:id="@+id/listViewFragment"
+        android:name="com.example.kotlintutorial.ListViewFragment"
+        android:label="ListViewFragment" >
+        <action
+            android:id="@+id/action_listViewFragment_to_detailsViewFragment2"
+            app:destination="@id/detailsViewFragment" />
+        <argument
+            android:name="actor"
+            app:argType="pojos.Actor" />
+    </fragment>
+    <dialog
+        android:id="@+id/detailsViewFragment"
+        android:name="com.example.kotlintutorial.DetailsViewFragment"
+        android:label="DetailsViewFragment" >
+        <action
+            android:id="@+id/action_detailsViewFragment_to_listViewFragment"
+            app:destination="@id/listViewFragment" />
+    </dialog>
 </navigation>

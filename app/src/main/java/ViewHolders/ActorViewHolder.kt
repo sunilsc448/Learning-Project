@@ -8,6 +8,7 @@ import com.squareup.picasso.Picasso
 import listeners.IClickListener
 import pojos.Actor
 
+@Deprecated("Old way of declaring a View holder")
 class ActorViewHolder(view: View, listener:IClickListener?):BaseViewHolder(view, listener) {
     private var imgVw:ImageView = mView.findViewById(R.id.image_view)
     private var nameVw:TextView = mView.findViewById(R.id.name_text)

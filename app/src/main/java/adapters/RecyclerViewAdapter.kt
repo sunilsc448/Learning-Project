@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlintutorial.R
 import listeners.IClickListener
 import pojos.Actor
+import viewmodels.FragmentListViewModel
 
-class RecyclerViewAdapter(var mList:List<Any>?, val listener: IClickListener?):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerViewAdapter(var mList:List<Any>?, val listener: IClickListener?, val viewModel: FragmentListViewModel):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemViewType(position: Int): Int {
         if(mList == null)return -1
         return when (mList!![position]) {
@@ -20,7 +21,7 @@ class RecyclerViewAdapter(var mList:List<Any>?, val listener: IClickListener?):R
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val vh = ViewHolderFactory.getViewHolder(viewType, parent, listener)
+        val vh = ViewHolderFactory.getViewHolder(viewType, parent, listener, viewModel)
         return vh
     }
 
