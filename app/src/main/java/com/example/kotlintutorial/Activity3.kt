@@ -1,13 +1,11 @@
 package com.example.kotlintutorial
 
 import KotlinSamples.CouroutineSamples
-import KotlinSamples.StringProblems
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -88,7 +86,14 @@ class Activity3 : AppCompatActivity() {
 //        creating_10k_Thread()
 
 //         RandomNumberActivityOnClick()
-        launchListActivityOnClick()
+        moviesActivityOnClick()
+//        launchListActivityOnClick()
+    }
+
+    private fun moviesActivityOnClick() {
+        btn.setOnClickListener {
+            startActivity(Intent(this, ListActivity::class.java))
+        }
     }
 
     private fun launchListActivityOnClick() {
@@ -99,7 +104,7 @@ class Activity3 : AppCompatActivity() {
 
     private fun RandomNumberActivityOnClick() {
         btn.setOnClickListener {
-            startActivity(Intent(this, RandomNumberActivity4::class.java))
+            startActivity(Intent(this, RandomNumberActivity::class.java))
         }
     }
 

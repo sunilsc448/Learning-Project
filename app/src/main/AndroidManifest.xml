@@ -27,7 +27,7 @@
             android:exported="false" />
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".RandomNumberActivity4"
+            android:name=".RandomNumberActivity"
             android:persistableMode="persistAcrossReboots"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity

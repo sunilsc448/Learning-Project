@@ -19,7 +19,7 @@ import org.greenrobot.eventbus.ThreadMode
 import org.greenrobot.eventbus.Subscribe
 import pojos.Actor
 
-class RandomNumberActivity4 : AppCompatActivity() {
+class RandomNumberActivity : AppCompatActivity() {
     private val TAG = this.javaClass.name
     private lateinit var randomNumberGenerator:RandomNumberGenerator
     private lateinit var viewModel: Activity4ViewModel
