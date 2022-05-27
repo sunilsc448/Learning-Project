@@ -10,7 +10,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
-class Activity4ViewModel: ViewModel() {
+class RandomNUmberActivityViewModel: ViewModel() {
     private val TAG = this.javaClass.name
     var randomNumber:MutableLiveData<String>? = null
         get() = field

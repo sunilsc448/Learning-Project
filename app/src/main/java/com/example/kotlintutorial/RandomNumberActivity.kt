@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_4.*
 import observers.Activity4LifeCycleObserver
 import org.greenrobot.eventbus.EventBus
-import viewmodels.Activity4ViewModel
+import viewmodels.RandomNUmberActivityViewModel
 import android.widget.Toast
 import androidx.lifecycle.Observer
 
@@ -22,7 +22,7 @@ import pojos.Actor
 class RandomNumberActivity : AppCompatActivity() {
     private val TAG = this.javaClass.name
     private lateinit var randomNumberGenerator:RandomNumberGenerator
-    private lateinit var viewModel: Activity4ViewModel
+    private lateinit var viewModel: RandomNUmberActivityViewModel
     val range = 1..10
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +46,7 @@ class RandomNumberActivity : AppCompatActivity() {
             txt.text = randomNumberGenerator.createNumber(range)
         }else {
 //            randomNumberGenerator = RandomNumberGenerator()
-            viewModel = ViewModelProviders.of(this).get(Activity4ViewModel::class.java)
+            viewModel = ViewModelProviders.of(this).get(RandomNUmberActivityViewModel::class.java)
             val value = viewModel.createNumber(range)
             setTextOnMainThread(value)
 

@@ -1,6 +1,7 @@
 package com.example.kotlintutorial
 
 import KotlinSamples.CouroutineSamples
+import Movies.view.MoviesActivity
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -92,7 +93,7 @@ class Activity3 : AppCompatActivity() {
 
     private fun moviesActivityOnClick() {
         btn.setOnClickListener {
-            startActivity(Intent(this, ListActivity::class.java))
+            startActivity(Intent(this, MoviesActivity::class.java))
         }
     }
 
