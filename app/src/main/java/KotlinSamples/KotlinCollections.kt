@@ -82,9 +82,16 @@ class ArraySample{
 
 class MapSample{
     init {
-        val mymap = mapOf(5 to "Yogi", 10 to "Yogi")
+        val mymap = mapOf(10 to "Yogi", 5 to "Yogi")
+
         for (key in mymap.keys){
             println("map element for key $key is ${mymap[key]}")
+        }
+
+        val hasmap = hashMapOf(10 to "modi", 5 to "modi")
+
+        for (key in hasmap.keys){
+            println("hash map element for key $key is ${hasmap[key]}")
         }
     }
 }

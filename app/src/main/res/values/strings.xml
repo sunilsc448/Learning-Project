@@ -31,4 +31,11 @@
     <string name="age_format_string">Age: %s</string>
     <string name="dob_format_string">Date of Birth: %s</string>
     <string name="title_activity_sample_navigation">SampleNavigationActivity</string>
+    <string name="no_internet">no internet</string>
+    <string name="enter_movie_name">Enter Movie Name</string>
+    <string name="tile_format_string">Movie Title: %s</string>
+    <string name="original_title_format_string">Original Title: %s</string>
+    <string name="popularity_format_string">Popularity: %s</string>
+    <string name="release_date_format_string">Release date: %s</string>
+    <string name="rating_format_string">Rating: %s/10</string>
 </resources>

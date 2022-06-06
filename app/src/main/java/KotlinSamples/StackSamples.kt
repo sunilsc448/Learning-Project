@@ -1,9 +1,11 @@
 package KotlinSamples
 
+import java.lang.StringBuilder
 import java.util.*
 
 class StackSamples {
     init{
+        //Design Stacks
 //        val myStack = MyStack2()
 //        myStack.push(1)
 //        myStack.push(2)
@@ -12,9 +14,127 @@ class StackSamples {
 //        myStack.empty() // return False)
 //        println()
 
-//        nextGreatestElementUsingStack(intArrayOf(13, 7, 6, 12))
+//        val stack = MyStack<String>()
+//        stack.push("Hi")
+//        stack.push("Hello")
+//        stack.push("How")
+//        stack.push("Are")
+//        stack.push("You")
+//        println("stack.peek() is ${stack.peek()}")
+//        println("stack.pop() is ${stack.pop()}")
+//        println("stack.pop() is ${stack.pop()}")
+//        while (!stack.isEmpty()){
+//            println("stack.item is ${stack.pop()}")
+//        }
+//        for (i in 1..130){
+//            stack.push("Hello $i")
+//        }
+//        while (!stack.isEmpty()){
+//            println("stack.item is ${stack.pop()}")
+//        }
+
+        //Two stacks
+//        val stack = TwoStacks<Int>()
+//        stack.pushStack1(1)
+//        stack.pushStack1(2)
+//        stack.pushStack2(3)
+//        stack.pushStack2(4)
+//        println("stack elements\n${stack}")
+//        println("stack popStack1 ${stack.popStack1()}")
+//        println("stack popStack2 ${stack.popStack2()}")
+//        println("stack elements\n${stack}")
+
+//        val stack = DoubleSidedStack<Int>()
+//        stack.pushToBack(1)
+//        stack.pushToBack(2)
+//        stack.pushToBack(3)
+//        stack.pushToBack(4)
+//        println("stack top ${stack.backTop()}")
+//        println("stack after pushes ${stack}")
+//        stack.popBack()
+//        println("stack top ${stack.backTop()}")
+//        stack.pushToFront(5)
+//        stack.pushToFront(6)
+
+        //Dequeue(doublesided queue)
+//        val dq = MyDequeue<Int>()
+//        dq.addFirst(1)
+//        dq.addFirst(2)
+//        dq.addLast(3)
+//        dq.removeLast()
+//        dq.removeLast()
+//        println("dequeue >>"+dq)
+
+        //Spans
+//          findingSpans_stack(intArrayOf(6, 3, 4, 5 , 2))
+//          findingSpans(intArrayOf(6, 3, 4, 5 , 2)) -> (1, 1, 2, 3, 1)
+//          findingSpans(intArrayOf(7, 5, 2, 4, 8, 9)) -> (1, 1, 1, 2, 5, 6)
+//          println("Maa area of a histogram is ${getMaxAreaHistogram(intArrayOf(3, 2, 5, 6, 1, 4, 4), 7)}")
+
+            //Reverese the Stack without extra memory
+//            val stack =  Stack<Int>()
+//            stack.push(1); stack.push(2);stack.push(3)
+//            println("stack elements before reverse ${stack.toString()}")
+//            reverseTheStack(stack)
+//            println("stack elements after reverse ${stack.toString()}")
+
+        //Misc Problems
+        nextGreatestElementUsingStack(intArrayOf(13, 7, 6, 12))
 //        nextGreatestElementCorrectOrder(intArrayOf(1, 3, 4, 2))
 //        oneThreeTwoPattern(intArrayOf(1,2,3,4))
+    }
+
+    private fun reverseTheStack(stack: Stack<Int>) {
+        if (stack.isEmpty())return
+
+        val data = stack.pop()
+        reverseTheStack(stack)
+        insertAtTheBottom(stack, data)
+    }
+
+    private fun insertAtTheBottom(stack: Stack<Int>, data: Int) {
+        if (stack.isEmpty()){
+            stack.push(data)
+            return
+        }
+
+        val temp = stack.pop()
+        insertAtTheBottom(stack, data)
+        stack.push(temp)
+    }
+
+
+    //TC: O(n2) worst complexity
+    private fun findingSpans(arr:IntArray):IntArray{
+        val spanArray = IntArray(arr.size)
+        for (i in 0 until arr.size){
+            var j = i
+            var spans = 1
+            for (j in i-1 downTo 0){
+                if (arr[i] < arr[j])
+                    break
+                spans++
+            }
+            spanArray[i] = spans
+        }
+        return spanArray
+    }
+
+    private fun findingSpans_stack(arr:IntArray):IntArray{
+        val spanArray = IntArray(arr.size)
+        val stack = MyStack<Int>()
+        for (i in 0 until arr.size){
+           while (!stack.isEmpty() && arr[i] > arr[stack.peek()!!]){
+               stack.pop()
+           }
+           var p = -1
+           if(!stack.isEmpty()){
+               p = stack.peek()!!
+           }
+           spanArray[i] = i - p
+           stack.push(i)
+        }
+        return spanArray
     }
 
     //1,2,3,4 -> false as array doesn't have items in i(1) < j(3) > k(2)
@@ -39,7 +159,7 @@ class StackSamples {
 
     //13, 7, 6, 12
     //output
-//    6 -> 7
+//    6 -> 12
 //    7 -> 12
 //    12 -> -1
 //    13 -> -1
@@ -166,7 +286,45 @@ class StackSamples {
     }
 }
 
-class MyStack() {
+class MyStack<T>{
+    private var top = -1
+    private var arraySize = 16
+    private var array:Array<T?> = arrayOfNulls<Any?>(arraySize) as Array<T?>
+
+    fun push(input:T){
+        if (isFull())
+            doubleStack()
+
+        array[++top] = input
+    }
+
+    private fun doubleStack() {
+        arraySize *= 2
+        array = Arrays.copyOf(array, arraySize)
+//        val newArray = arrayOfNulls<Any?>(arraySize) as Array<T?>
+//        var count = 0
+//        array.forEach {
+//            newArray[count] = array[count++]
+//        }
+//        array = newArray
+    }
+
+    private fun isFull() = top == arraySize - 1
+
+    fun pop():T?{
+        if(isEmpty())return null
+        return array[top--]
+    }
+
+    fun peek():T?{
+        if(isEmpty())return null
+        return array[top]
+    }
+
+    fun isEmpty() =  (top == -1)
+}
+
+class MyStack2 {
     private var queue1:Queue<Int> = LinkedList<Int>()
     private var queue2:Queue<Int> = LinkedList<Int>()
     fun push(x: Int) {
@@ -204,7 +362,7 @@ class MyStack() {
     }
 }
 
-class MyStack2(){
+class MyStack3{
     private var queue:Queue<Int> = LinkedList()
     fun push(x: Int) {
         queue.add(x)
@@ -220,5 +378,213 @@ class MyStack2(){
     }
     fun empty(): Boolean {
         return queue.isEmpty()
+    }
+}
+
+class TwoStacks<T>{
+    private var arraySize = 16
+    private var array = arrayOfNulls<Any?>(arraySize)
+    private var top1 = -1; private  var top2 = arraySize
+
+    fun pushStack1(input:T){
+        if(isStackFull()){
+           doubleArraySize()
+        }
+        array[++top1] = input
+    }
+
+    fun pushStack2(input:T){
+        if(isStackFull()){
+            doubleArraySize()
+        }
+        array[--top2] = input
+    }
+
+    fun popStack1(): T?{
+        if(isStack1Empty()){
+            return null
+        }
+        return array[top1--] as T
+    }
+
+    fun popStack2(): T?{
+        if(isStack2Empty()){
+            return null
+        }
+        return array[top2++] as T
+    }
+
+    private fun doubleArraySize() {
+        arraySize *= 2
+        array = Arrays.copyOf(array, arraySize)
+    }
+
+    fun isStackFull() = !(top1 < top2 - 1)
+
+    fun isStack1Empty() = (top1 < 0)
+
+    fun isStack2Empty() = (top2 > arraySize - 1)
+
+    override fun toString(): String {
+        val sb = StringBuilder()
+        array.forEach {
+            it?.let {
+                sb.append(it).append("\n")
+            }
+        }
+        return sb.toString()
+    }
+}
+
+class DoubleSidedStack<T>{
+   private var head:Node2<T>? = null
+
+    fun pushToBack(input:T){
+        val newNode = Node2(input)
+        if(head == null){
+            newNode.next = head
+            newNode.prev = head
+            head = newNode
+        }else{
+           newNode.next = head
+            head?.prev?.next = newNode
+            newNode.prev = head?.prev
+            head?.prev = newNode
+        }
+    }
+
+    fun pushToFront(value:T){
+        pushToBack(value)
+        head = head?.prev
+    }
+
+    fun popBack():T?{
+        if(head?.prev == head){
+            val popValue = head?.value
+            head = null
+            return popValue
+        }else{
+            val tail = head?.prev?.prev
+            val popValue = head?.value
+            tail?.next = head
+            head?.prev = tail
+            return popValue
+        }
+    }
+
+    fun popFront():T?{
+        head = head?.next
+        return popBack()
+    }
+
+    fun backTop():T?{
+        return head?.prev?.value
+    }
+
+    fun frontTop():T?{
+        return head?.value
+    }
+
+    override fun toString(): String {
+        val sb = StringBuilder()
+        var temp = head
+        while (temp?.next != head){
+            sb.append(temp?.value).append('\t')
+            temp = temp?.next
+        }
+        return sb.toString()
+    }
+}
+
+class MyDequeue<T>{
+    private val size = 6
+    private val array = Array<Any>(size){}
+    private var last = 0
+    private var first = -1
+
+    fun addFirst(input:T){
+        if(isFull())
+            return
+
+        if(first == -1){
+            first = 0
+            last = 0
+        }else if(first == 0){
+            first = size - 1
+        }else{
+            first--
+        }
+
+        array[first] =  input as Any
+    }
+
+    fun removeFirst(){
+        if(isEmpty()){
+            return
+        }
+
+        if(first == last){
+            first = -1
+            last = -1
+        } else if(first == size - 1){
+            first = 0
+        }else{
+            first++
+        }
+    }
+
+    fun addLast(input:T){
+        if(isFull())
+            return
+
+        if(first == -1){
+            first = 0
+            last = 0
+        }else if(last == size-1){
+            last = 0
+        }else{
+            last++
+        }
+
+        array[last] = input as Any
+    }
+
+    fun removeLast(){
+        if(isEmpty()){
+            return
+        }
+
+        if(first == last){
+            first = -1
+            last = -1
+        }else if(last == 0){
+            last = size - 1
+        }else{
+            last--
+        }
+    }
+
+    private fun isEmpty(): Boolean {
+        return (first == -1)
+    }
+
+    private fun isFull(): Boolean {
+        return ((first == 0 && last == -1) || first == last + 1)
+    }
+
+    fun getFirst():T{
+        if(!isEmpty()){
+            return array[first] as T
+        }else{
+            throw StackOverflowError("Queue is Empty")
+        }
+    }
+
+    fun getLast():T{
+        if(!isEmpty()){
+            return array[last] as T
+        }else{
+            throw StackOverflowError("Queue is Empty")
+        }
     }
 }

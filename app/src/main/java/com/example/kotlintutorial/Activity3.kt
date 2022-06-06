@@ -1,12 +1,13 @@
 package com.example.kotlintutorial
 
 import KotlinSamples.CouroutineSamples
-import Movies.view.MoviesActivity
+import KotlinSamples.InOutSamples
+import KotlinSamples.LinkedListImplementation
+import KotlinSamples.PracticePitch
+import android.Manifest
+import movies.view.MoviesActivity
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.os.CountDownTimer
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -17,6 +18,16 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Dispatchers.IO
 import java.util.*
 import kotlin.system.measureTimeMillis
+import androidx.core.app.ActivityCompat
+
+import android.content.pm.PackageManager
+
+import android.app.Activity
+import android.os.*
+import pojos.Player
+import java.io.*
+import java.text.SimpleDateFormat
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 class Activity3 : AppCompatActivity() {
@@ -34,6 +45,36 @@ class Activity3 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_3)
         firstFunction()
+        verifyStoragePermissions(this)
+    }
+
+    private fun fileSample() {
+        val filename = "suniltxt.txt"
+
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        var file: File? = null
+        try {
+            file = File.createTempFile("suniltxt", ".txt", storageDir)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+
+//        val file = File(Environment.getExternalStorageDirectory().toString() + "/" + File.separator + filename)
+//        file.createNewFile()
+
+        val fopStream = FileOutputStream(filename)
+        val objopStream = ObjectOutputStream(fopStream)
+        objopStream.writeObject(Player("sunil", 10))
+        objopStream.flush()
+        objopStream.close()
+        fopStream.close()
+
+        val fipStream = FileInputStream(filename)
+        val objipStream = ObjectInputStream(fipStream)
+        val player = objipStream.readObject() as Player
+        println(player)
     }
 
     private fun firstFunction() {
@@ -85,10 +126,14 @@ class Activity3 : AppCompatActivity() {
 //        structuredConcurrencySample()
 //        miscellaneousEg()
 //        creating_10k_Thread()
+//        LinkedListImplementation()
+
+//          InOutSamples()
 
 //         RandomNumberActivityOnClick()
-        moviesActivityOnClick()
 //        launchListActivityOnClick()
+//          moviesActivityOnClick()
+        PracticePitch()
     }
 
     private fun moviesActivityOnClick() {
@@ -717,7 +762,22 @@ class Activity3 : AppCompatActivity() {
 
         }, Date(), 1000)
     }
+
+    fun verifyStoragePermissions(activity: Activity?) {
+        // Check if we have write permission
+        val permission = ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf( Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                1
+            )
+        }
+    }
 }
+
+
 
 open class sampleAbs(val millisInFuture:Long, val countdown:Long ): CountDownTimer(millisInFuture, countdown) {
     override fun onTick(millisUntilFinished: Long) {

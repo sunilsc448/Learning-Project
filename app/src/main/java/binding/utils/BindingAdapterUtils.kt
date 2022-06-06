@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide
 import com.example.kotlintutorial.R
 import com.squareup.picasso.Picasso
 import listeners.IClickListener
+import movies.models.Movie
+import movies.viewmodel.MoviesViewModel
 import pojos.Actor
 import viewmodels.FragmentListViewModel
 

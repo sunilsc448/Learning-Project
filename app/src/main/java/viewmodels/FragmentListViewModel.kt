@@ -4,6 +4,11 @@ import android.widget.Button
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import pojos.Actor
 import pojos.ActorResponse
 import pojos.SampleRetrofitBody
@@ -23,8 +28,13 @@ class FragmentListViewModel(var parentViewModel:ListActivityViewModel):ViewModel
         return isFetchingData
     }
 
+    private val viewModelJob = SupervisorJob()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private var noResponse:MutableLiveData<String> = MutableLiveData()
     fun getNoResponse():LiveData<String>{
+        viewModelScope.launch{
+
+        }
         return noResponse
     }
 

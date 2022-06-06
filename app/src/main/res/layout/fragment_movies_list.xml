@@ -1,13 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <import type="movies.viewmodel.MoviesViewModel"/>
+        <import type="android.content.Context"/>
+        <import type="listeners.IClickListener"/>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+        <variable name="viewmodel" type="movies.viewmodel.MoviesViewModel" />
+        <variable name="listener" type="listeners.IClickListener" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <Button
+            android:visibility="gone"
+            android:id="@+id/statusButton"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/no_internet"
+            android:text="@string/no_internet"
+            android:textColor="@color/noInternetButtonTextColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/searchEditText"
+            android:enabled="@{viewmodel.editFocus}"
+            android:text="@={viewmodel.editBoxText}"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_8dp"
+            android:autofillHints="false"
+            android:hint="@string/enter_movie_name"
+            android:inputType="text"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/loadingProgressBar"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            tools:visibility="visible"
+            moviesProgressbar = "@{viewmodel.movieLoadingStateLiveData}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_0dp"
+            viewmodel="@{viewmodel}"
+            movies="@{viewmodel.movies}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchEditText"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_movie" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

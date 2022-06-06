@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_movies"
+    app:startDestination="@id/moviesListFragment">
+    <fragment android:id="@+id/moviesListFragment"
+        android:name="movies.view.MoviesListFragment"
+        android:label="Movie App"
+        tools:layout="@layout/fragment_movies_list">
+        <action
+            android:id="@+id/movieDetailClicked"
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment android:id="@+id/movieDetailsFragment"
+        android:name="movies.view.MovieDetailsFragment"
+        android:label="Movie App"
+        tools:layout="@layout/fragment_movie_details">
+        <action
+            android:id="@+id/movieDetailBackClicked"
+            app:destination="@id/moviesListFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="movie"
+            app:argType="movies.models.Movie" />
+    </fragment>
+
+</navigation>

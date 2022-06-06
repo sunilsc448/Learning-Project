@@ -5,14 +5,10 @@ import dagger.Module
 import dagger.Provides
 import pojos.Engine
 import pojos.PetrolEngine
+import javax.inject.Named
 
 @Module
 class PetrolEngineModule {
-//    private var mileage:Int
-//    constructor(mileage:Int){
-//        this.mileage = mileage
-//    }
-
     @Provides
     fun getEngine(petrolEngine: PetrolEngine):Engine{
         return petrolEngine

@@ -22,7 +22,7 @@ class SimpleTestClassTest {
 
     @Test
     fun add() = runBlocking{
-        CouroutineSamples().myOwnSuspendFunction()
+//        CouroutineSamples().myOwnSuspendFunction()
         Assert.assertEquals(4, 2 + 2)
     }
 }

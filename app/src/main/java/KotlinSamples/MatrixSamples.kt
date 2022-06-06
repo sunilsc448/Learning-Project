@@ -6,7 +6,137 @@ import kotlin.math.sign
 class MatrixSamples {
     init {
 //        zigzagConversion("AB", 1)
+
+//        val inputArray = arrayOf(intArrayOf(1, 0, 0, 1), intArrayOf(1, 0, 1, 0), intArrayOf(1, 0, 0, 1), intArrayOf(1, 0, 0, 0))
+//        val count:Int = maxAreaIsland(inputArray)
+//        println("count $count")
+
+//        val inputArray = arrayOf(intArrayOf(1, 2, 3, 4), intArrayOf(5, 6, 7, 8),
+//            intArrayOf(9, 10, 11, 12), intArrayOf(13, 14, 15, 16), intArrayOf(17, 18, 19, 20))
+//        printWaveMatrix(inputArray)
     }
+
+    fun maxAreaIsland(inputArray: Array<IntArray>): Int {
+        val m = inputArray.size
+        val n = inputArray[0].size
+        var maxCount = 0
+        val visited:Array<BooleanArray> = Array(m){BooleanArray(n)}
+        for (i in 0 until m){
+            for (j in 0 until n){
+                if(!visited[i][j] && inputArray[i][j] == 1) {
+                    val count = findTheLargestPath(i, j, m, n,inputArray, visited, 1)
+                    if(count > maxCount){
+                        maxCount = count
+                    }
+                }
+            }
+        }
+        return maxCount
+    }
+
+    private fun findTheLargestPath(i: Int, j: Int, rowMax: Int, colMax: Int, array: Array<IntArray>, visited: Array<BooleanArray>, count:Int):Int {
+        if(i >= rowMax || j >= colMax){
+            return count
+        }
+        var counter = count
+        visited[i][j] = true
+        val directions = arrayOf(intArrayOf(0, 1), intArrayOf(1, 1), intArrayOf(1, 0), intArrayOf(1, -1),
+            intArrayOf(0,-1), intArrayOf(-1, -1), intArrayOf(-1, 0), intArrayOf(-1, 1))
+        for (dirIndx in directions.indices){
+            val newi = i + directions[dirIndx][0]
+            val newj = j + directions[dirIndx][1]
+            if(newi >= 0 && newj >= 0 && newi < rowMax && newj < colMax && !visited[newi][newj] && array[newi][newj] == 1){
+                counter = findTheLargestPath(newi, newj, rowMax, colMax,array, visited, counter+1)
+            }
+        }
+        return counter
+    }
+
+    fun printWaveMatrix(array:Array<IntArray>){
+        val rowLength = array.size
+        val colLength = array[0].size
+        println("wave matrix : ")
+        var i = 0
+        while (i < colLength) {
+            wave(i, rowLength, array, colLength)
+            i++
+        }
+    }
+
+    private fun wave(index: Int = 0, rowLength: Int, array: Array<IntArray>, colLength: Int) {
+        if(index % 2 == 0){
+            for (i in 0 until rowLength) {
+                print("${array[i][index]} \t")
+            }
+        }else{
+            for (i in rowLength - 1 downTo 0) {
+                print("${array[i][index + 1]} \t")
+            }
+        }
+    }
+
+    fun zeroMatrix(array: Array<IntArray>) {
+        val m = array.size
+        val n = array[0].size
+        val visited:Array<BooleanArray> = Array(m){BooleanArray(n)}
+        for (i in 0 until m){
+            for (j in 0 until n){
+                if(array[i][j] == 0 && !visited[i][j]){
+                    markEntireRowZero(array, i, j, m, n, visited)
+                    markEntireColumnZero(array, i, j, m, n, visited)
+                }
+            }
+        }
+        print(array)
+    }
+
+    private fun markEntireRowZero(array: Array<IntArray>, i: Int, j: Int, m: Int, n: Int, visited: Array<BooleanArray>) {
+        for (index in 0 until n){
+            visited[index][j] = true
+            array[index][j] = 0
+        }
+    }
+
+    fun markEntireColumnZero(array: Array<IntArray>, i: Int, j: Int, m:Int, n:Int, visited: Array<BooleanArray>) {
+        for (index in 0 until m){
+            visited[i][index] = true
+            array[i][index] = 0
+        }
+    }
+
+    fun rotateArrayBy90ClockWise(array: Array<IntArray>){
+       val n = array.size
+       for (i in 0 until n/2){
+           print("inside i loop $i")
+           for (j in i until n-i-1){
+               val temp = array[i][j]
+               array[i][j] = array[n-j-1][i]
+               array[n-j-1][i] = array[n-i-1][n-j-1]
+               array[n-i-1][n-j-1] = array[j][n-i-1]
+               array[j][n-i-1] = temp
+           }
+       }
+       println(array)
+    }
+
+    fun rotateArrayBy90AntiClockWise(array: Array<IntArray>){
+        val n = array.size
+        for (i in 0 until n/2){
+            print("inside i loop $i")
+            for (j in i until n-i-1){
+                val temp = array[i][j]
+                array[i][j] = array[j][n-i-1]
+                array[j][n-i-1] = array[n-i-1][n-j-1]
+                array[n-i-1][n-j-1] = array[n-j-1][i]
+                array[n-j-1][i] = temp
+            }
+        }
+        println(array)
+    }
+
+
+
+
 
     fun shiftGrid(grid: Array<IntArray>, k: Int): List<List<Int>> {
         val m = grid.size
@@ -178,4 +308,5 @@ class MatrixSamples {
         return retStr
         //PAHNAPLSIIGYIR
     }
+
 }

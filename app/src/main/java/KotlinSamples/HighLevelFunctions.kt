@@ -1,5 +1,8 @@
 package KotlinSamples
 
+import android.os.Looper
+import android.os.Handler
+
 class HighLevelFunctions {
     var result = 0
     init {
@@ -33,6 +36,7 @@ class HighLevelFunctions {
     fun sq_rt(value:Int) = println("Square root of number $value is ${value * 2}")
 
     fun highLevelFunction(a:Int, b:Int,lambda: (Int, Int) -> Int):Int{
+//        lambda(a, b)
         return lambda.invoke(a,b)
     }
 
@@ -42,6 +46,11 @@ class HighLevelFunctions {
 
     inline fun sampleInline(crossinline body: () -> Unit) {
         body()
+        val run = Runnable {
+            TODO("Not yet implemented")
+        }
+
+
 //        val f = object: Runnable {
 //            override fun run(){
 //                body()

@@ -30,7 +30,7 @@ class DaggerSampleActivity : AppCompatActivity() {
     private fun fieldInjection() {
 //        var carComponent = DaggerCarComponent.builder().build()
 //        var carComponent = DaggerCarComponent.builder().petrolEngineModule(PetrolEngineModule(12)).build()
-        var carComponent1 = (application as AppClassForComponent).getGlobalCarComponent()
+        var carComponent1 = (application as AppClass).getGlobalCarComponent()
         carComponent1.inject(this)
         car.start()
         car1.start()

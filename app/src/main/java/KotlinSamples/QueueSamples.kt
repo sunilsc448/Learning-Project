@@ -5,7 +5,7 @@ import kotlin.collections.ArrayDeque
 
 class QueueSamples {
     init {
-
+        maxSlidingWindow(intArrayOf(4, 1, 3, 5, 1, 2, 3, 2, 1, 1, 5), 11)
     }
     fun maxSlidingWindow(nums: IntArray, k: Int): IntArray {
         var priorityQueue = PriorityQueue<Int>(k, Collections.reverseOrder())

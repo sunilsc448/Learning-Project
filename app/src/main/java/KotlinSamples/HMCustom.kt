@@ -44,7 +44,7 @@ class HMSample{
 }
 
 class HMCustom<K, V> {
-    var arraySize = 16
+    var arraySize = 4
     val loadFactor = 0.9
     var itemCount = 0
     var entries:Array<LinkedList<Entri<K, V>>> = Array(arraySize){ LinkedList<Entri<K, V>>() }

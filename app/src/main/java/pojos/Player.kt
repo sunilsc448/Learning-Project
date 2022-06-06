@@ -1,6 +1,6 @@
 package pojos
 
-open class Player(val name:String, val level: Int) {
+open class Player(val name:String, @Transient val level: Int) {
     var lives = 3
     var score = 0
 
