@@ -155,6 +155,18 @@ class StringProblems {
         return res
     }
 
+//    Input: s = "abcabcbb"
+//    Output: 3
+//    Explanation: The answer is "abc", with the length of 3.
+
+//    Input: s = "bbbbb"
+//    Output: 1
+//    Explanation: The answer is "b", with the length of 1.
+
+//    Input: s = "pwwkew"
+//    Output: 3
+//    Explanation: The answer is "wke", with the length of 3.
+//    Notice that the answer must be a substring, "pwke" is a
     fun lengthOfLongestSubstring(s: String): Int {
         var result = 0
         val n = s.length
@@ -277,16 +289,17 @@ class StringProblems {
         var incrementer = 1
         var index = 0
         for (i in 0 until s.length){
+            //index is the decider which will put the value into right substring item
             sbArray[index].append(s[i])
+
+            //if top item
             if(index == 0){
-                incrementer = 1
+                incrementer = 1 //if bottom item
             }else if(index == numRows - 1){
                 incrementer = -1
             }
+
             index += incrementer
-            while (index > numRows- 1){
-                index--
-            }
         }
 
         var resulStr = ""
@@ -365,5 +378,42 @@ class StringProblems {
         }
 
         return answerWords
+    }
+
+//    Letter Combinations of a Phone Number
+//    Input: digits = "23"
+//    Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+
+//    Input: digits = "2"
+//    Output: ["a","b","c"]
+
+//    Input: digits = ""
+//    Output: []
+    fun letterCombinations(digits: String): List<String> {
+        if(digits.isNullOrEmpty())
+            return emptyList()
+        val map = mapOf(
+            '2' to listOf("a", "b", "c"),
+            '3' to listOf("d", "e", "f"),
+            '4' to listOf("g", "h", "i"),
+            '5' to listOf("j", "k", "l"),
+            '6' to listOf("m", "n", "o"),
+            '7' to listOf("p", "q", "r", "s"),
+            '8' to listOf("t", "u", "v"),
+            '9' to listOf("w", "x", "y", "z")
+        )
+
+        var rsltList = map.get(digits[0])!!
+        if(digits.length == 1){
+            return rsltList
+        }
+        var index = 1
+        while (index < digits.length){
+            val list = map.get(digits[index])!!
+            rsltList = rsltList.flatMap { a ->list.flatMap { b -> arrayListOf(a + b)}}
+            index++
+        }
+
+        return rsltList
     }
 }

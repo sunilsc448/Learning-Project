@@ -78,6 +78,21 @@ class PracticePitch {
 //        FilterAndMapSample()
 //        SetSample()
 //        MapSample()
+//        MatrixSamples().numIslands(arrayOf(charArrayOf('1', '1', '0', '0', '0'), charArrayOf('1', '1', '0', '0', '0'),
+//            charArrayOf('0', '0', '1', '0', '0'),  charArrayOf('0', '0', '0', '1', '1')))
+
+//          MatrixSamples().generatePascalTriangle(5)
+
+//        ArrayPrograms().tripletSum(intArrayOf(1,1,2,2,3,3), 6)
+//        ArrayPrograms().tripletSum(intArrayOf(1,1,2,2,3,3,4,4,5,5), 8)
+
+//        StringProblems().zigzagConversionStringBuilder("PAYPALISHIRING", 5)
+
+//        ArrayPrograms().findUnsortedSubarray(intArrayOf(2, 6, 4, 8, 10, 9, 15))
+
+//        ArrayPrograms().TrappingRainWater(intArrayOf(3, 0, 2, 0, 4))
+
+        StringProblems().lengthOfLongestSubstring("abcabcbb")
     }
 
     fun findKthLargest(){

@@ -7,7 +7,6 @@ import movies.repository.MoviesRepository
 import androidx.lifecycle.*
 import kotlinx.coroutines.*
 import movies.models.MoviesResponse
-import pojos.Actor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,6 +43,11 @@ class MoviesViewModel @Inject constructor(private val repository:MoviesRepositor
     init {
         movies.addSource(_popularMoviesLiveData){
             movies.value = it
+
+            //do the Room Operation in IO thread
+            viewModelScope.launch(Dispatchers.IO) {
+                repository.addPopularMoviesToDB(it)
+            }
         }
         movies.addSource(_searchMoviesLiveData){
             movies.value = it
@@ -59,6 +63,8 @@ class MoviesViewModel @Inject constructor(private val repository:MoviesRepositor
 //                movieLoadingStateLiveData.postValue(MoviesLoadingState.LOADING)
                 isEditTextFocus.postValue(false)
                 fetchMovieByQuery(query)
+            }else if(query.isEmpty()){
+                movies.postValue(_popularMoviesLiveData.value)
             }
         }
     }
@@ -98,11 +104,20 @@ class MoviesViewModel @Inject constructor(private val repository:MoviesRepositor
                 _popularMoviesLiveData.postValue(response.body()?.movies)
             }else{
                 movieLoadingStateLiveData.value = MoviesLoadingState.INVALID_API_KEY
+                setTheDataFromDB()
             }
         }
 
         override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
             movieLoadingStateLiveData.value = MoviesLoadingState.ERROR
+            setTheDataFromDB()
+        }
+    }
+
+    private fun setTheDataFromDB() {
+        //do the Room Operation in IO thread
+        viewModelScope.launch(Dispatchers.IO) {
+            _popularMoviesLiveData.postValue(repository.getPopularMoviesFromDB())
         }
     }
 

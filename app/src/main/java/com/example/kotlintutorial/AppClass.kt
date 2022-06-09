@@ -7,6 +7,7 @@ import movies.modules.MoviesApiModule
 import android.app.Application
 import component.CarComponent
 import component.DaggerCarComponent
+import movies.modules.RoomModule
 
 class AppClass:Application() {
     lateinit var carComponent: CarComponent
@@ -25,6 +26,7 @@ class AppClass:Application() {
     private fun initMoviesComponent(appClass: AppClass):MoviesComponent{
         return  DaggerMoviesComponent.builder().
                 appModule(AppModule(appClass)).
+                roomModule(RoomModule()).
                 moviesApiModule(MoviesApiModule()).
                 build()
     }

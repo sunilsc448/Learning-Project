@@ -132,8 +132,8 @@ class Activity3 : AppCompatActivity() {
 
 //         RandomNumberActivityOnClick()
 //        launchListActivityOnClick()
-//          moviesActivityOnClick()
-        PracticePitch()
+          moviesActivityOnClick()
+//        PracticePitch()
     }
 
     private fun moviesActivityOnClick() {

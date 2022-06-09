@@ -5,6 +5,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.math.max
+import kotlin.math.sign
 
 class ArrayPrograms {
     init {
@@ -586,7 +587,27 @@ class ArrayPrograms {
         return cnt
     }
 
-    fun areDistinct(arr: IntArray, target: Int): Int {
+    //3Sum With Multiplicity
+//    Input: arr = [1,1,2,2,3,3,4,4,5,5], target = 8
+//    Output: 20
+//    Explanation:
+//    Enumerating by the values (arr[i], arr[j], arr[k]):
+//    (1, 2, 5) occurs 8 times;
+//    (1, 3, 4) occurs 8 times;
+//    (2, 2, 4) occurs 2 times;
+//    (2, 3, 3) occurs 2 times.
+
+//    Input: arr = [1,1,2,2,2,2], target = 5
+//    Output: 12
+//    Explanation:
+//    arr[i] = 1, arr[j] = arr[k] = 2 occurs 12 times:
+//    We choose one 1 from [1,1] in 2 ways,
+//    and two 2s from [2,2,2,2] in 6 ways.
+
+//    Input: arr = [2,1,3], target = 6
+//    Output: 1
+//    Explanation: (1, 2, 3) occured one time in the array so we return 1.
+    fun tripletSum(arr: IntArray, target: Int): Int {
         val mod = 1000000007
         var sum = 0
         var map = HashMap<Int, Int>()
@@ -594,17 +615,317 @@ class ArrayPrograms {
         for(i in 1 until arr.size){
             for(j in i+1 until arr.size){
                 val diff = target - (arr[i] + arr[j])
-                if(map.keys.contains(diff)){
-                    sum = ((sum % mod) + (map.get(diff)!! % mod)) % mod
+                if(map.containsKey(diff)){
+                    sum = sum + map.get(diff)!!
+//                    sum = ((sum % mod) + (map.get(diff)!! % mod)) % mod
                 }
             }
 
-            if(map.keys.contains(arr[i])){
+            if(map.containsKey(arr[i])){
                 map.put(arr[i], map.get(arr[i])!! + 1)
             }else{
                 map.put(arr[i], 1)
             }
         }
         return sum
+    }
+
+    //CountTriplets Better Approach O(n2)
+    //    i < j < k and a[k] < a[i] < a[j]
+    fun countTriplets(arr: IntArray):Int{
+        var tripletCounter = 0
+        for (i in 0 until arr.size){
+            var counter = 0
+            for (j in i+1 until arr.size){
+                if(arr[j] > arr[i]){
+                    counter++
+                }else{
+                    tripletCounter += counter
+                }
+            }
+        }
+        return tripletCounter
+    }
+
+    //CountTriplets O(n3)
+    //    i < j < k and a[k] < a[i] < a[j]
+    fun countTripletsBruteForce(arr: IntArray): Int {
+        val n = arr.size
+        var cnt = 0
+        for (i in 0 until n)
+            for (j in i + 1 until n)
+                for (k in j + 1 until n) { // If it satisfy the
+                    // given conditions
+                    if (arr[k] < arr[i] && arr[i] < arr[j]) {
+                        cnt++
+                    }
+                }
+
+        // Return the final count
+        return cnt
+    }
+
+//    Input: nums = [2,6,4,8,10,9,15]
+//    Output: 5
+//    Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.
+
+//    Input: nums = [1,2,3,4]
+//    Output: 0
+//    array is already sorted
+    fun findUnsortedSubarray(nums: IntArray): Int {
+        val len = nums.size
+        var max = Int.MIN_VALUE ; var min = Int.MAX_VALUE
+        var start = -1 ; var end = -1
+        for (i in 0 until len) {
+            max = Math.max(max, nums[i]) //from left to right, search the current max
+            min = Math.min(min, nums[len - i - 1]) //from right to left, search the current min
+            if (nums[i] < max)
+                end = i
+            if (nums[len - i - 1] > min)
+                start = len - i - 1
+        }
+        return if (start == -1)
+            0
+        else
+            end - start + 1
+    }
+
+//    Input: nums = [1,2,3,4], k = 5
+//    Output: 2
+//    Explanation: Starting with nums = [1,2,3,4]:
+//    - Remove numbers 1 and 4, then nums = [2,3]
+//    - Remove numbers 2 and 3, then nums = []
+//    There are no more pairs that sum up to 5, hence a total of 2 operations.
+
+//    Input: nums = [3,1,3,4,3], k = 6
+//    Output: 1
+//    Explanation: Starting with nums = [3,1,3,4,3]:
+//    - Remove the first two 3's, then nums = [1,4,3]
+//    There are no more pairs that sum up to 6, hence a total of 1 operation.
+    fun maxOperationsKSumPair(nums: IntArray, k: Int): Int {
+        val map = HashMap<Int, Int>()
+        var count = 0
+        for (i in 0 until nums.size) {
+            if (map.containsKey(nums[i])) {
+                count++
+                map.remove(nums[i])
+            } else {
+                map.put(k - nums[i], 0)
+            }
+        }
+        return count
+    }
+
+    fun maxOperationsKSumPair2(nums: IntArray, k: Int): Int {
+        val map = HashMap<Int, Int>()
+        var count = 0
+        for(i in 0 until nums.size){
+            if(map.containsKey(nums[i])){
+                count++
+                val value = map.get(nums[i])!!
+                map.remove(nums[i])
+                if(value > 1){
+                    map.put(nums[i], value - 1)
+                }
+            }else{
+                if(map.containsKey(k-nums[i])){
+                    map.put(k-nums[i], map.get(k-nums[i])!! + 1)
+                }else{
+                    map.put(k-nums[i], 1)
+                }
+            }
+        }
+        return count
+    }
+
+//    Input: x = 123
+//    Output: 321
+
+//    Input: x = -123
+//    Output: -321
+
+//    Input: x = 120
+//    Output: 21
+    //reverseTheInteger
+    fun reverseTheInteger(x: Int): Int {
+        if(x > Int.MAX_VALUE || x <= Int.MIN_VALUE){
+            return 0
+        }
+        var num = x
+        var sum:Long = 0
+
+        while (num != 0){
+            val rem = num % 10
+            num /= 10
+            sum = (sum*10) + rem
+        }
+
+        if(sum > Int.MAX_VALUE || sum <= (Int.MIN_VALUE)){
+            return 0
+        }else {
+            return sum.toInt()
+        }
+    }
+
+//    Input: s = "42"
+//    Output: 42
+//
+//    Input: s = "   -42"
+//    Output: -42
+//
+//    Input: s = "4193 with words"
+//    Output: 4193
+    fun stringToInteger(s: String): Int {
+        val str = s.trim()
+        if(str.isEmpty())return 0
+        var num:Long = 0
+        var isNegative = false
+        var index = 0
+        if(str[0] == '-'){
+            isNegative = true
+            index++
+        }else if(str[0] == '+'){
+            index++
+        }
+
+        for (i in index until str.length){
+            if(str[i] in '0'..'9'){
+                num = num*10 + str[i].toString().toInt()
+            }else{
+                break;
+            }
+            if(num > Int.MAX_VALUE || num < Int.MIN_VALUE){
+                break
+            }
+        }
+
+        if(isNegative){
+            num = -num
+        }
+
+        if(num > Int.MAX_VALUE){
+            return Int.MAX_VALUE
+        }else if(num < Int.MIN_VALUE){
+            return Int.MIN_VALUE
+        }else{
+            return num.toInt()
+        }
+    }
+
+//    Input: x = 121
+//    Output: true
+//
+//    Input: x = -121
+//    Output: false
+
+//    Input: x = 10
+//    Output: false
+    fun isPalindrome(x: Int): Boolean {
+        if(x < 0){
+            return false
+        }
+
+        var xVal = x
+
+        var rhs = 0
+        while(xVal != 0){
+            rhs = rhs * 10 + (xVal % 10)
+            xVal = xVal/10
+        }
+
+        return x == rhs
+    }
+
+
+
+//    Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+//    Output: 6
+//    Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+//
+//    Input: height = [4,2,0,3,2,5]
+//    Output: 9
+    fun TrappingRainWater(height: IntArray): Int {
+//        approach 1
+         val size = height.size
+         var sum = 0
+         for (i in 1 until size-1){
+            var left = height[i]
+            for (j in 0 until i){
+                left = Math.max(left, height[j])
+            }
+            var right = height[i]
+            for (j in i + 1 until size){
+                right = Math.max(right, height[j])
+            }
+            sum += Math.min(left, right) - height[i]
+         }
+         return sum
+
+
+        //approach2
+//         val size = height.size
+//         var sum = 0
+
+//         //fill left array
+//         val leftArray = Array(size){Int.MIN_VALUE}
+//         leftArray[0] = height[0]
+//         for (i in 1 until size){
+//             leftArray[i] = Math.max(leftArray[i - 1], height[i])
+//         }
+
+//         //fill right array
+//         val rightArray = Array(size){Int.MIN_VALUE}
+//         rightArray[size - 1] = height[size - 1]
+//         for (i in size-2 downTo 0){
+//             rightArray[i] = Math.max(rightArray[i+1], height[i])
+//         }
+
+//         for (i in 1 until size){
+//             sum += Math.min(leftArray[i], rightArray[i]) - height[i]
+//         }
+//         return sum
+
+
+        //approach3
+        // val size = height.size
+        // var sum = 0
+        // var left = 0; var right = size-1
+        // var left_max = 0; var right_max = 0
+        // while (left < right){
+        //     if(height[left] < height[right]){
+        //         if(height[left] > left_max){
+        //             left_max = height[left]
+        //         }else{
+        //             sum += left_max - height[left]
+        //         }
+        //         left++
+        //     }else{
+        //         if(height[right] > right_max){
+        //             right_max = height[right]
+        //         }else{
+        //             sum += right_max - height[right]
+        //         }
+        //         right--
+        //     }
+        // }
+        // return sum
+
+        //aproach4
+//        val size = height.size
+//        var sum = 0
+//        val stack = Stack<Int>()
+//        for(i in 0 until size){
+//            while(stack.isNotEmpty() && height[i] >  height[stack.peek()]){
+//                val pop_height = height[stack.pop()]
+//                if(stack.isEmpty()){
+//                    break;
+//                }
+//                val dist = i - stack.peek() - 1
+//                val min_height = Math.min(height[stack.peek()], height[i]) - pop_height
+//                sum += (min_height * dist)
+//            }
+//            stack.push(i)
+//        }
+//        return sum
     }
 }

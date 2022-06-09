@@ -18,4 +18,12 @@ class MoviesActivity : AppCompatActivity() {
         AppClass.application.moviesComponent.inject(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MoviesViewModel::class.java)
     }
+
+    override fun onRetainCustomNonConfigurationInstance(): Any? {
+        return super.onRetainCustomNonConfigurationInstance()
+    }
+
+    override fun getLastNonConfigurationInstance(): Any? {
+        return super.getLastNonConfigurationInstance()
+    }
 }

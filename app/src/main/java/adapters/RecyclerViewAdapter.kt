@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlintutorial.R
 import listeners.IClickListener
 import pojos.Actor
-import viewmodels.FragmentListViewModel
 
 class RecyclerViewAdapter(var mList:List<Any>?, val listener: IClickListener?, val viewModel: ViewModel):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemViewType(position: Int): Int {

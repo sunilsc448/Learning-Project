@@ -1,5 +1,7 @@
 package KotlinSamples
 
+import java.util.ArrayList
+
 class MapsSample {
     init {
 //        maxOperations(intArrayOf(2,5,4,4,1,3,4,4,1,4,4,1,2,1,2,2,3,2,4,2), 3)
@@ -22,5 +24,37 @@ class MapsSample {
         return count
     }
 
+    //    Input: nums = [1,2,3,1]
+    //    Output: true
+    //
+    //    Input: nums = [1,2,3,4]
+    //    Output: false
 
+    //using Map or List
+    fun isDuplicateItem(nums: IntArray):Boolean{
+        val map = HashMap<Int, Int>()
+        nums.forEach {
+            if(map.containsKey(it)){
+                return true
+            }else{
+                map.put(it, it)
+            }
+        }
+        return false
+
+//        val map = ArrayList<Int>()
+//        nums.forEach {
+//            if(map.contains(it)){
+//                return true
+//            }else{
+//                map.add(it)
+//            }
+//        }
+//        return false
+    }
+
+    //using Set
+    fun isDuplicateItem2(nums: IntArray):Boolean{
+       return nums.size != nums.toSet().size
+    }
 }

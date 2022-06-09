@@ -71,4 +71,35 @@ class LinkedListSamples {
 
         return head.next
     }
+
+    fun isPalindrome(head: ListNode?): Boolean {
+        var slow = head
+        var fast = head
+        while (fast != null && fast.next != null) {
+            slow = slow!!.next
+            fast = fast.next!!.next
+        }
+        slow = reverse(slow)
+        fast = head
+        while (slow != null) {
+            if (slow.`val` != fast!!.`val`) {
+                return false
+            }
+            slow = slow.next
+            fast = fast.next
+        }
+        return true
+    }
+
+    fun reverse(node: ListNode?): ListNode? {
+        var node = node
+        var prev: ListNode? = null
+        while (node != null) {
+            val newNode = node.next
+            node.next = prev
+            prev = node
+            node = newNode
+        }
+        return prev
+    }
 }

@@ -11,7 +11,6 @@ import com.example.kotlintutorial.R
 import com.squareup.picasso.Picasso
 import movies.models.MoviesLoadingState
 import movies.viewmodel.MoviesViewModel
-import viewmodels.FragmentListViewModel
 
 object MoviesBindingAdapterUtils {
     @BindingAdapter(value = ["viewmodel","movies"])
@@ -24,7 +23,7 @@ object MoviesBindingAdapterUtils {
                 recyclerView.adapter = adapter
             }else{
                 (adapter as RecyclerViewAdapter).updateData(movies)
-                recyclerView.scrollToPosition(adapter.itemCount - 1)
+                recyclerView.scrollToPosition(0)
             }
         }
     }

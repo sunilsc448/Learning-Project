@@ -1,5 +1,6 @@
 package KotlinSamples
 
+import android.util.MutableInt
 import java.lang.StringBuilder
 import kotlin.math.sign
 
@@ -14,6 +15,83 @@ class MatrixSamples {
 //        val inputArray = arrayOf(intArrayOf(1, 2, 3, 4), intArrayOf(5, 6, 7, 8),
 //            intArrayOf(9, 10, 11, 12), intArrayOf(13, 14, 15, 16), intArrayOf(17, 18, 19, 20))
 //        printWaveMatrix(inputArray)
+    }
+
+
+//    Input: grid = [
+//    ["1","1","1","1","0"],
+//    ["1","1","0","1","0"],
+//    ["1","1","0","0","0"],
+//    ["0","0","0","0","0"]
+//    ]
+//    Output: 1
+//    Input: grid = [
+//    ["1","1","0","0","0"],
+//    ["1","1","0","0","0"],
+//    ["0","0","1","0","0"],
+//    ["0","0","0","1","1"]
+//    ]
+//    Output: 3
+    //Find Number OF Islands >> BFS
+    fun numIslands(grid: Array<CharArray>): Int {
+        var count = 0
+        for (i in grid.indices) {
+            for (j in 0 until grid[i].size) {
+                if (grid[i][j] == '1') {
+                    count++
+                    val islandLength = BFS(i, j, grid, 0)
+                    println(islandLength)
+                }
+            }
+        }
+        return count
+    }
+
+    fun BFS(i: Int, j: Int, grid: Array<CharArray>, count: Int):Int {
+        if (i < 0 || i >= grid.size || j < 0 || j >= grid[i].size || grid[i][j] == '0') {
+            return count
+        }
+        var counter = count + 1
+        grid[i][j] = '0'
+        counter =  BFS(i + 1, j, grid, counter) // down
+        counter =  BFS(i - 1, j, grid, counter) //up
+        counter =  BFS(i, j + 1, grid, counter) //right
+        counter =  BFS(i, j - 1, grid, counter) //left
+        return counter
+    }
+
+    // Pascal's Triangle
+//    Input: numRows = 5
+//    Output: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
+//    Input: numRows = 1
+//    Output: [[1]]
+    fun generatePascalTriangle(numRows: Int): List<List<Int>> {
+        val parentList: MutableList<List<Int>> = ArrayList()
+
+        if (numRows == 0)
+            return parentList
+
+        //add [1]
+        val firstRow: MutableList<Int> = ArrayList()
+        firstRow.add(1)
+        parentList.add(firstRow)
+
+        for (i in 1 until numRows) {
+            //add [1] in the beginning
+            val newRow: MutableList<Int> = ArrayList()
+            newRow.add(1)
+
+            val prevRow = parentList[i - 1]
+
+            for (j in 1 until i) {
+                newRow.add(prevRow[j - 1] + prevRow[j])
+            }
+
+            //add [1] in the end
+            newRow.add(1)
+            parentList.add(newRow)
+        }
+        return parentList
     }
 
     fun maxAreaIsland(inputArray: Array<IntArray>): Int {
