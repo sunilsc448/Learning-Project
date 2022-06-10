@@ -6,6 +6,11 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.kotlintutorial.AppClass
 import com.example.kotlintutorial.R
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.lang.Exception
 import javax.inject.Inject
 
 class MoviesActivity : AppCompatActivity() {
