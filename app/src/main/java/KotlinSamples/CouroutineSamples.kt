@@ -26,18 +26,17 @@ class CouroutineSamples {
 //        deferredAsyncAndAwait()
 //        deferredGlobalAsyncAndAwait()
 //          handlingCoroutineExceptions()
-        CoroutineScope(Main).launch {
-            coroutineWithContext()
-//            coroutineWithContextVSAsyncAwait()
-        }
+//        CoroutineScope(Main).launch {
+//            coroutineWithContext()
+////            coroutineWithContextVSAsyncAwait()
+//        }
 
 //        coroutinewithTimeout()
 //        coroutinewithTimeoutOrNull()
 
-        //sequential execution inside coroutine
+//        sequential execution inside coroutine (normalMainThread vs suspendFunction)
 //          normalMainThread()
-//          vs
-//          suspendFunction()
+          suspendFunction()
 
 //        concurrentSample()
 //        concurrentLazySample()
@@ -206,11 +205,13 @@ class CouroutineSamples {
 
     private fun getMessage1():String {
         Thread.sleep(1000)
+        println("CoroutineExperiment: inside getMessage1")
         return "Hello "
     }
 
     private fun getMessage2():String {
         Thread.sleep(1000)
+        println("CoroutineExperiment: inside getMessage2")
         return "World"
     }
 
@@ -311,8 +312,8 @@ class CouroutineSamples {
                     return@launch
                 }
                 println("CoroutineExperiment: $i sleep between lengthyJob ${Thread.currentThread().name} and isActive $isActive")
-                Thread.sleep(10)
-//                delay(100)
+//                Thread.sleep(100)
+                delay(100)
 //                yield()
             }
             println("CoroutineExperiment: Job Finished "+Thread.currentThread().name)

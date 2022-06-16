@@ -1,0 +1,75 @@
+package launchModes
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
+import com.example.kotlintutorial.R
+import kotlinx.android.synthetic.main.activity_first.*
+
+class FirstActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_first)
+        btn.setOnClickListener {
+            startActivity(Intent(this, SecondActivity::class.java))
+        }
+    }
+
+    private val TAG = "First Activity"
+    override fun onStart() {
+        Log.i(TAG, "onStart")
+        super.onStart()
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        Log.i(TAG, "onRestoreInstanceState")
+        super.onRestoreInstanceState(savedInstanceState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        Log.i(TAG, "onRestoreInstanceState persistentState")
+        super.onRestoreInstanceState(savedInstanceState, persistentState)
+    }
+
+    override fun onResume() {
+        Log.i(TAG, "onResume")
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Log.i(TAG, "onPause")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Log.i(TAG, "onStop")
+        super.onStop()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.i(TAG, "onSaveInstanceState")
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        Log.i(TAG, "onSaveInstanceState outPersistentState")
+        super.onSaveInstanceState(outState, outPersistentState)
+    }
+
+    override fun onDestroy() {
+        Log.i(TAG, "onDestroy")
+        super.onDestroy()
+    }
+
+    override fun recreate() {
+        Log.i(TAG, "recreate")
+        super.recreate()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        Log.i(TAG, "onNewIntent")
+        super.onNewIntent(intent)
+    }
+}

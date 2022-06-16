@@ -4,6 +4,7 @@ import KotlinSamples.CouroutineSamples
 import KotlinSamples.InOutSamples
 import KotlinSamples.LinkedListImplementation
 import KotlinSamples.PracticePitch
+import RXJava.RXJavaActivity
 import android.Manifest
 import movies.view.MoviesActivity
 import android.content.Intent
@@ -25,6 +26,8 @@ import android.content.pm.PackageManager
 import android.app.Activity
 import android.os.*
 import pojos.Player
+import services.ServiceActivity
+import workManager.WorkManagerActivity
 import java.io.*
 import java.text.SimpleDateFormat
 
@@ -132,8 +135,31 @@ class Activity3 : AppCompatActivity() {
 
 //         RandomNumberActivityOnClick()
 //        launchListActivityOnClick()
-          moviesActivityOnClick()
+//          moviesActivityOnClick()
+//        ServiceActivityOnClick()
+//        workManagerActivityOnClick()
+        rxJavaActivity()
+
+
         PracticePitch()
+    }
+
+    private fun rxJavaActivity() {
+        btn.setOnClickListener {
+            startActivity(Intent(this, RXJavaActivity::class.java))
+        }
+    }
+
+    private fun workManagerActivityOnClick() {
+        btn.setOnClickListener {
+            startActivity(Intent(this, WorkManagerActivity::class.java))
+        }
+    }
+
+    private fun ServiceActivityOnClick() {
+        btn.setOnClickListener {
+            startActivity(Intent(this, ServiceActivity::class.java))
+        }
     }
 
     private fun moviesActivityOnClick() {

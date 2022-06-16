@@ -1,5 +1,6 @@
 package movies.view
 
+import android.content.Context
 import movies.viewmodel.MoviesViewModel
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -51,7 +52,11 @@ class MoviesListFragment : Fragment() {
             findNavController().navigate(MoviesListFragmentDirections.movieDetailClicked(it))
         })
 
-        parentViewModel.fetchPopularMovies()
+            parentViewModel.fetchPopularMovies()
         return dataBinding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
     }
 }
