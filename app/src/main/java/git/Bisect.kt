@@ -8,4 +8,8 @@ class Bisect {
     fun m2(){
         "2nd"
     }
+
+    fun m3(){
+        "3rd'
+    }
 }
