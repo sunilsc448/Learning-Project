@@ -10,9 +10,4 @@ class RebaseSample {
         "This is the first commit for Rebase from Feature Branch"
         "This is the second commit for Rebase from Feature Branch"
     }
-
-    fun method2(){
-        "This is the first commit for Rebase from Feature Branch"
-        "This is the second commit for Rebase from Feature Branch"
-    }
 }
