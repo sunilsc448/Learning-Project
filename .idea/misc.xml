@@ -10,12 +10,15 @@
         <entry key="app/src/main/res/layout/activity_3.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_4.xml" value="0.3619791666666667" />
         <entry key="app/src/main/res/layout/activity_dagger_sample2.xml" value="0.3463541666666667" />
-        <entry key="app/src/main/res/layout/activity_first.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_first.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_fourth.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/activity_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17532795156407668" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.3619791666666667" />
         <entry key="app/src/main/res/layout/activity_main3.xml" value="0.5401554404145078" />
         <entry key="app/src/main/res/layout/activity_movies.xml" value="0.20572916666666666" />
+        <entry key="app/src/main/res/layout/activity_mukti_threading.xml" value="0.21354166666666666" />
+        <entry key="app/src/main/res/layout/activity_notification.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_rxjava.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/layout/activity_sample_navigation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_second.xml" value="0.18020833333333333" />
@@ -26,14 +29,16 @@
         <entry key="app/src/main/res/layout/content_sample_navigation.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_details.xml" value="0.13177083333333334" />
-        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.1765625" />
         <entry key="app/src/main/res/layout/fragment_list_type.xml" value="0.22564327793033842" />
         <entry key="app/src/main/res/layout/fragment_movie_details.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/fragment_movies_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.18697916666666667" />
+        <entry key="app/src/main/res/layout/fragment_third.xml" value="0.17239583333333333" />
         <entry key="app/src/main/res/layout/item_actor.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_movie.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/network_security_config.xml" value="0.10260416666666666" />
       </map>
     </option>
   </component>

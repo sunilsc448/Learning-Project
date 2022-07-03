@@ -5,8 +5,24 @@ import kotlin.collections.ArrayDeque
 
 class QueueSamples {
     init {
-        maxSlidingWindow(intArrayOf(4, 1, 3, 5, 1, 2, 3, 2, 1, 1, 5), 11)
+        MyQueueUseCase()
+//        maxSlidingWindow(intArrayOf(4, 1, 3, 5, 1, 2, 3, 2, 1, 1, 5), 11)
     }
+
+    private fun MyQueueUseCase() {
+        val queue = MyQueue<String>()
+        queue.enqueue("anil")
+        queue.enqueue("sunil")
+        queue.enqueue("roopa")
+        println("front item is ${queue.dequeue()}")
+        queue.enqueue("neksha")
+        queue.enqueue("kanvi")
+        println("front item is ${queue.dequeue()}")
+        queue.enqueue("simba")
+        queue.enqueue("xxxxx")
+        println("front item is ${queue.dequeue()}")
+    }
+
     fun maxSlidingWindow(nums: IntArray, k: Int): IntArray {
         var priorityQueue = PriorityQueue<Int>(k, Collections.reverseOrder())
 
@@ -61,5 +77,44 @@ class QueueSamples {
         resultArray[resultCounter++] = nums[priorityQueue.first()]
 
         return resultArray
+    }
+}
+
+class MyQueue<T>{
+    private var size = 16
+    private var count = 0
+    private var front:Int = 0
+    private var rear:Int = -1
+    private var array:Array<T?> = arrayOfNulls<Any>(size) as Array<T?>
+    fun enqueue(value:T){
+        if(isFull()){
+            doubleTheQueue()
+        }
+        rear = ++rear % size
+        array[rear] = value
+        count++
+    }
+
+    fun dequeue():T?{
+        if(isEmpty())
+            return null
+
+        val data = array[front]
+        front = ++front % size
+        count--
+        return data
+    }
+
+    fun isEmpty():Boolean{
+        return count == 0
+    }
+
+    private fun isFull():Boolean{
+        return count == size
+    }
+
+    private fun doubleTheQueue() {
+        size *= 2
+        array = Arrays.copyOf(array, size)
     }
 }

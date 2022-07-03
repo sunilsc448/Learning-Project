@@ -2,6 +2,9 @@ package KotlinSamples
 
 import android.util.Log
 import java.lang.StringBuilder
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class StringProblems {
     init {
@@ -109,6 +112,7 @@ class StringProblems {
             }
         }
         var oddCount = 0
+        //char empty value
         var oddChar:Char = '\u0000'
         map.forEach{
             if(it.value %2 != 0){
@@ -249,6 +253,13 @@ class StringProblems {
         return s.substring(startPos, startPos + maxLength)
     }
 
+//    Example 1:
+//    Input: s = "babad"
+//    Output: "bab"
+//    Explanation: "aba" is also a valid answer.
+//    Example 2:
+//    Input: s = "cbbd"
+//    Output: "bb"
     //Using two pointer approach >>> TC O(n2)   SC: O(1)
     private fun longestPalindromeSubString2(s: String):String {
         val n = s.length
@@ -415,5 +426,133 @@ class StringProblems {
         }
 
         return rsltList
+    }
+
+//    Valid Anagram
+//    Input: s = "anagram", t = "nagaram"
+//    Output: true
+//    Input: s = "rat", t = "car"
+//    Output: false
+//    TC: O(n)  Memory O(n)
+    fun isAnagram(s: String, t: String): Boolean {
+        val map = HashMap<Char, Int>()
+
+        s.forEach{
+            if(map.get(it) == null){
+                map.put(it, 1)
+            }else{
+                map.put(it, map.get(it)!! + 1)
+            }
+        }
+
+        t.forEach{
+            if(map.contains(it)){
+                val mapVal = map.get(it)
+                if(mapVal!! <= 1){
+                    map.remove(it)
+                }else{
+                    map.put(it, mapVal-1)
+                }
+            }else{
+                map.put(it, 1)
+            }
+        }
+
+        return map.count() == 0
+    }
+
+//    TC : O(nLogn) Memory O(1)
+    fun isAnagram_sortApproach(s: String, t: String): Boolean {
+        val sList = s.toCharArray().sorted()
+        val tList = t.toCharArray().sorted()
+        return sList == tList
+    }
+
+//    Group Anagrams
+//    Input: strs = ["eat","tea","tan","ate","nat","bat"]
+//    Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+//    Input: strs = [""]
+//    Output: [[""]]
+//    Input: strs = ["a"]
+//    Output: [["a"]]
+    fun groupAnagrams(strs: Array<String>): List<List<String>> {
+        val map = HashMap<String, ArrayList<String>>()
+        strs.forEach {
+            val sortedString = it.toCharArray().sorted().joinToString("")
+            if(map.containsKey(sortedString)){
+                val list = map.get(sortedString)!!.add(it)
+            }else{
+                map.put(sortedString, arrayListOf(it))
+            }
+        }
+
+        val outPutList = MutableList<List<String>>(0){ emptyList()}
+        map.values.forEach {
+            outPutList.add(it)
+        }
+        return outPutList
+    }
+
+//    Input: s = "cbaebabacd", p = "abc"
+//    Output: [0,6]
+//    Explanation:
+//    The substring with start index = 0 is "cba", which is an anagram of "abc".
+//    The substring with start index = 6 is "bac", which is an anagram of "abc".
+//
+//    Input: s = "abab", p = "ab"
+//    Output: [0,1,2]
+//    Explanation:
+//    The substring with start index = 0 is "ab", which is an anagram of "ab".
+//    The substring with start index = 1 is "ba", which is an anagram of "ab".
+//    The substring with start index = 2 is "ab", which is an anagram of "ab".
+    fun findAnagrams(s: String, p: String): List<Int> {
+        val n = s.length
+        val m = p.length
+        val sortedP = p.toCharArray().sorted()
+        val outputList = ArrayList<Int>()
+        for (i in 0 until n-m+1){
+            var str:String = ""
+            for (j in i until i+m){
+                str += s[j]
+            }
+            val sortedStr = str.toCharArray().sorted()
+            if(sortedP.equals(sortedStr)){
+                outputList.add(i)
+            }
+        }
+        return outputList
+    }
+
+    fun findAnagrams_slidingWindow(s:String, p:String): List<Int> {
+        val charCounts = IntArray(26) { 0 }
+        var startIdx = 0
+        var endIdx = p.length - 1
+        val result = mutableListOf<Int>()
+        // initial count
+        for (i in 0 until p.length-1) {
+            charCounts[s[i] - 'a']++
+        }
+
+        while (endIdx < s.length) {
+            charCounts[s[endIdx]-'a']++
+            if (isValidAnagram(charCounts.clone(), p)) {
+                result.add(startIdx)
+            }
+            charCounts[s[startIdx]-'a']--
+            endIdx++
+            startIdx++
+        }
+        return result
+    }
+
+    private fun isValidAnagram(charCounts: IntArray, p: String): Boolean {
+        // check if valid
+        for (i in p.indices) {
+            val idx = p[i] - 'a'
+            charCounts[idx]--
+            if (charCounts[idx] < 0)
+                return false
+        }
+        return true
     }
 }

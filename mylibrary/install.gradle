@@ -1,0 +1,12 @@
+afterEvaluate { //1
+    publishing { //2
+        publications { //3
+            debug(MavenPublication) {
+                from components.release//4
+                groupId = 'com.example.mylibrary' //5
+                artifactId = 'myfirstaar' //6
+                version = "1.0.0" //7
+            }
+        }
+    }
+}

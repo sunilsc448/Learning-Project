@@ -52,7 +52,7 @@ class MoviesListFragment : Fragment() {
             findNavController().navigate(MoviesListFragmentDirections.movieDetailClicked(it))
         })
 
-            parentViewModel.fetchPopularMovies()
+        parentViewModel.fetchPopularMovies()
         return dataBinding.root
     }
 

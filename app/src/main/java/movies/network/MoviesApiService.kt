@@ -1,7 +1,6 @@
 package movies.network
 
 import movies.models.MoviesResponse
-import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,4 +12,7 @@ interface MoviesApiService {
 
     @GET("search/movie")
     fun getMoviesbyQueryAsync(@Query("query")query:String):Call<MoviesResponse>
+
+    @GET("movie/popular")
+    fun getPopularMovies():Response<MoviesResponse>
 }

@@ -1,4 +1,4 @@
-package launchModes
+package lifecycle.activities.launchModes
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,16 +8,19 @@ import android.util.Log
 import com.example.kotlintutorial.R
 import kotlinx.android.synthetic.main.activity_first.*
 
-class SecondActivity : AppCompatActivity() {
+class FourthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second)
+        setContentView(R.layout.activity_fourth)
         btn.setOnClickListener {
-            startActivity(Intent(this, ThirdActivity::class.java))
+            val intent = Intent(this, FirstActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//            intent.flags = Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
         }
     }
 
-    private val TAG = "Second Activity"
+    private val TAG = "Fourth Activity"
     override fun onStart() {
         Log.i(TAG, "onStart")
         super.onStart()
@@ -37,7 +40,6 @@ class SecondActivity : AppCompatActivity() {
         Log.i(TAG, "onRestoreInstanceState persistentState")
         super.onRestoreInstanceState(savedInstanceState, persistentState)
     }
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         Log.i(TAG, "onSaveInstanceState")
@@ -72,5 +74,10 @@ class SecondActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         Log.i(TAG, "onNewIntent")
         super.onNewIntent(intent)
+    }
+
+    override fun onRestart() {
+        Log.i(TAG, "onRestart")
+        super.onRestart()
     }
 }

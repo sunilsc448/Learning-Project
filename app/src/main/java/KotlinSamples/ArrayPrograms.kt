@@ -1002,4 +1002,80 @@ class ArrayPrograms {
         else
             nums.size - maxLength
     }
+
+//    Input: nums = [4,2,4,5,6]
+//    Output: 17
+//    Explanation: The optimal subarray here is [2,4,5,6].
+
+//    Input: nums = [5,2,1,2,5,2,1,2,5]
+//    Output: 8
+//    Explanation: The optimal subarray here is [5,2,1] or [1,2,5].
+
+//    Input: nums = [10000,1,10000,1,1,1,1,1,1]
+//    Output: 10001
+    fun maximumAscOrDescSubarray(nums: IntArray): Int {
+        var maxSum = 0
+        var isAscending = false
+        var sum = nums[0]
+        for(i in 1 until nums.size){
+            if(nums[i-1] < nums[i]){
+                if(isAscending){
+                    sum += nums[i]
+                }else{
+                    sum = nums[i] + nums[i-1]
+                }
+                if(sum > maxSum){
+                    maxSum = sum
+                }
+                isAscending = true
+            }else if(nums[i-1] > nums[i]){
+                if(!isAscending){
+                    sum += nums[i]
+                }else{
+                    sum = nums[i] + nums[i-1]
+                }
+                if(sum > maxSum){
+                    maxSum = sum
+                }
+                isAscending = false
+            }
+        }
+        return maxSum
+    }
+
+    //    Maximum Erasure Value
+//    You are given an array of positive integers nums and want to erase a subarray containing unique elements. The score you get by erasing the subarray is equal to the sum of its elements.
+
+//    Input: nums = [4,2,4,5,6]
+//    Output: 17
+//    Explanation: The optimal subarray here is [2,4,5,6].
+
+//    Input: nums = [5,2,1,2,5,2,1,2,5]
+//    Output: 8
+//    Explanation: The optimal subarray here is [5,2,1] or [1,2,5].
+
+    //    Input: nums = [10000,1,10000,1,1,1,1,1,1]
+//    Output: 10001
+
+
+    //    Input: nums = 20,19,20,1,2,3,4,5
+//    Output: 54
+    fun maximumUniqueSubAraySum(nums: IntArray): Int{
+        var i = 0 ; var j = 0
+        var maxSum = 0 ; var currSum = 0
+        val set: MutableSet<Int> = HashSet()
+        while (i < nums.size && j < nums.size) {
+            if (!set.contains(nums[j])) {
+                currSum += nums[j]
+                maxSum = Math.max(maxSum, currSum)
+                set.add(nums[j])
+                j++
+            } else {
+                currSum = currSum - nums[i]
+                set.remove(nums[i])
+                i++
+            }
+        }
+        return maxSum
+    }
 }

@@ -1,4 +1,4 @@
-package launchModes
+package lifecycle.activities.launchModes
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,18 +6,28 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import com.example.kotlintutorial.R
-import kotlinx.android.synthetic.main.activity_first.*
+import kotlinx.android.synthetic.main.activity_first.btn
+import kotlinx.android.synthetic.main.activity_second.*
 
-class ThirdActivity : AppCompatActivity() {
+class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i(TAG, "onCreate")
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_third)
+        setContentView(R.layout.activity_second)
         btn.setOnClickListener {
-            startActivity(Intent(this, FirstActivity::class.java))
+            val intent = Intent(this, ThirdActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        }
+
+        btn2.setOnClickListener {
+            val intent = Intent(this, FourthActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
         }
     }
 
-    private val TAG = "Third Activity"
+    private val TAG = "Second Activity"
     override fun onStart() {
         Log.i(TAG, "onStart")
         super.onStart()
@@ -37,6 +47,7 @@ class ThirdActivity : AppCompatActivity() {
         Log.i(TAG, "onRestoreInstanceState persistentState")
         super.onRestoreInstanceState(savedInstanceState, persistentState)
     }
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         Log.i(TAG, "onSaveInstanceState")
@@ -71,5 +82,10 @@ class ThirdActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         Log.i(TAG, "onNewIntent")
         super.onNewIntent(intent)
+    }
+
+    override fun onRestart() {
+        Log.i(TAG, "onRestart")
+        super.onRestart()
     }
 }

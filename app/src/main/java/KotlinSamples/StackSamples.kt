@@ -14,7 +14,7 @@ class StackSamples {
 //        myStack.empty() // return False)
 //        println()
 
-//        val stack = MyStack<String>()
+        val stack = MyStack<String>()
 //        stack.push("Hi")
 //        stack.push("Hello")
 //        stack.push("How")

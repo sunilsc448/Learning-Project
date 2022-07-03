@@ -5,6 +5,7 @@ import movies.component.MoviesComponent
 import movies.modules.AppModule
 import movies.modules.MoviesApiModule
 import android.app.Application
+import com.google.firebase.messaging.FirebaseMessaging
 import component.CarComponent
 import component.DaggerCarComponent
 import movies.modules.RoomModule

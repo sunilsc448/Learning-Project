@@ -1,4 +1,4 @@
-package launchModes
+package lifecycle.activities.launchModes
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,19 +8,28 @@ import android.util.Log
 import com.example.kotlintutorial.R
 import kotlinx.android.synthetic.main.activity_first.*
 
-class FirstActivity : AppCompatActivity() {
+class ThirdActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i(TAG, "onCreate")
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_first)
+        setContentView(R.layout.activity_third)
         btn.setOnClickListener {
-            startActivity(Intent(this, SecondActivity::class.java))
+            val intent = Intent(this, FourthActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//            intent.flags = Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
         }
     }
 
-    private val TAG = "First Activity"
+    private val TAG = "Third Activity"
     override fun onStart() {
         Log.i(TAG, "onStart")
         super.onStart()
+    }
+
+    override fun onResume() {
+        Log.i(TAG, "onResume")
+        super.onResume()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -33,9 +42,14 @@ class FirstActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState, persistentState)
     }
 
-    override fun onResume() {
-        Log.i(TAG, "onResume")
-        super.onResume()
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.i(TAG, "onSaveInstanceState")
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        Log.i(TAG, "onSaveInstanceState outPersistentState")
+        super.onSaveInstanceState(outState, outPersistentState)
     }
 
     override fun onPause() {
@@ -46,16 +60,6 @@ class FirstActivity : AppCompatActivity() {
     override fun onStop() {
         Log.i(TAG, "onStop")
         super.onStop()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        Log.i(TAG, "onSaveInstanceState")
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        Log.i(TAG, "onSaveInstanceState outPersistentState")
-        super.onSaveInstanceState(outState, outPersistentState)
     }
 
     override fun onDestroy() {
@@ -71,5 +75,10 @@ class FirstActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         Log.i(TAG, "onNewIntent")
         super.onNewIntent(intent)
+    }
+
+    override fun onRestart() {
+        Log.i(TAG, "onRestart")
+        super.onRestart()
     }
 }

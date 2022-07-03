@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "373583133558",
+    "project_id": "kotlin-tutorials-299bf",
+    "storage_bucket": "kotlin-tutorials-299bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373583133558:android:bfa23bafd9996b80a99857",
+        "android_client_info": {
+          "package_name": "com.example.kotlintutorial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373583133558-q8u0tpfrrvfoqobdi2ma823u2taif2j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2PnJ77os6tTxWz5QMSrHRq6yPLFxlY-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373583133558-q8u0tpfrrvfoqobdi2ma823u2taif2j5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

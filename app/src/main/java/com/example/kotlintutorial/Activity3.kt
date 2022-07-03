@@ -1,8 +1,6 @@
 package com.example.kotlintutorial
 
 import KotlinSamples.CouroutineSamples
-import KotlinSamples.InOutSamples
-import KotlinSamples.LinkedListImplementation
 import KotlinSamples.PracticePitch
 import RXJava.RXJavaActivity
 import android.Manifest
@@ -25,6 +23,9 @@ import android.content.pm.PackageManager
 
 import android.app.Activity
 import android.os.*
+import firebase.NotificationActivity
+import lifecycle.activities.launchModes.FirstActivity
+import multiThreading.MultiThreadingActivity
 import pojos.Player
 import services.ServiceActivity
 import workManager.WorkManagerActivity
@@ -138,10 +139,30 @@ class Activity3 : AppCompatActivity() {
 //          moviesActivityOnClick()
 //        ServiceActivityOnClick()
 //        workManagerActivityOnClick()
-        rxJavaActivity()
-
+//        rxJavaActivity()
+          launchModesActivity()
+//        launchNotificationActivity()
+//        launchMultiThreadingActivity()
 
         PracticePitch()
+    }
+
+    private fun launchNotificationActivity() {
+        btn.setOnClickListener {
+            startActivity(Intent(this, NotificationActivity::class.java))
+        }
+    }
+
+    private fun launchMultiThreadingActivity() {
+        btn.setOnClickListener {
+            startActivity(Intent(this, MultiThreadingActivity::class.java))
+        }
+    }
+
+    private fun launchModesActivity() {
+        btn.setOnClickListener {
+            startActivity(Intent(this, FirstActivity::class.java))
+        }
     }
 
     private fun rxJavaActivity() {

@@ -66,7 +66,7 @@ class MusicPlayerService:Service() {
             builder.setContentTitle(StringBuilder(resources.getString(R.string.app_name)).append(" service is running").toString())
                 .setTicker(StringBuilder(resources.getString(R.string.app_name)).append("service is running").toString())
                 .setContentText("Touch to open") //                    , swipe down for more options.
-                .setSmallIcon(R.drawable.not)
+                .setSmallIcon(R.drawable.notification)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setWhen(0)
                 .setOnlyAlertOnce(true)

@@ -1,0 +1,23 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lifecycle.fragments.FirstFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/textView"
+        android:textSize="25sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="First Fragment" />
+
+    <Button
+        android:id="@+id/btn"
+        android:text="Go to Second"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_width="@dimen/dimen_200dp"
+        android:layout_height="@dimen/dimen_100dp"/>
+
+</FrameLayout>

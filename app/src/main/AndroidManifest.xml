@@ -14,15 +14,32 @@
 
     <application
         android:name=".AppClass"
+        android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:persistent="true"
-        android:requestLegacyExternalStorage="true"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true">
         <activity
             android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:name="RXJava.RXJavaActivity"
+            android:name="firebase.NotificationActivity"
             android:exported="false" />
+
+        <service android:name="firebase.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="multiThreading.MultiThreadingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name="RXJava.RXJavaActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name="workManager.WorkManagerActivity"
             android:exported="false"
@@ -45,10 +62,10 @@
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".Activity3"
+            android:exported="true"
             android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -61,24 +78,32 @@
             android:name=".DaggerSampleActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name="launchModes.FirstActivity"
-            android:launchMode="singleTask"
+            android:name="lifecycle.activities.launchModes.FirstActivity"
             android:theme="@style/Theme.Design.Light.NoActionBar">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name="launchModes.SecondActivity"
+            android:name="lifecycle.activities.launchModes.SecondActivity"
             android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+<!--        android:theme="@style/Theme.AppCompat.Translucent" />-->
+        <activity
+            android:name="lifecycle.activities.launchModes.ThirdActivity"
+            android:exported="false"
+            android:taskAffinity="com.example.abc"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name="launchModes.ThirdActivity"
+            android:name="lifecycle.activities.launchModes.FourthActivity"
             android:exported="false"
             android:launchMode="singleTop"
+            android:taskAffinity="com.example.abc"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/notification" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
     </application>
 
 </manifest>

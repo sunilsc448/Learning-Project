@@ -102,56 +102,41 @@ class PracticePitch {
 //                9665,8070,31,3555,4198,2626,9553,9724,4503,1951,9980,3975,6025,8928,2952,911,3674,6620,3745,6548,
 //                4985,5206,5777,1908,6029,2322,2626,2188,5639),31841)
 
-        CouroutineSamples()
+//        CouroutineSamples()
+//          ArrayPrograms().maximumUniqueSubarray(intArrayOf(10000,1,10000,1,1,1,1,1,1))
+//          ArrayPrograms().maximumUniqueSubAraySum(intArrayOf(5,2,1,2,5,2,1,2,5))
+//        StringProblems().isAnagram_sortApproach("anagram", "nagaram")
+//        StringProblems().groupAnagrams(arrayOf("eat","tea","tan","ate","nat","bat"))
+//        StringProblems().findAnagrams("abab", "ab")
+//        StringProblems().findAnagrams_slidingWindow("cbaebabacd", "abc")
+//        NetoworkLibUseCase()
+//        QueueSamples()
+        LRUCacheImplementation()
+        getNumberOfShifts()
     }
+//    setTime = "07:30" and timeToSet = "08:00"
+//    setTime = "23:45" and timeToSet = "08:00"
+    fun getNumberOfShifts(){
+        val old = "23:45"
+        val new = "08:00"
+        val splitOld = old.split(":")
+        val splitNew = new.split(":")
+        val oldHours = splitOld[0].toInt()
+        val oldMins = splitOld[1].toInt()
+        val newHours = splitNew[0].toInt()
+        val newMins = splitNew[1].toInt()
 
-    fun findKthLargest(){
-        val inputArray = arrayOf("44", "3", "55", "2", "11", "5")
-        Arrays.sort(inputArray){b,a ->
-            if (a.length !== b.length) {
-                b.length - a.length
-            }
-            else {
-                b.compareTo(a)
-            }
-        }
-        println(inputArray)
-    }
+        val diffHours = Math.abs(newHours - oldHours)
+        val diffMins = Math.abs(newMins - oldMins)
+        var hoursShift = 0
+    //    setTime = "07:30" and timeToSet = "20:00"
+        if(diffHours > 12){
+            if(newHours > oldHours){
 
-    fun fibo(n:Int):Int{
-        if(n <= 2)
-            return 1
-
-        var a = 1;var b = 1; var result = 0
-        for (i in 2 until n){
-            result = a + b
-            a = b
-            b = result
-        }
-        return result
-    }
-
-    fun fibRec(a: Int, b: Int, n: Int):Int{
-        if(0 == n)return b
-        return fibRec(a+b, a,n-1)
-    }
-
-    fun bs(arr:IntArray, key:Int):Int{
-        return bsRec(arr, 0, arr.size-1, key)
-    }
-
-    private fun bsRec(arr: IntArray, low: Int, high: Int, key: Int):Int {
-        if(high >= low){
-            val mid = (low+high)/2
-            if(arr[mid] == key)
-                return mid + 1 //returns position from index
-            if(key > mid){
-                return bsRec(arr, mid + 1, high, key)
             }else{
-                return bsRec(arr, low, mid - 1, key)
+
             }
         }
-        return -1
     }
 }
 
