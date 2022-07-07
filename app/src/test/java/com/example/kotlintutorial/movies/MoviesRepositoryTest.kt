@@ -109,6 +109,10 @@ private class MoviesApiServiceTD: MoviesApiService{
     override fun getMoviesbyQueryAsync(query: String): Call<MoviesResponse> {
         TODO("Not yet implemented")
     }
+
+    override fun getPopularMovies(): Response<MoviesResponse> {
+        TODO("Not yet implemented")
+    }
 }
 
 private class MoviesRoomDatabaseTD: MoviesRoomDatabase(){

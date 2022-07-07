@@ -18,6 +18,7 @@ class AppClass:Application() {
         application = this
         moviesComponent = initMoviesComponent(this)
         carComponent = initCarComponent()
+        SampleJavaClass.SampleInnerClass().method1()
     }
 
     private fun initCarComponent():CarComponent{

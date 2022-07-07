@@ -1,6 +1,7 @@
 package com.example.kotlintutorial
 
 import KotlinSamples.CouroutineSamples
+import KotlinSamples.HighLevelFunctions
 import KotlinSamples.PracticePitch
 import RXJava.RXJavaActivity
 import android.Manifest
@@ -93,7 +94,7 @@ class Activity3 : AppCompatActivity() {
 //        LateinitSample()
 //        BackingFieldSample()
 //        LazyInitilisationSample()
-//        HighLevelFunctions()
+        HighLevelFunctions()
 //        ScopeFunctionsSample()
 //          StructuralAndReferralEquitySample()
 //        LeetCodeHashMap()
@@ -140,7 +141,7 @@ class Activity3 : AppCompatActivity() {
 //        ServiceActivityOnClick()
 //        workManagerActivityOnClick()
 //        rxJavaActivity()
-          launchModesActivity()
+//          launchModesActivity()
 //        launchNotificationActivity()
 //        launchMultiThreadingActivity()
 

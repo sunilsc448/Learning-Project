@@ -2,6 +2,11 @@ package repository
 
 import DataSource.IRemoteDataSource
 import Utility.RetrofitClient
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import pojos.Actor
 import pojos.ActorResponse
 import pojos.SampleRetrofitBody
 import retrofit2.Callback
@@ -50,5 +55,12 @@ object ListRepository : IRemoteDataSource{
     private fun makeAnApiCallWithHeaderPost(actorsCallBack: Callback<ActorResponse>, token:String,model:SampleRetrofitBody) {
         val call = RetrofitClient.getAPI().getActorsPost(token, model)
         call.enqueue(actorsCallBack)
+    }
+
+    override fun fetchActorsDirect(scope:CoroutineScope, liveData: MutableLiveData<List<Actor>>) {
+        scope.launch {
+            val data = RetrofitClient.getAPI().getActorsDirect()
+            liveData.postValue(data.actors)
+        }
     }
 }

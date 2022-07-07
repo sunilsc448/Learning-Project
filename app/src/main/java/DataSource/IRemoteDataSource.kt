@@ -1,5 +1,8 @@
 package DataSource
 
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import pojos.Actor
 import pojos.ActorResponse
 import pojos.SampleRetrofitBody
 import retrofit2.Callback
@@ -10,4 +13,5 @@ interface IRemoteDataSource {
     fun fetchActors(actorsCallBack: Callback<ActorResponse>, industryType:String, priorityIndustry:String)
     fun fetchActorsWithHeader(actorsCallBack: Callback<ActorResponse>, token:String, industryType:String, priorityIndustry:String)
     fun fetchActorsWithHeaderPost(actorsCallBack: Callback<ActorResponse>, token:String, model:SampleRetrofitBody)
+    fun fetchActorsDirect(scope: CoroutineScope, liveData: MutableLiveData<List<Actor>>)
 }

@@ -31,6 +31,10 @@ class HighLevelFunctions {
 //        Property Reference ::someVal.isInitialized
 //        Constructor Reference ::MyClass
         SqrtClass(::sq_rt)
+
+        //function returning function
+        val add = returnMeAddFunction()
+        println(add(2, 3))
     }
 
     fun sq_rt(value:Int) = println("Square root of number $value is ${value * 2}")
@@ -56,6 +60,19 @@ class HighLevelFunctions {
 //                body()
 //            }
 //        }.run()
+    }
+
+    //function returning function
+    private fun add(a: Int, b: Int): Int {
+        return a + b
+    }
+
+    private fun sub(a: Int, b: Int): Int {
+        return b - a
+    }
+
+    private fun returnMeAddFunction():(Int, Int)->Int{
+        return ::add
     }
 }
 

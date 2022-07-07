@@ -41,19 +41,19 @@ class FirstActivity : AppCompatActivity(), FragmentClickListener {
 //            clicked("first")
 //        }
 
-        val runnable = Runnable {
-            for (i in 1..10){
-                Thread.sleep(1000)
-                println("${Thread.currentThread().name} $i")
-            }
-            runOnUiThread{
-                txt.text = "HEllo≥≥≥≥≥≥≥≥≥"
-            }
-            println("Thread operation complete")
-        }
-
-        val thread = Thread(runnable)
-        thread.start()
+//        val runnable = Runnable {
+//            for (i in 1..10){
+//                Thread.sleep(1000)
+//                println("${Thread.currentThread().name} $i")
+//            }
+//            runOnUiThread{
+//                txt.text = "HEllo≥≥≥≥≥≥≥≥≥"
+//            }
+//            println("Thread operation complete")
+//        }
+//
+//        val thread = Thread(runnable)
+//        thread.start()
     }
 
     override fun onAttachFragment(fragment: android.app.Fragment?) {

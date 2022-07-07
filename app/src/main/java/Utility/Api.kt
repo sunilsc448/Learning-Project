@@ -17,4 +17,7 @@ interface Api {
     fun getActorsWithHeader(@Header("mock_token")token:String, @Query("industry")industryType:String, @Query("priority")priorityIndustry:String):Call<ActorResponse>
     @POST("/actors")
     fun getActorsPost(@Header("mock_token")token:String, @Body model:SampleRetrofitBody):Call<ActorResponse>
+
+    @GET("/actors/get")
+    suspend fun getActorsDirect():ActorResponse
 }

@@ -1,3 +1,5 @@
 include ':app'
 rootProject.name='KotlinTutorial'
 include ':mylibrary'
+include ':annotationprocessor'
+include ':annotations'

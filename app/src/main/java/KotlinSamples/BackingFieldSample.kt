@@ -8,10 +8,6 @@ class BackingFieldSample {
             println("get age is ${human.age}")
         }
     }
-
-    override fun hashCode(): Int {
-        return super.hashCode()
-    }
 }
 
 class Human{

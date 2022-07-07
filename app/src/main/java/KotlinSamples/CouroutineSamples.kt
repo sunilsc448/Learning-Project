@@ -36,7 +36,7 @@ class CouroutineSamples {
 
 //        sequential execution inside coroutine (normalMainThread vs suspendFunction)
 //          normalMainThread()
-          suspendFunction()
+//          suspendFunction()
 
 //        concurrentSample()
 //        concurrentLazySample()
@@ -50,7 +50,37 @@ class CouroutineSamples {
 
 //        println("CoroutineExperiment: lengthyJob finished")
 //        println("CoroutineExperiment: after lengthyJob ${Thread.currentThread().name}")
+
+        example1()
     }
+
+    private fun example1() {
+        GlobalScope.launch(Dispatchers.Main) {
+//            val userOne = async(Dispatchers.IO) { fetchFirstUser() }
+//            val userTwo = async(Dispatchers.IO) { fetchSecondUser() }
+            val userOne = withContext(Dispatchers.IO) { fetchFirstUser() }
+            val userTwo = withContext(Dispatchers.IO) { fetchSecondUser() }
+            showUsers(userOne, userTwo) // back on UI thread
+        }
+    }
+
+    private fun showUsers(ip1: String, ip2: String) {
+        Thread.sleep(5000)
+        println("showing users")
+    }
+
+    private suspend fun fetchFirstUser():String{
+        delay(5000)
+        println("op1")
+        return "op1"
+    }
+
+    private suspend fun fetchSecondUser():String{
+        delay(5000)
+        println("op2")
+        return "op2"
+    }
+
 
     //Task1 and Task2 are serially executed
     private suspend fun coroutineWithContext() {

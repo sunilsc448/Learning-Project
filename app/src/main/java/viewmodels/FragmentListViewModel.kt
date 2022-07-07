@@ -69,7 +69,8 @@ class FragmentListViewModel(var parentViewModel:ListActivityViewModel):ViewModel
 //        ListRepository.fetchActorsWithHeader(actorsCallBack, token, industry, priority)
 //        ListRepository.fetchActorsDynamicUrl(actorsCallBack, url)
 //        ListRepository.fetchActorsDynamicUrlWithHeader(actorsCallBack, token ,url)
-        ListRepository.fetchActorsWithHeaderPost(actorsCallBack, token , SampleRetrofitBody("Rajkumar", 77, "Sandalwood"))
+//        ListRepository.fetchActorsWithHeaderPost(actorsCallBack, token , SampleRetrofitBody("Rajkumar", 77, "Sandalwood"))
+        ListRepository.fetchActorsDirect(viewModelScope, mActors)
     }
 
     fun addActor() {

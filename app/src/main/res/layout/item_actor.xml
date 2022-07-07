@@ -23,6 +23,7 @@
             android:id="@+id/image_view"
             tools:src="@drawable/placeholder_image"
             loadImage="@{actor.photo}"
+             clickListener="@{null}"
             android:scaleType="centerCrop"
             android:layout_width="75dp"
             android:layout_height="75dp"

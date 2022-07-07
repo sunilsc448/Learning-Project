@@ -1,9 +1,8 @@
 package KotlinSamples
 
-import android.os.Environment
-import pojos.Player
-import java.io.*
-import java.util.*
+import android.view.View
+import android.widget.Button
+import com.example.kotlintutorial.AppClass
 
 class PracticePitch {
     init {
@@ -111,9 +110,27 @@ class PracticePitch {
 //        StringProblems().findAnagrams_slidingWindow("cbaebabacd", "abc")
 //        NetoworkLibUseCase()
 //        QueueSamples()
-        LRUCacheImplementation()
-        getNumberOfShifts()
+//        LRUCacheImplementation()
+//        getNumberOfShifts()
+//        CouroutineSamples()
+//        KotlinOperatorOverloading()
+//        ExtensionFunctionSample()
+//          SampleSealedClass()
+//        KotlinVaragsExample()
+//        MapSample()
+//        KotlinInfixSample()
+//        ClassDelegateSample()
+//        SingeltonExperiment.getInstance().hello()
+//        KotlinDataClassSample()
+//        KotlinDestructionDeclarationSamples()
+//        KotlinReflections()
+        KotlinAnnotations()
     }
+
+    fun <T> genericsExample(value: T) {
+        println(value)
+    }
+
 //    setTime = "07:30" and timeToSet = "08:00"
 //    setTime = "23:45" and timeToSet = "08:00"
     fun getNumberOfShifts(){
@@ -137,6 +154,30 @@ class PracticePitch {
 
             }
         }
+    }
+}
+
+
+class SingeltonExperiment{
+    private constructor()
+    companion object {
+        private var singeltonExperiment:SingeltonExperiment? = null
+        @Synchronized
+        fun getInstance(): SingeltonExperiment {
+            if (singeltonExperiment == null) {
+                singeltonExperiment = SingeltonExperiment()
+            }
+            return singeltonExperiment!!
+        }
+    }
+    fun hello(){
+        val touchListener = View.OnTouchListener { v, event -> false }
+        val button:Button = Button(AppClass.application)
+        button.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 }
 

@@ -42,7 +42,7 @@ class ArrayListImplementation<E> {
 
     operator fun get(i: Int): E? {
         isinValid(i)
-        return elements[i] as E?
+        return elements[i] as E
     }
 
     private fun isinValid(i: Int) {
