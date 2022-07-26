@@ -24,7 +24,9 @@ import android.content.pm.PackageManager
 
 import android.app.Activity
 import android.os.*
+import daggerTutorial.SampleActivity
 import firebase.NotificationActivity
+import kotlinFlow.FlowActivity
 import lifecycle.activities.launchModes.FirstActivity
 import multiThreading.MultiThreadingActivity
 import pojos.Player
@@ -94,7 +96,7 @@ class Activity3 : AppCompatActivity() {
 //        LateinitSample()
 //        BackingFieldSample()
 //        LazyInitilisationSample()
-        HighLevelFunctions()
+//        HighLevelFunctions()
 //        ScopeFunctionsSample()
 //          StructuralAndReferralEquitySample()
 //        LeetCodeHashMap()
@@ -144,8 +146,23 @@ class Activity3 : AppCompatActivity() {
 //          launchModesActivity()
 //        launchNotificationActivity()
 //        launchMultiThreadingActivity()
-
+//          launchSampleActivity()
+//        launchFlowActivity()
         PracticePitch()
+
+
+    }
+
+    private fun launchFlowActivity() {
+        btn.setOnClickListener {
+            startActivity(Intent(this, FlowActivity::class.java))
+        }
+    }
+
+    private fun launchSampleActivity() {
+        btn.setOnClickListener {
+            startActivity(Intent(this, SampleActivity::class.java))
+        }
     }
 
     private fun launchNotificationActivity() {

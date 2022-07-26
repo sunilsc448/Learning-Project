@@ -22,7 +22,7 @@ class WorkManagerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_work_manager)
 
         workManager = WorkManager.getInstance(applicationContext)
-        workRequest = OneTimeWorkRequest.Builder(RandomNumberGeneratorJob::class.java).addTag("req-1").build()
+        workRequest = OneTimeWorkRequest.Builder(RandomNumberGeneratorJob::class.java, ).addTag("req-1"). build()
         workRequest2 = OneTimeWorkRequest.Builder(RandomNumberGeneratorJob2::class.java).addTag("req-2").build()
         workRequest3 = OneTimeWorkRequest.Builder(RandomNumberGeneratorJob3::class.java).addTag("req-3").build()
 

@@ -2,10 +2,10 @@ package KotlinSamples
 
 class KotlinLocalFunctions {
     init {
-        fizzBuzzWithLocal(2, 3)
+        fizzBuzzWithLocal()
     }
 
-    private fun fizzBuzz(a: Int, b: Int) {
+    private fun fizzBuzz() {
         for (i in 1 until 10){
             if(i % 3 == 0 && i % 5 == 0){
                 println("fizzbuzz")
@@ -19,7 +19,7 @@ class KotlinLocalFunctions {
         }
     }
 
-    private fun fizzBuzzWithLocal(a: Int, b: Int) {
+    private fun fizzBuzzWithLocal() {
         fun isFizz(input:Int):Boolean = input % 3 == 0
         fun isBuzz(input:Int):Boolean = input % 5 == 0
         for (i in 1 until 10){

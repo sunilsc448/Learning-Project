@@ -27,3 +27,38 @@ fun checkMetal(metal: Metal) {
         Metal.PLATINUM -> TODO()
     }
 }
+
+
+
+fun checkShapeEnum(shape:ShapeEnum):String{
+    return when(shape){
+        ShapeEnum.RECTANGLE -> "It is a rectangle"
+        ShapeEnum.CIRCLE -> "It is a circle"
+        ShapeEnum.SQUARE -> "It is a Square"
+        ShapeEnum.NO_SHAPE -> "It is a NoShape"
+    }
+}
+
+enum class ShapeEnum(val input:Int){
+    RECTANGLE(1) {
+        override fun shapeUse() {
+            println(input)
+        }
+    },
+    CIRCLE(2) {
+        override fun shapeUse() {
+            println(input)
+        }
+    },
+    SQUARE(3) {
+        override fun shapeUse() {
+            println(input)
+        }
+    },
+    NO_SHAPE(4) {
+        override fun shapeUse() {
+            println(input)
+        }
+    };
+    abstract fun shapeUse()
+}

@@ -5,24 +5,41 @@ import movies.component.MoviesComponent
 import movies.modules.AppModule
 import movies.modules.MoviesApiModule
 import android.app.Application
-import com.google.firebase.messaging.FirebaseMessaging
-import component.CarComponent
-import component.DaggerCarComponent
+import daggerTutorial.component.DaggerDaggerTutorialComponent
+import daggerTutorial.component.DaggerTutorialComponent
+import daggerTutorial.module.ContextModule
 import movies.modules.RoomModule
 
 class AppClass:Application() {
-    lateinit var carComponent: CarComponent
-    lateinit var moviesComponent: MoviesComponent
+    private lateinit var moviesComponent: MoviesComponent
+    private lateinit var daggerTutorialComponent: DaggerTutorialComponent
     override fun onCreate() {
         super.onCreate()
         application = this
+        initDaggerTutorialComponent(this)
         moviesComponent = initMoviesComponent(this)
-        carComponent = initCarComponent()
         SampleJavaClass.SampleInnerClass().method1()
     }
 
-    private fun initCarComponent():CarComponent{
-        return DaggerCarComponent.builder().mileage(18).engineCapacity(1192).build()
+    private fun initDaggerTutorialComponent(appClass: AppClass) {
+        daggerTutorialComponent = DaggerDaggerTutorialComponent.builder().
+                contextModule(ContextModule(appClass)).build()
+
+        val daggerTutorialComponent2 = DaggerDaggerTutorialComponent.builder().
+        contextModule(ContextModule(appClass)).build()
+
+        val githubservice1 = daggerTutorialComponent.getGithubService()
+        val picasso1 = daggerTutorialComponent.getPicasso()
+
+        val githubservice2 = daggerTutorialComponent.getGithubService()
+        val picasso2 = daggerTutorialComponent.getPicasso()
+
+        val githubservice3 = daggerTutorialComponent2.getGithubService()
+        val picasso3 = daggerTutorialComponent2.getPicasso()
+
+        println("githubservice1 > $githubservice1 & picasso1 > $picasso1")
+        println("githubservice2 > $githubservice2 & picasso2 > $picasso2")
+        println("githubservice3 > $githubservice3 & picasso3 > $picasso3")
     }
 
     private fun initMoviesComponent(appClass: AppClass):MoviesComponent{
@@ -33,9 +50,9 @@ class AppClass:Application() {
                 build()
     }
 
-    fun getGlobalCarComponent():CarComponent{
-        return carComponent
-    }
+    fun getDaggerTutorialComponent():DaggerTutorialComponent = daggerTutorialComponent
+
+    fun getMoviesComponent():MoviesComponent = moviesComponent
 
     companion object{
         lateinit var application:AppClass

@@ -1,7 +1,6 @@
 package KotlinSamples
 
 import kotlinx.coroutines.*
-import kotlin.system.measureTimeMillis
 
 class InOutSamples {
     init {
@@ -9,8 +8,8 @@ class InOutSamples {
         val output = CaseOut<Int>(10).produce()
 
 //        genericsExample<Int>(10)
-        genericsExample<Double>(10.0)
-        genericsExample<String>("10.0")
+        GenericsExample<Double>(10.0)
+        GenericsExample<String>("10.0")
     }
     // two kotlin suspend functions
 // Suppose we have two tasks like below
@@ -28,7 +27,7 @@ class InOutSamples {
     }
 }
 
-class genericsExample<out T>(val input:Any?) {
+class GenericsExample<out T>(val input:Any?) {
     init {
         println("I am getting called with the value "+input)
     }

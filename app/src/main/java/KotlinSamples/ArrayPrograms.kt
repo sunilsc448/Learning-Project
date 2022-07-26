@@ -2,10 +2,7 @@ package KotlinSamples
 
 import java.math.BigInteger
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
-import kotlin.math.max
-import kotlin.math.sign
 
 class ArrayPrograms {
     init {
@@ -51,7 +48,7 @@ class ArrayPrograms {
     }
 
     fun sortAsWaveArray(arr: IntArray) {
-        for (i in 0 until arr.size step 2){
+        for (i in arr.indices step 2){
             if(i > 0 && arr[i] < arr[i - 1]){
                 swap(arr, i, i - 1)
             }
@@ -238,7 +235,7 @@ class ArrayPrograms {
 
     fun kthLargestNumberComparatorApproach(nums: Array<String>, k: Int): String {
         Arrays.sort(nums) { a, b ->
-            if (a.length !== b.length)
+            if (a.length != b.length)
                 a.length - b.length
             else a.compareTo(b)
         }
@@ -320,7 +317,13 @@ class ArrayPrograms {
         return resultArray
     }
 
+//    Input: height = [1,8,6,2,5,4,8,3,7]
+//    Output: 49
+//    Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7].
+//    In this case, the max area of water (blue section) the container can contain is 49.
 
+//    Input: height = [1,1]
+//    Output: 1
     fun containerMostWater(arr: IntArray):Int{
         var maxArea = 0
         for (i in 0 until arr.size){
@@ -349,7 +352,104 @@ class ArrayPrograms {
         return maxArea
     }
 
-    private fun smallestElementInAnArray(arr: IntArray) {
+
+    //    Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+//    Output: 6
+//    Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+//
+//    Input: height = [4,2,0,3,2,5]
+//    Output: 9
+//        approach 1
+    fun TrappingRainWater(height: IntArray): Int {
+        val size = height.size
+        var sum = 0
+        for (i in 1 until size - 1) {
+            var left = height[i]
+            for (j in 0 until i) {
+                left = Math.max(left, height[j])
+            }
+            var right = height[i]
+            for (j in i + 1 until size) {
+                right = Math.max(right, height[j])
+            }
+            sum += Math.min(left, right) - height[i]
+        }
+        return sum
+    }
+
+    //approach2
+    fun TrappingRainWater_2(height: IntArray): Int {
+        val size = height.size
+        var sum = 0
+
+        //fill left array
+        val leftArray = Array(size){Int.MIN_VALUE}
+        leftArray[0] = height[0]
+        for (i in 1 until size){
+            leftArray[i] = Math.max(leftArray[i - 1], height[i])
+        }
+
+        //fill right array
+        val rightArray = Array(size){Int.MIN_VALUE}
+        rightArray[size - 1] = height[size - 1]
+        for (i in size-2 downTo 0){
+            rightArray[i] = Math.max(rightArray[i+1], height[i])
+        }
+
+        for (i in 1 until size){
+            sum += Math.min(leftArray[i], rightArray[i]) - height[i]
+        }
+        return sum
+    }
+
+    //approach3
+    fun TrappingRainWater_3(height: IntArray): Int {
+        val size = height.size
+        var sum = 0
+        var left = 0; var right = size-1
+        var left_max = 0; var right_max = 0
+        while (left < right){
+            if(height[left] < height[right]){
+                if(height[left] > left_max){
+                    left_max = height[left]
+                }else{
+                    sum += left_max - height[left]
+                }
+                left++
+            }else{
+                if(height[right] > right_max){
+                    right_max = height[right]
+                }else{
+                    sum += right_max - height[right]
+                }
+                right--
+            }
+        }
+        return sum
+    }
+
+    //aproach4
+    fun TrappingRainWater_4(height: IntArray): Int {
+        val size = height.size
+        var sum = 0
+        val stack = Stack<Int>()
+        for(i in 0 until size){
+            while(stack.isNotEmpty() && height[i] >  height[stack.peek()]){
+                val pop_height = height[stack.pop()]
+                if(stack.isEmpty()){
+                    break;
+                }
+                val dist = i - stack.peek() - 1
+                val min_height = Math.min(height[stack.peek()], height[i]) - pop_height
+                sum += (min_height * dist)
+            }
+            stack.push(i)
+        }
+        return sum
+    }
+
+
+    fun smallestElementInAnArray(arr: IntArray) {
         var smallestElement = 0
         var l = 0
         var r= arr.size - 1
@@ -365,7 +465,7 @@ class ArrayPrograms {
         println("smallest element is >>> $smallestElement")
     }
 
-    private fun largestElementInAnArray(arr: IntArray) {
+    fun largestElementInAnArray(arr: IntArray) {
         var largestElement = 0
         var l = 0
         var r= arr.size - 1
@@ -413,24 +513,6 @@ class ArrayPrograms {
         println("smallest element is >>> $smallestElement")
         return Pair(smallestElement, largestElement)
     }
-
-    fun twoSum(nums: IntArray, target: Int): IntArray {
-        var outputArray = IntArray(2)
-        var map:HashMap<Int, Int> = HashMap<Int, Int>()
-        for(i in 0 until nums.size){
-            val diff = target - nums[i]
-            if(map.containsKey(diff)){
-                outputArray[0] = i
-                outputArray[1] = map.get(diff)!!
-            }else{
-                map.put(nums[i], i)
-            }
-        }
-        return outputArray
-    }
-
-
-
 
 
     //1, 4, 2, 10, 2, 3, 1, 0, 20
@@ -589,27 +671,45 @@ class ArrayPrograms {
     }
 
     //3Sum With Multiplicity
-//    Input: arr = [1,1,2,2,3,3,4,4,5,5], target = 8
-//    Output: 20
-//    Explanation:
-//    Enumerating by the values (arr[i], arr[j], arr[k]):
-//    (1, 2, 5) occurs 8 times;
-//    (1, 3, 4) occurs 8 times;
-//    (2, 2, 4) occurs 2 times;
-//    (2, 3, 3) occurs 2 times.
+    //    Input: arr = [1,1,2,2,3,3,4,4,5,5], target = 8
+    //    Output: 20
+    //    Explanation:
+    //    Enumerating by the values (arr[i], arr[j], arr[k]):
+    //    (1, 2, 5) occurs 8 times;
+    //    (1, 3, 4) occurs 8 times;
+    //    (2, 2, 4) occurs 2 times;
+    //    (2, 3, 3) occurs 2 times.
 
-//    Input: arr = [1,1,2,2,2,2], target = 5
-//    Output: 12
-//    Explanation:
-//    arr[i] = 1, arr[j] = arr[k] = 2 occurs 12 times:
-//    We choose one 1 from [1,1] in 2 ways,
-//    and two 2s from [2,2,2,2] in 6 ways.
+    //    Input: arr = [1,1,2,2,2,2], target = 5
+    //    Output: 12
+    //    Explanation:
+    //    arr[i] = 1, arr[j] = arr[k] = 2 occurs 12 times:
+    //    We choose one 1 from [1,1] in 2 ways,
+    //    and two 2s from [2,2,2,2] in 6 ways.
 
-//    Input: arr = [2,1,3], target = 6
-//    Output: 1
-//    Explanation: (1, 2, 3) occured one time in the array so we return 1.
+    //    Input: arr = [2,1,3], target = 6
+    //    Output: 1
+    //    Explanation: (1, 2, 3) occured one time in the array so we return 1.
+    //CountTriplets O(n3)
+    //    i < j < k and a[k] < a[i] < a[j]
+    fun countTripletsBruteForce(arr: IntArray): Int {
+        val n = arr.size
+        var cnt = 0
+        for (i in 0 until n)
+            for (j in i + 1 until n)
+                for (k in j + 1 until n) { // If it satisfy the
+                    // given conditions
+                    if (arr[k] < arr[i] && arr[i] < arr[j]) {
+                        cnt++
+                    }
+                }
+
+        // Return the final count
+        return cnt
+    }
+
     fun tripletSum(arr: IntArray, target: Int): Int {
-        val mod = 1000000007
+//        val mod = 1000000007
         var sum = 0
         var map = HashMap<Int, Int>()
         map.put(arr[0], 1)
@@ -648,23 +748,94 @@ class ArrayPrograms {
         return tripletCounter
     }
 
-    //CountTriplets O(n3)
-    //    i < j < k and a[k] < a[i] < a[j]
-    fun countTripletsBruteForce(arr: IntArray): Int {
-        val n = arr.size
-        var cnt = 0
-        for (i in 0 until n)
-            for (j in i + 1 until n)
-                for (k in j + 1 until n) { // If it satisfy the
-                    // given conditions
-                    if (arr[k] < arr[i] && arr[i] < arr[j]) {
-                        cnt++
-                    }
-                }
 
-        // Return the final count
-        return cnt
+    //    Input: nums = [-1,0,1,2,-1,-4]
+//    Output: [[-1,-1,2],[-1,0,1]]
+//    Explanation:
+//    nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
+//    nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
+//    nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
+//    The distinct triplets are [-1,0,1] and [-1,-1,2].
+//    Notice that the order of the output and the order of the triplets does not matter.
+
+//    Input: nums = [0,1,1]
+//    Output: []
+//    Explanation: The only possible triplet does not sum up to 0.
+
+    //    Input: nums = [0,0,0]
+//    Output: [[0,0,0]]
+//    Explanation: The only possible triplet sums up to 0.
+    //unsorted array
+    fun threeSumToSumZero(numbers: IntArray): List<List<Int>>{
+        //-1, 0, 1, 2, -1, -4
+        //-4, -1, -1, 0, 1, 2
+        numbers.sort()
+        val target = 0
+        val list = mutableListOf<List<Int>>()
+        //running till last but two is sufficient as last summing with last two items is of no use
+        for (i in 0 until numbers.size - 2){
+            val currentItem = numbers[i]
+            var l = i + 1
+            var r = numbers.size - 1
+
+            //#main logic 1 > to avoid duplicate
+            if(i > 0 && currentItem == numbers[i-1])
+                continue
+
+            while (l < r) {
+                val sum = numbers[l] + numbers[r] + currentItem
+                if (sum == target) {
+                    list.add(listOf(numbers[l], numbers[r], currentItem))
+                    l++
+                    //#main logic 2 > to avoid duplicate
+                    while (numbers[l] ==  numbers[l - 1] && l < r){
+                        l++
+                    }
+                } else if (sum > target) {
+                    r--
+                } else {
+                    l++
+                }
+            }
+        }
+        return list
     }
+
+    //unsorted array
+    fun twoSumUnsortedArray(nums: IntArray, target: Int): IntArray {
+        var outputArray = IntArray(2)
+        var map:HashMap<Int, Int> = HashMap<Int, Int>()
+        for(i in 0 until nums.size){
+            val diff = target - nums[i]
+            if(map.containsKey(diff)){
+                outputArray[0] = i
+                outputArray[1] = map.get(diff)!!
+            }else{
+                map.put(nums[i], i)
+            }
+        }
+        return outputArray
+    }
+
+    fun twoSumSortedArray(numbers: IntArray, target: Int): IntArray? {
+        val array = IntArray(2)
+        var l = 0
+        var r = numbers.size - 1
+        while (l <= r) {
+            val sum = numbers[l] + numbers[r]
+            if (sum == target) {
+                array[0] = l + 1
+                array[1] = r + 1
+                break
+            } else if (sum > target) {
+                r--
+            } else {
+                l++
+            }
+        }
+        return array
+    }
+
 
 //    Input: nums = [2,6,4,8,10,9,15]
 //    Output: 5
@@ -838,98 +1009,6 @@ class ArrayPrograms {
     }
 
 
-
-//    Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
-//    Output: 6
-//    Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
-//
-//    Input: height = [4,2,0,3,2,5]
-//    Output: 9
-    fun TrappingRainWater(height: IntArray): Int {
-//        approach 1
-         val size = height.size
-         var sum = 0
-         for (i in 1 until size-1){
-            var left = height[i]
-            for (j in 0 until i){
-                left = Math.max(left, height[j])
-            }
-            var right = height[i]
-            for (j in i + 1 until size){
-                right = Math.max(right, height[j])
-            }
-            sum += Math.min(left, right) - height[i]
-         }
-         return sum
-
-
-        //approach2
-//         val size = height.size
-//         var sum = 0
-
-//         //fill left array
-//         val leftArray = Array(size){Int.MIN_VALUE}
-//         leftArray[0] = height[0]
-//         for (i in 1 until size){
-//             leftArray[i] = Math.max(leftArray[i - 1], height[i])
-//         }
-
-//         //fill right array
-//         val rightArray = Array(size){Int.MIN_VALUE}
-//         rightArray[size - 1] = height[size - 1]
-//         for (i in size-2 downTo 0){
-//             rightArray[i] = Math.max(rightArray[i+1], height[i])
-//         }
-
-//         for (i in 1 until size){
-//             sum += Math.min(leftArray[i], rightArray[i]) - height[i]
-//         }
-//         return sum
-
-
-        //approach3
-        // val size = height.size
-        // var sum = 0
-        // var left = 0; var right = size-1
-        // var left_max = 0; var right_max = 0
-        // while (left < right){
-        //     if(height[left] < height[right]){
-        //         if(height[left] > left_max){
-        //             left_max = height[left]
-        //         }else{
-        //             sum += left_max - height[left]
-        //         }
-        //         left++
-        //     }else{
-        //         if(height[right] > right_max){
-        //             right_max = height[right]
-        //         }else{
-        //             sum += right_max - height[right]
-        //         }
-        //         right--
-        //     }
-        // }
-        // return sum
-
-        //aproach4
-//        val size = height.size
-//        var sum = 0
-//        val stack = Stack<Int>()
-//        for(i in 0 until size){
-//            while(stack.isNotEmpty() && height[i] >  height[stack.peek()]){
-//                val pop_height = height[stack.pop()]
-//                if(stack.isEmpty()){
-//                    break;
-//                }
-//                val dist = i - stack.peek() - 1
-//                val min_height = Math.min(height[stack.peek()], height[i]) - pop_height
-//                sum += (min_height * dist)
-//            }
-//            stack.push(i)
-//        }
-//        return sum
-    }
-
 //    Minimum Operations to Reduce X to Zero
 //    Input: nums = [1,1,4,2,3], x = 5
 //    Output: 2
@@ -1078,4 +1157,93 @@ class ArrayPrograms {
         }
         return maxSum
     }
+
+    fun projectBids(projects:IntArray, bids:IntArray):Int{
+        var sum = 0
+        val map:HashMap<Int, Int> = HashMap(projects.size)
+        for (i in 0 until projects.size){
+            var value = bids[i]
+            if(map.containsKey(projects[i])){
+                value = Math.min(value, map.get(projects[i])!!)
+            }
+            map.put(projects[i], value)
+        }
+        return sum
+    }
+
+    fun topKFrequent(nums: IntArray, k: Int): IntArray {
+        val map = HashMap<Int, Int>()
+        for (element in nums) {
+            if (map.contains(element)) {
+                map.put(element, map[element]!! + 1)
+            } else {
+                map.put(element, 1)
+            }
+        }
+
+        val subMap = map.toList().sortedByDescending { it.second }
+        return subMap.subList(0, k).map { it.first }.toIntArray()
+    }
+
+//    Input: nums = [1,2,3,4]
+//    Output: [24,12,8,6]
+
+//    Input: nums = [-1,1,0,-3,3]
+//    Output: [0,0,9,0,0]
+    fun productExceptSelf(nums: IntArray): IntArray {
+        var prod = 1
+        val ans = IntArray(nums.size) { 1 }
+        for(i in 0 until nums.size) {
+            ans[i] = prod
+            prod *= nums[i]
+        }
+        prod = 1
+        for(i in nums.size-1 downTo 0) {
+            ans[i] *= prod
+            prod *= nums[i]
+        }
+        return ans
+    }
+
+    fun longestConsecutive(nums: IntArray): Int {
+        var length = 0
+        val set: MutableSet<Int> = HashSet()
+        for (i in nums) set.add(i)
+        for (i in nums) {
+            var max = 0
+            var prevVal = i - 1
+            var nextVal = i + 1
+            while (set.contains(prevVal)) {
+                max++
+                set.remove(prevVal--)
+            }
+
+            while (set.contains(nextVal)) {
+                max++
+                set.remove(nextVal++)
+            }
+            length = Math.max(length, max)
+        }
+        return length
+    }
+
+    fun longestConsecutiveSlightBetter(nums: IntArray): Int {
+        var length = 0
+        val set: MutableSet<Int> = HashSet()
+        for (i in nums) set.add(i)
+        for (i in nums) {
+            if(!set.contains(i-1)){
+                var currentItem = i
+                var currentLength = 1
+                while(set.contains(currentItem+1)){
+                    currentItem++
+                    currentLength++
+                }
+                length = Math.max(length, currentLength)
+            }
+        }
+        return length
+    }
+
+
 }

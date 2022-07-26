@@ -20,7 +20,7 @@ class MoviesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
 
-        AppClass.application.moviesComponent.inject(this)
+        AppClass.application.getMoviesComponent().inject(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MoviesViewModel::class.java)
     }
 

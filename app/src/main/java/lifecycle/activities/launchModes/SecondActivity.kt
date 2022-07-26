@@ -16,13 +16,13 @@ class SecondActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
         btn.setOnClickListener {
             val intent = Intent(this, ThirdActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
 
         btn2.setOnClickListener {
             val intent = Intent(this, FourthActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
     }

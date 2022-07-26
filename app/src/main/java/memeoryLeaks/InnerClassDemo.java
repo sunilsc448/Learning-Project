@@ -1,0 +1,3 @@
+package memeoryLeaks;
+   class clas   {
+}

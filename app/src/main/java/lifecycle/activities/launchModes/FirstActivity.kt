@@ -137,7 +137,7 @@ class FirstActivity : AppCompatActivity(), FragmentClickListener {
     private fun attachFragment(fragment: Fragment) {
         val txn = supportFragmentManager.beginTransaction()
         txn.replace(R.id.fragment_frame, fragment)
-//        txn.addToBackStack(fragment::class.java.name)
+        txn.addToBackStack(fragment::class.java.name)
         txn.commit()
     }
 }

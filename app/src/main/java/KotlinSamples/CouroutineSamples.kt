@@ -10,15 +10,17 @@ import kotlin.system.measureTimeMillis
 
 class CouroutineSamples {
     init{
-//        println("CoroutineExperiment: before lengthyJob ${Thread.currentThread().name}")
-//        println("CoroutineExperiment: lengthyJob started")
+        println("CoroutineExperiment: before lengthyJob ${Thread.currentThread().name}")
+        println("CoroutineExperiment: lengthyJob started")
 //        threadExp()
 //        couroutineExp()
 //        couroutineExpWithDelay()
 //        threadOutOfMemoryExp()
 //        couroutineNoOutOfMemoryExp()
 //        couroutineNoOutOfMemoryExpWithDelay()
+
 //        runBlockingSample()
+
 //        jobAndJoinLaunch()
 //        jobAndCancelLaunch()
 //        jobAndJoinGlobalLaunch()
@@ -52,15 +54,35 @@ class CouroutineSamples {
 //        println("CoroutineExperiment: after lengthyJob ${Thread.currentThread().name}")
 
         example1()
+        example2()
+    }
+
+    private fun example2()  = runBlocking{
+        val msg1 = launch{getApiResult1()}
+        val msg2 = launch{getApiResult2()}
+//        println("CoroutineExperiment: the final message is: ${msg1.await() + msg2.await()}")
+    }
+
+    private fun getApiResult1():String{
+        for (i in 1 until 100000000){}
+        println("api 1 Data ")
+        return "api 1 Data "
+    }
+
+    private fun getApiResult2():String{
+        for (i in 1 until 100000000){}
+        println("api 2 Data ")
+        return "api 2 Data"
     }
 
     private fun example1() {
         GlobalScope.launch(Dispatchers.Main) {
-//            val userOne = async(Dispatchers.IO) { fetchFirstUser() }
-//            val userTwo = async(Dispatchers.IO) { fetchSecondUser() }
-            val userOne = withContext(Dispatchers.IO) { fetchFirstUser() }
-            val userTwo = withContext(Dispatchers.IO) { fetchSecondUser() }
-            showUsers(userOne, userTwo) // back on UI thread
+            val userOne = async(Dispatchers.IO) { fetchFirstUser() }
+            val userTwo = async(Dispatchers.IO) { fetchSecondUser() }
+//            val userOne = withContext(Dispatchers.IO) { fetchFirstUser() }
+//            val userTwo = withContext(Dispatchers.IO) { fetchSecondUser() }
+//            showUsers(userOne, userTwo) // back on UI thread
+            showUsers( userOne.await(), userTwo.await()) // back on UI thread
         }
     }
 
@@ -210,7 +232,7 @@ class CouroutineSamples {
         val msg2:Deferred<String> = async(start = CoroutineStart.LAZY){getMessage22()}
 
         //coroutines won't be initialised until used
-//        println("CoroutineExperiment: the final message is: ${msg1.await() + msg2.await()}")
+        println("CoroutineExperiment: the final message is: ${msg1.await() + msg2.await()}")
 
         println("CoroutineExperiment: end of method concurrentLazySample")
     }
@@ -313,7 +335,7 @@ class CouroutineSamples {
                 }
             }catch (e:CancellationException){
                 //runs a separate coroutine
-                withContext(NonCancellable) {
+                val job = withContext(NonCancellable) {
                     delay(50)
                 }
                 println("CoroutineExperiment: CancellationException caught safely, msg is \"${e.message}\"")
@@ -349,7 +371,7 @@ class CouroutineSamples {
             println("CoroutineExperiment: Job Finished "+Thread.currentThread().name)
         }
         println("CoroutineExperiment: Job to be Cancelled within 2 secs "+Thread.currentThread().name)
-        delay(100)
+        delay(500)
         println("CoroutineExperiment: Job is cancelling "+Thread.currentThread().name)
 //        Thread.currentThread().join()
         job.cancelAndJoin()

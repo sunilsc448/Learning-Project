@@ -126,6 +126,6 @@ dependencies {
     //kotlin reflection
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
-    kapt project(':annotationprocessor')
+//    kapt project(':annotationprocessor')
     implementation project(':annotations')
 }

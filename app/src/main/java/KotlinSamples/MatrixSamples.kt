@@ -15,6 +15,47 @@ class MatrixSamples {
 //        val inputArray = arrayOf(intArrayOf(1, 2, 3, 4), intArrayOf(5, 6, 7, 8),
 //            intArrayOf(9, 10, 11, 12), intArrayOf(13, 14, 15, 16), intArrayOf(17, 18, 19, 20))
 //        printWaveMatrix(inputArray)
+
+
+//        val array1 = arrayOf(charArrayOf('5','3','.','.','7','.','.','.','.'),
+//            charArrayOf('6','.','.','1','9','5','.','.','.'),
+//            charArrayOf('.','9','8','.','.','.','.','6','.'),
+//            charArrayOf('8','.','.','.','6','.','.','.','3'),
+//            charArrayOf('4','.','.','8','3','.','.','.','1'),
+//            charArrayOf('7','.','.','.','2','.','.','.','6'),
+//            charArrayOf('.','6','.','.','.','.','2','8','.'),
+//            charArrayOf('.','.','.','4','1','9','.','.','5'),
+//            charArrayOf('.','.','.','.','8','.','.','7','9'))
+//        val array2 = arrayOf(charArrayOf('8','3','.','.','7','.','.','.','.'),
+//            charArrayOf('6','.','.','1','9','5','.','.','.'),
+//            charArrayOf('.','9','8','.','.','.','.','6','.'),
+//            charArrayOf('8','.','.','.','6','.','.','.','3'),
+//            charArrayOf('4','.','.','8','3','.','.','.','1'),
+//            charArrayOf('7','.','.','.','2','.','.','.','6'),
+//            charArrayOf('.','6','.','.','.','.','2','8','.'),
+//            charArrayOf('.','.','.','4','1','9','.','.','5'),
+//            charArrayOf('.','.','.','.','8','.','.','7','9'))
+//
+//        val array3 = arrayOf(charArrayOf('5','3','.','.','7','.','.','.','.'),
+//            charArrayOf('6','.','.','1','9','5','.','.','.'),
+//            charArrayOf('.','9','8','.','.','.','.','6','.'),
+//            charArrayOf('8','.','.','.','6','.','.','.','3'),
+//            charArrayOf('4','.','.','8','3','.','.','.','1'),
+//            charArrayOf('7','.','.','.','2','6','.','.','6'),
+//            charArrayOf('.','6','.','.','.','.','2','8','.'),
+//            charArrayOf('.','.','.','4','1','9','.','.','5'),
+//            charArrayOf('.','.','.','.','8','.','.','7','9'))
+//
+//        val array4 = arrayOf(charArrayOf('.','.','4','.','.','.','6','3','.'),
+//            charArrayOf('.','.','.','.','.','.','.','.','.'),
+//            charArrayOf('5','.','.','.','.','.','.','9','.'),
+//            charArrayOf('.','.','.','5','6','.','.','.','.'),
+//            charArrayOf('4','.','3','.','.','.','.','.','1'),
+//            charArrayOf('.','.','.','7','.','.','.','.','.'),
+//            charArrayOf('.','.','.','5','.','.','.','.','.'),
+//            charArrayOf('.','.','.','.','.','.','.','.','.'),
+//            charArrayOf('.','.','.','.','.','.','.','.','.'))
+//        isValidSudoku(array4)
     }
 
 
@@ -387,4 +428,68 @@ class MatrixSamples {
         //PAHNAPLSIIGYIR
     }
 
+    fun isValidSudoku(board: Array<CharArray>): Boolean {
+        val m = board.size
+        val n = board[0].size
+        if(m < 9 || n < 9)
+            return false
+
+        //all rows check
+        for(i in 0 until 9){
+            val visited = Array(10){false}
+            for(j in 0 until 9){
+                val item = board[i][j]
+                if (item != '.') {
+                    val numItem = item - '0'
+                    if (visited[numItem]) {
+                        return false
+                    }else{
+                        visited[numItem] = true
+                    }
+                }
+            }
+        }
+
+        //all columns check
+        for(i in 0 until 9){
+            val visited = Array(10){false}
+            for(j in 0 until 9){
+                val item = board[j][i]
+                if (item != '.') {
+                    val numItem = item - '0'
+                    if (visited[numItem]) {
+                        return false
+                    }else{
+                        visited[numItem] = true
+                    }
+                }
+            }
+        }
+
+        //all 3X3 array check
+        var p = 0; var q = 0
+        while(p < n) {
+            val visited = Array(10) { false }
+            for (i in p until p+3) {
+                for (j in q until q+3) {
+                    val item = board[i][j]
+                    if (item != '.') {
+                        val numItem = item - '0'
+                        if (visited[numItem]) {
+                            return false
+                        }else{
+                            visited[numItem] = true
+                        }
+                    }
+                }
+            }
+            q+=3
+            if(q == 9) {
+                q = 0
+                p+=3
+            }
+        }
+
+        return true
+    }
 }

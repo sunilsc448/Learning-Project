@@ -1,9 +1,7 @@
 package com.example.kotlintutorial;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,13 +15,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        isVersionEligible(null, null);
-
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, DaggerSampleActivity.class));
-            }
-        });
 
 //        solution(2014, "April", "May", "Wednesday");
 

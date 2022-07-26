@@ -19,12 +19,20 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:persistent="true"
-        android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true">
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true">
         <activity
             android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:name="firebase.NotificationActivity"
+            android:name="kotlinFlow.FlowActivity"
             android:exported="false" />
+        <activity
+            android:name="daggerTutorial.SampleActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name="firebase.NotificationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
 
         <service android:name="firebase.MyFirebaseInstanceIDService">
             <intent-filter>
@@ -66,6 +74,7 @@
             android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -75,27 +84,20 @@
             android:persistableMode="persistAcrossReboots"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".DaggerSampleActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
-        <activity
             android:name="lifecycle.activities.launchModes.FirstActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
-        </activity>
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name="lifecycle.activities.launchModes.SecondActivity"
             android:exported="false"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
-<!--        android:theme="@style/Theme.AppCompat.Translucent" />-->
+            android:theme="@style/Theme.Design.Light.NoActionBar" /> <!-- android:theme="@style/Theme.AppCompat.Translucent" /> -->
         <activity
             android:name="lifecycle.activities.launchModes.ThirdActivity"
             android:exported="false"
-            android:taskAffinity="com.example.abc"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name="lifecycle.activities.launchModes.FourthActivity"
             android:exported="false"
-            android:launchMode="singleTop"
-            android:taskAffinity="com.example.abc"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
 
         <meta-data

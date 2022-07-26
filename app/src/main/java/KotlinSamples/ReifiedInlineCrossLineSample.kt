@@ -156,7 +156,7 @@ class ReifiedInlineCrossLineSample {
         print("doSomething end")
     }
 
-    private fun doSomethingElseLambdaInline(function: () -> Unit) {
+    private inline fun doSomethingElseLambdaInline(function: () -> Unit) {
         function()
     }
 

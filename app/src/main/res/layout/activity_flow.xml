@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kotlinFlow.FlowActivity">
+
+    <TextView
+        tools:text="collect calue"
+        android:gravity="center_horizontal"
+        android:id="@+id/collect_txt"
+        android:layout_marginTop="@dimen/dimen_100dp"
+        android:layout_width="0dp"
+        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        tools:text="collect latest value"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/collect_txt"
+        android:id="@+id/collect_latest_txt"
+        android:layout_width="0dp"
+        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        tools:text="count value"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/collect_latest_txt"
+        android:id="@+id/count_txt"
+        android:layout_width="0dp"
+        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        tools:text="reduce value"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/count_txt"
+        android:id="@+id/reduce_txt"
+        android:layout_width="0dp"
+        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        tools:text="fold value"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/reduce_txt"
+        android:id="@+id/fold_txt"
+        android:layout_width="0dp"
+        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        tools:text="flatten value"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/fold_txt"
+        android:id="@+id/flatten_txt"
+        android:layout_width="0dp"
+        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        tools:text="state flow counter value"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/flatten_txt"
+        android:id="@+id/state_flow_counter_txt"
+        android:layout_width="0dp"
+        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

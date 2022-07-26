@@ -4,6 +4,15 @@ import okhttp3.Response
 import java.lang.Exception
 
 class SampleSealedClass {
+    /*
+    Sealed class rules
+    Sealed classes are abstract and can have abstract members.
+    Sealed classes cannot be instantiated directly.
+    Sealed classes cannot have public constructors (The constructors are private by default).
+    Sealed classes can have subclasses, but they must either be in the same file or nested inside of the sealed class declaration.
+    Sealed classes subclass can have subclasses outside of the sealed class file.
+    */
+
     init {
         val circle = Shape.Circle(3.5f)
         val rectangle = Shape.Rectangle(5,6)
@@ -31,39 +40,6 @@ class SampleSealedClass {
             }
         }
     }
-}
-
-fun checkShapeEnum(shape:ShapeEnum):String{
-    return when(shape){
-        ShapeEnum.RECTANGLE -> "It is a rectangle"
-        ShapeEnum.CIRCLE -> "It is a circle"
-        ShapeEnum.SQUARE -> "It is a Square"
-        ShapeEnum.NO_SHAPE -> "It is a NoShape"
-    }
-}
-
-enum class ShapeEnum(val input:Int){
-    RECTANGLE(1) {
-        override fun shapeUse() {
-            println(input)
-        }
-    },
-    CIRCLE(2) {
-        override fun shapeUse() {
-            println(input)
-        }
-    },
-    SQUARE(3) {
-        override fun shapeUse() {
-            println(input)
-        }
-    },
-    NO_SHAPE(4) {
-        override fun shapeUse() {
-            println(input)
-        }
-    };
-    abstract fun shapeUse()
 }
 
 fun checkShapeSealed(shape: Shape):String {
@@ -133,7 +109,8 @@ class RepoSample{
 }
 
 sealed class DeliveryStatus
-
 open class Dispatched(val trackingId: String) : DeliveryStatus()
-
 class LocallyDispatched : Dispatched("1234") { }
+
+
+

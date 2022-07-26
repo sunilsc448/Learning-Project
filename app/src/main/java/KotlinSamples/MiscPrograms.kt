@@ -6,7 +6,7 @@ class MiscPrograms {
 //        reverse(1563847412)
 //        reverse(123)
 //        intToRoman(1994)
-        romanToInt("LVIII")
+//        romanToInt("LVIII")
     }
 
     //-1563847412
@@ -48,10 +48,35 @@ class MiscPrograms {
         return result
     }
 
+    //LIX > 59
+    //MCDXCVIII > 1498
+    //CMXVI > 916
+    fun romanToDecimal(str: String): Int {
+        var decimal = 0
+        var i = 0
+        while (i < str.length) {
+            val val1 = JavaSamples.getValueForRomanChar(str[i])
+            if (i == str.length - 1) {
+                decimal += val1
+            } else {
+                val val2 = JavaSamples.getValueForRomanChar(str[i + 1])
+                if (val1 < val2) {
+                    decimal += val2 - val1
+                    i++
+                } else {
+                    decimal += val1
+                }
+            }
+            i++
+        }
+        return decimal
+    }
+
     //McMXCIX" > 1999
     //XXXVII" > 37
     //"LVIII" > 58
-    private fun romanToInt(s: String):Int{
+    //CMXVI >  916
+    fun romanToInt(s: String):Int{
         var sum = 0
         var i = s.length - 1
         while (i >= 0){

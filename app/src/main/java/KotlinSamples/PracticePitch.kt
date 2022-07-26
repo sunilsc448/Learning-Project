@@ -1,9 +1,15 @@
 package KotlinSamples
 
+import android.os.Build
 import android.view.View
 import android.widget.Button
+import androidx.annotation.RequiresApi
 import com.example.kotlintutorial.AppClass
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.N)
 class PracticePitch {
     init {
 //        IteratorImplementation()
@@ -124,60 +130,56 @@ class PracticePitch {
 //        KotlinDataClassSample()
 //        KotlinDestructionDeclarationSamples()
 //        KotlinReflections()
-        KotlinAnnotations()
-    }
+//        KotlinAnnotations()
+//        ScopeFunctionsSample()
+//        KotlinCPS()
+//        CouroutineSamples()
+//        FilterAndMapSample()
+//        ArrayPrograms().nextGreatestElement(intArrayOf(4, 5, 2, 25))
+        StringProblems().longestSubStringWithoutDuplicate("pwwkew")
+//        val projects = intArrayOf(1,1)
+//        val bids = intArrayOf(4,7)
+//        ArrayPrograms().projectBids(projects, bids)
+//        JavaSamples.reverseWords("i.like.this.program.very.much")
+//        JavaSamples.longestCommonPrefix(arrayOf("geeks", "geeksforgeeks", "geeker", "geek"), 4) //output "d"
+//        JavaSamples.romanToDecimal("CMXVI")
+//        JavaSamples.convertToRoman(5)
+//        JavaSamples.shortestDistance(arrayListOf("the", "quick", "brown", "fox", "quick"), "the", "fox")
+//        JavaSamples.shortestDistance(arrayListOf("geeks", "for", "geeks", "contribute", "practice"), "geeks", "practice")
+//        JavaSamples.shortestDistance(arrayListOf("rn", "kl", "bk", "ypo", "bk"), "kl", "rn")
+//        JavaSamples.shortestDistance(arrayListOf("jd", "lzt", "kym", "ky", "gdf", "gdf", "jd"), "kym", "gdf");
+//        JavaSamples.shortestDistance(arrayListOf("axa", "ffn", "ty", "bs", "oin", "bs", "axa"), "bs", "axa");
+//        JavaSamples.isdivisible7("8955795758")
 
-    fun <T> genericsExample(value: T) {
-        println(value)
-    }
+//        JavaSamples.areKAnagrams("uovwhqfaemqodyksjj", "swwhzsiowocjfyadvj", 17)
+//        StringProblems().checkIsPangram("Bawds jog, flick quartz, vex nymph")
+//        JavaSamples.lengthOfLongestSubstringOptimised("geeksforgeeks")
+//        StringProblems().longestPalindromeSubString("aebcbda")
+//        JavaSamples.distinctSubsequences("gfg")
+//        StringProblems().distinctSubsequences_map("gfg")
+//        JavaSamples.i45yui'
+    //        sRotated("amazon", "azonam")
+//        JavaSamples.atoi("123")
+//          JavaSamples.findSum("0000000", "000000000")
+//          ArrayPrograms().getMaxPairjGreaterThani(intArrayOf(2, 6, 9, 11, 19, 21, 23))
+//        StringProblems().sortArrayOfStrings(arrayOf("zebra", "antelope", "ant", "bear", "lion", "lioness"))
+//        val arr = intArrayOf(1, 2, 3, 4)
+//        ArrayPrograms().productExceptSelf(arr)
 
-//    setTime = "07:30" and timeToSet = "08:00"
-//    setTime = "23:45" and timeToSet = "08:00"
-    fun getNumberOfShifts(){
-        val old = "23:45"
-        val new = "08:00"
-        val splitOld = old.split(":")
-        val splitNew = new.split(":")
-        val oldHours = splitOld[0].toInt()
-        val oldMins = splitOld[1].toInt()
-        val newHours = splitNew[0].toInt()
-        val newMins = splitNew[1].toInt()
+//       val encodedString = StringProblems().encode(arrayListOf("lint", "code", "love", "you"))
+//       StringProblems().decode(encodedString)
 
-        val diffHours = Math.abs(newHours - oldHours)
-        val diffMins = Math.abs(newMins - oldMins)
-        var hoursShift = 0
-    //    setTime = "07:30" and timeToSet = "20:00"
-        if(diffHours > 12){
-            if(newHours > oldHours){
+        ArrayPrograms().longestConsecutiveSlightBetter(intArrayOf(100, 4, 200, 1, 3, 2))
 
-            }else{
-
-            }
-        }
-    }
-}
-
-
-class SingeltonExperiment{
-    private constructor()
-    companion object {
-        private var singeltonExperiment:SingeltonExperiment? = null
-        @Synchronized
-        fun getInstance(): SingeltonExperiment {
-            if (singeltonExperiment == null) {
-                singeltonExperiment = SingeltonExperiment()
-            }
-            return singeltonExperiment!!
-        }
-    }
-    fun hello(){
-        val touchListener = View.OnTouchListener { v, event -> false }
-        val button:Button = Button(AppClass.application)
-        button.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                TODO("Not yet implemented")
-            }
-        })
+        var arr = intArrayOf(7,6,4,3,1)
+        arr = intArrayOf(7,1,5,3,6,4)
+        arr = intArrayOf(3,2,6,5,0,3)
+//        arr = intArrayOf(2,1,2,1,0,1,2)
+//        arr = intArrayOf(0,1,1)
+//        arr = intArrayOf(0,0,0)
+//        ArrayPrograms().threeSumToSumZero(arr)
+//          ArrayPrograms().TrappingRainWater_4(arr)
+        SlidingWindowProblems().longestSubStringSlidingWindow("abcbde")
     }
 }
 
