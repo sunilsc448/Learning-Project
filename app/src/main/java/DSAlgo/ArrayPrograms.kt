@@ -1,4 +1,4 @@
-package KotlinSamples
+package DSAlgo
 
 import java.math.BigInteger
 import java.util.*
@@ -23,6 +23,57 @@ class ArrayPrograms {
 //        minimumOperationsToZero(intArrayOf(3,2,20,1,1,3), 10)
     }
 
+
+//    Input: nums = [4,5,6,7,0,1,2]
+//    Output: nums = [0,1,2,4,5,6,7]
+    fun rotateArray(nums: IntArray): IntArray {
+        val n = nums.size
+        var rotatedIndex = 0
+        for (i in 1 until n){
+            if(nums[i] < nums[i - 1]){
+                rotatedIndex = i
+                break
+            }
+        }
+        val sortedArray = IntArray(n)
+        for (i in rotatedIndex until n){
+            sortedArray[i-rotatedIndex] = nums[i]
+        }
+
+        for (i in 0 until rotatedIndex){
+            sortedArray[n-rotatedIndex + i] = nums[i]
+        }
+
+        return sortedArray
+    }
+
+    fun rotateArrayInPlace(nums: IntArray): IntArray {
+        val n = nums.size
+        var rotatedIndex = 0
+        for (i in 1 until n){
+            if(nums[i] < nums[i - 1]){
+                rotatedIndex = i
+                break
+            }
+        }
+
+        val positionsToRotate = n - rotatedIndex
+
+        var k = 0
+        while (k < positionsToRotate) {
+            val last = nums[nums.size - 1]
+            for (i in nums.size - 2 downTo 0) {
+                nums[i+1] = nums[i]
+            }
+            nums[0] = last
+            k++
+        }
+
+        return nums
+    }
+
+//    Input: nums = [9,0,0,6,0,2,4]
+//    Output: nums = [9,6,2,4,0,0,0]
     fun moveAllZerosToEnd(arr: IntArray){
         var pivot = 0
         for (i in arr.indices){
@@ -36,6 +87,8 @@ class ArrayPrograms {
         println(arr)
     }
 
+//    Input: nums = [3,4,4,5,6,6,7]
+//    Output: nums = [3,4,5,6,7,4,6]
     fun removeDuplicatesSortedArray(arr: IntArray){
         var pivot = 0
         for (i in arr.indices){
@@ -47,6 +100,8 @@ class ArrayPrograms {
         println(arr.copyOfRange(0, pivot+1))
     }
 
+//    Input: nums = [3,4,4,5,6,6,7]
+//    Output: nums = [3,4,5,6,7,4,6]
     fun sortAsWaveArray(arr: IntArray) {
         for (i in arr.indices step 2){
             if(i > 0 && arr[i] < arr[i - 1]){
@@ -104,6 +159,8 @@ class ArrayPrograms {
         return outPut
     }
 
+//    Input: nums = [4,3,5,6,7]
+//    Output: nums = [7,6,5,3,4]
     fun reverseArrayInPlace(arr: IntArray):IntArray{
         var l = 0; var r= arr.size - 1
         while(l < r){
@@ -116,6 +173,7 @@ class ArrayPrograms {
 
 //    for sequence 0......n
 //    for sequence 1......n   >   n = n + 1
+//    [4,1,3,2,6] = 5 && [4,1,3,2,6,0] = 5
     fun findMissingNumberinSequenceUnsortedArray(arr: IntArray):Int{
         val n = arr.size + 1
         val expectedSum = (n * (n+1))/ 2
@@ -141,10 +199,8 @@ class ArrayPrograms {
         if(n <= 1)
             return BigInteger(n.toString())
 
-        var a = BigInteger("0"); var b = BigInteger("1"); var c = BigInteger("0")
-        if(n == 0)
-            return a
-
+        var a = BigInteger("0"); var b = BigInteger("1")
+        var c = BigInteger("0")
         for(i in 2..n){
             c = a + b
             a = b
@@ -158,6 +214,24 @@ class ArrayPrograms {
             return b
         }else{
             return fibonacciRec(n-1, a+b, a)
+        }
+    }
+
+
+    //1
+    //11
+    //121
+    //1331
+    //14641
+    fun pascalsTriangle(n:Int){
+        val n = 5
+        for (i in 0 until n) {
+            var number = 1
+            for (j in 0..i) {
+                print(number)
+                number = number * (i - j) / (j + 1)
+            }
+            println()
         }
     }
 
@@ -210,7 +284,13 @@ class ArrayPrograms {
         return Integer.parseInt(max2.toChar()+"")
     }
 
-    //stones = [2,7,4,1,8,1]
+//    Input: stones = [2,7,4,1,8,1]
+//    Output: 1
+//    Explanation:
+//    We combine 7 and 8 to get 1 so the array converts to [2,4,1,1,1] then,
+//    we combine 2 and 4 to get 2 so the array converts to [2,1,1,1] then,
+//    we combine 2 and 1 to get 1 so the array converts to [1,1,1] then,
+//    we combine 1 and 1 t
     fun lastStoneWeight(stones: IntArray): Int {
         if(stones.size == 0)
             return 0
@@ -233,6 +313,9 @@ class ArrayPrograms {
         return lastStoneWeight(stoneCopy.toIntArray())
     }
 
+//    input = ["11","23","13","9","911","44"] , k = 2
+//    output >  "44"
+//    not important
     fun kthLargestNumberComparatorApproach(nums: Array<String>, k: Int): String {
         Arrays.sort(nums) { a, b ->
             if (a.length != b.length)
@@ -242,87 +325,566 @@ class ArrayPrograms {
         return nums[nums.size - k]
     }
 
+    fun smallestElementInAnArray(arr: IntArray) {
+        var smallestElement = 0
+        var l = 0
+        var r= arr.size - 1
+        while (l < r){
+            if(arr[l] < arr[r]){
+                smallestElement = arr[l]
+                r--
+            }else{
+                smallestElement = arr[r]
+                l++
+            }
+        }
+        println("smallest element is >>> $smallestElement")
+    }
+
+    fun largestElementInAnArray(arr: IntArray) {
+        var largestElement = 0
+        var l = 0
+        var r= arr.size - 1
+        while (l < r){
+            if(arr[l] < arr[r]){
+                largestElement = arr[r]
+                l++
+            }else{
+                largestElement = arr[l]
+                r--
+            }
+        }
+        println("largest element is >>> $largestElement")
+    }
+
+    fun minAndMax(arr: IntArray):Pair<Int, Int>{
+        var largestElement = Int.MIN_VALUE
+        var smallestElement = Int.MAX_VALUE
+        var l = 0
+        var r= arr.size - 1
+        while (l < r){
+            if(arr[l] < arr[r]){
+                smallestElement = arr[l]
+                if(arr[r] > largestElement) {
+                    largestElement = arr[r]
+                }
+                r--
+            }else{
+                smallestElement = arr[r]
+                if(arr[l] > largestElement) {
+                    largestElement = arr[l]
+                }
+                l++
+            }
+        }
+        println("largest element is >>> $largestElement")
+        println("smallest element is >>> $smallestElement")
+        return Pair(smallestElement, largestElement)
+    }
+
     //13, 7, 6, 12
     //4, 5, 2, 25
-    fun nextGreatestElement(arr:IntArray){
+    fun nextGreatestElement(arr:IntArray) {
         val size = arr.size
-        for (i in 0 until size){
+        for (i in 0 until size) {
             var next = -1
-            for (j in i+1 until size){
-                if(arr[j] > arr[i]){
+            for (j in i + 1 until size) {
+                if (arr[j] > arr[i]) {
                     next = arr[j]
                     break
+
                 }
+                println("${arr[i]}'s next element is $next")
             }
-            println("${arr[i]}'s next element is $next")
         }
     }
 
-    fun maximumSumSlidingProblem(arr: IntArray, m: Int): Int {
-        var maxSum = 0
-        for (i in 0 until arr.size - m) {
-            var sum = 0
-            for (j in i until i + m) {
-                sum += arr[j]
+    fun towerOfHanoi(from:Char, to:Char, aux:Char, n:Int){
+        if(n == 0)
+            return
+        towerOfHanoi(from, aux, to, n-1)
+        println("move the $n block from $from to $to")
+        towerOfHanoi(aux, to, from, n-1)
+    }
+
+    //input = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+    //output = 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6
+    //input = 5, 15, 1, 3, 2, 8, 7, 9, 10, 6, 11, 4
+    //output = 5, 10, 5, 4, 3, 4, 5, 6, 7, 6, 7, 6
+    //unsorted
+    fun runningMedian(arr: IntArray, n: Int) {
+        var i: Int
+        var j: Int
+        var pos: Int
+        var num: Int
+        var count = 1
+
+        println("Median after reading 1" + " element is " + arr[0])
+        i = 1
+        while (i < n) {
+            var median: Float
+            j = i - 1
+            num = arr[i]
+
+            // find position to insert current element in sorted
+            // part of array
+            pos = BinarySearchProblems().binarySearchPositionToInsert(arr, 0, j, num)
+
+            // move elements to right to create space to insert
+            // the current element
+            while (j >= pos) {
+                arr[j + 1] = arr[j]
+                j--
             }
-            if (sum > maxSum) {
+            arr[j + 1] = num
+
+            // increment count of sorted elements in array
+            count++
+
+            // if odd number of integers are read from stream
+            // then middle element in sorted order is median
+            // else average of middle elements is median
+            median = if (count % 2 != 0) {
+                arr[count / 2].toFloat()
+            } else {
+                ((arr[count / 2 - 1] + arr[count / 2]) / 2).toFloat()
+            }
+            println("Median after reading " + (i + 1) + " elements is " + median.toInt())
+            i++
+        }
+    }
+
+    fun findMedianOfSortedArraysLength(nums1: IntArray, nums2: IntArray): Double {
+        var i = 0; var j = 0
+        var mergeArray = IntArray(nums1.size + nums2.size)
+        var counter = 0
+        while(i < nums1.size && j < nums2.size){
+            if(nums1[i] < nums2[j]){
+                mergeArray[counter++] = nums1[i++]
+            }else{
+                mergeArray[counter++] = nums2[j++]
+            }
+        }
+
+        while(i < nums1.size){
+            mergeArray[counter++] = nums1[i++]
+        }
+
+        while(j < nums2.size){
+            mergeArray[counter++] = nums2[j++]
+        }
+
+        val middle = (mergeArray.size - 1)/2
+
+        var double = 0.0
+        if(mergeArray.size % 2 == 0){
+            double = (mergeArray[middle].toDouble() + mergeArray[middle + 1].toDouble())/2
+        }else{
+            double = mergeArray[middle].toDouble()
+        }
+
+        return double
+    }
+
+    fun gameOfLife(arr: Array<IntArray>) {
+        val m = arr.size
+        val n: Int = arr[0].size
+        val changed = Array(m) { BooleanArray(n) }
+        for (i in 0 until m) {
+            for (j in 0 until n) {
+                var currentVal = arr[i][j]
+                val countOfLives = count(arr, i, j, m, n, changed) //count live neighbours
+                if (currentVal == 0) {
+                    if (countOfLives == 3) {
+                        changed[i][j] = true
+                        currentVal = 1
+                    }
+                } else {
+                    if (countOfLives < 2) {
+                        changed[i][j] = true
+                        currentVal = 0
+                    } else if (countOfLives > 3) {
+                        changed[i][j] = true
+                        currentVal = 0
+                    }
+                }
+                arr[i][j] = currentVal
+            }
+        }
+    }
+    //function for counting the live neighbours of current cell
+    fun count(arr: Array<IntArray>, i: Int, j: Int, m: Int, n: Int, changed: Array<BooleanArray>?): Int {
+        val dis = arrayOf(
+            intArrayOf(-1, -1),
+            intArrayOf(-1, 0),
+            intArrayOf(-1, 1),
+            intArrayOf(0, -1),
+            intArrayOf(0, 1),
+            intArrayOf(1, -1),
+            intArrayOf(1, 0),
+            intArrayOf(1, 1)
+        )
+        var cnt = 0
+        for (k in 0..7) {
+            val x = i + dis[k][0]
+            val y = j + dis[k][1]
+            if (x >= 0 && y >= 0 && x < m && y < n && arr[x][y] == 1) {
+                cnt++
+            }
+        }
+        return cnt
+    }
+
+    //unsorted array
+    //################## refer Hashing Samples ##########################
+
+    fun twoSumSortedArray(numbers: IntArray, target: Int): IntArray? {
+        val array = IntArray(2)
+        var l = 0
+        var r = numbers.size - 1
+        while (l <= r) {
+            val sum = numbers[l] + numbers[r]
+            if (sum == target) {
+                array[0] = l + 1
+                array[1] = r + 1
+                break
+            } else if (sum > target) {
+                r--
+            } else {
+                l++
+            }
+        }
+        return array
+    }
+
+
+    //3Sum With Multiplicity
+    //    Input: arr = [1,1,2,2,3,3,4,4,5,5], target = 8
+    //    Output: 20
+    //    Explanation:
+    //    Enumerating by the values (arr[i], arr[j], arr[k]):
+    //    (1, 2, 5) occurs 8 times;
+    //    (1, 3, 4) occurs 8 times;
+    //    (2, 2, 4) occurs 2 times;
+    //    (2, 3, 3) occurs 2 times.
+
+    //    Input: arr = [1,1,2,2,2,2], target = 5
+    //    Output: 12
+    //    Explanation:
+    //    arr[i] = 1, arr[j] = arr[k] = 2 occurs 12 times:
+    //    We choose one 1 from [1,1] in 2 ways,
+    //    and two 2s from [2,2,2,2] in 6 ways.
+
+    //    Input: arr = [2,1,3], target = 6
+    //    Output: 1
+    //    Explanation: (1, 2, 3) occured one time in the array so we return 1.
+    //CountTriplets O(n3)
+    //    i < j < k and a[k] < a[i] < a[j]
+    fun countTripletsBruteForce(arr: IntArray): Int {
+        val n = arr.size
+        var cnt = 0
+        for (i in 0 until n)
+            for (j in i + 1 until n)
+                for (k in j + 1 until n) { // If it satisfy the
+                    // given conditions
+                    if (arr[k] < arr[i] && arr[i] < arr[j]) {
+                        cnt++
+                    }
+                }
+
+        // Return the final count
+        return cnt
+    }
+
+    //############ Refer Hashing for better approach ###################
+
+    //CountTriplets Better Approach O(n2)
+    //    i < j < k and a[k] < a[i] < a[j]
+//    Input: arr[] = {2, 5, 1, 3, 0}  Output: 4
+//    Explanation:
+//    Below are the triplets (i, j, k) such that i < j < k and a[k] < a[i] < a[j]:
+//    1. (0, 1, 2) and arr[2] < arr[0] 1 < 2 < 5.
+//    2. (0, 1, 4) and arr[4] < arr[0] 0 < 2 < 5.
+//    3. (0, 3, 4) and arr[4] < arr[0] 0 < 2 < 3.
+//    4. (2, 3, 4) and arr[4] < arr[2] 0 < 1 < 3.
+    fun countTriplets(arr: IntArray):Int{
+        var tripletCounter = 0
+        for (i in 0 until arr.size){
+            var counter = 0
+            for (j in i+1 until arr.size){
+                if(arr[j] > arr[i]){
+                    counter++
+                }else{
+                    tripletCounter += counter
+                }
+            }
+        }
+        return tripletCounter
+    }
+
+
+//    Input: nums = [-1,0,1,2,-1,-4]
+//    Output: [[-1,-1,2],[-1,0,1]]
+//    Explanation:
+//    nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
+//    nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
+//    nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
+//    The distinct triplets are [-1,0,1] and [-1,-1,2].
+//    Notice that the order of the output and the order of the triplets does not matter.
+
+//    Input: nums = [0,1,1]
+//    Output: []
+//    Explanation: The only possible triplet does not sum up to 0.
+
+    //    Input: nums = [0,0,0]
+//    Output: [[0,0,0]]
+//    Explanation: The only possible triplet sums up to 0.
+    //unsorted array
+    fun threeSumToSumZero(numbers: IntArray): List<List<Int>> {
+        //-1, 0, 1, 2, -1, -4
+        //-4, -1, -1, 0, 1, 2
+        numbers.sort()
+        val target = 0
+        val list = mutableListOf<List<Int>>()
+        //running till last but two is sufficient as last summing with last two items is of no use
+        for (i in 0 until numbers.size - 2) {
+            val currentItem = numbers[i]
+            var l = i + 1
+            var r = numbers.size - 1
+
+            //#main logic 1 > to avoid duplicate
+            if (i > 0 && currentItem == numbers[i - 1])
+                continue
+
+            while (l < r) {
+                val sum = numbers[l] + numbers[r] + currentItem
+                if (sum == target) {
+                    list.add(listOf(numbers[l], numbers[r], currentItem))
+                    l++
+                    //#main logic 2 > to avoid duplicate
+                    while (numbers[l] == numbers[l - 1] && l < r) {
+                        l++
+                    }
+                } else if (sum > target) {
+                    r--
+                } else {
+                    l++
+                }
+            }
+        }
+        return list
+    }
+
+
+//    Input: nums = [2,6,4,8,10,9,15]
+//    Output: 5
+//    Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.
+
+//    Input: nums = [1,2,3,4]
+//    Output: 0
+//    array is already sorted
+    fun findUnsortedSubarray(nums: IntArray): Int {
+        val len = nums.size
+        var max = Int.MIN_VALUE ; var min = Int.MAX_VALUE
+        var start = -1 ; var end = -1
+        for (i in 0 until len) {
+            max = Math.max(max, nums[i]) //from left to right, search the current max
+            min = Math.min(min, nums[len - i - 1]) //from right to left, search the current min
+            if (nums[i] < max)
+                end = i
+            if (nums[len - i - 1] > min)
+                start = len - i - 1
+        }
+        return if (start == -1)
+            0
+        else
+            end - start + 1
+    }
+
+//    Input: x = 123
+//    Output: 321
+
+//    Input: x = -123
+//    Output: -321
+
+//    Input: x = 120
+//    Output: 21
+    //reverseTheInteger
+    fun reverseTheInteger(x: Int): Int {
+        if(x > Int.MAX_VALUE || x <= Int.MIN_VALUE){
+            return 0
+        }
+        var num = x
+        var sum:Long = 0
+
+        while (num != 0){
+            val rem = num % 10
+            num /= 10
+            sum = (sum*10) + rem
+        }
+
+        if(sum > Int.MAX_VALUE || sum <= (Int.MIN_VALUE)){
+            return 0
+        }else {
+            return sum.toInt()
+        }
+    }
+
+//    Input: s = "42"
+//    Output: 42
+//
+//    Input: s = "   -42"
+//    Output: -42
+//
+//    Input: s = "4193 with words"
+//    Output: 4193
+    fun stringToInteger(s: String): Int {
+        val str = s.trim()
+        if(str.isEmpty())return 0
+        var num:Long = 0
+        var isNegative = false
+        var index = 0
+        if(str[0] == '-'){
+            isNegative = true
+            index++
+        }else if(str[0] == '+'){
+            index++
+        }
+
+        for (i in index until str.length){
+            if(str[i] in '0'..'9'){
+                num = num*10 + str[i].toString().toInt()
+            }else{
+                break;
+            }
+            if(num > Int.MAX_VALUE || num < Int.MIN_VALUE){
+                break
+            }
+        }
+
+        if(isNegative){
+            num = -num
+        }
+
+        if(num > Int.MAX_VALUE){
+            return Int.MAX_VALUE
+        }else if(num < Int.MIN_VALUE){
+            return Int.MIN_VALUE
+        }else{
+            return num.toInt()
+        }
+    }
+
+//    Input: x = 121
+//    Output: true
+//
+//    Input: x = -121
+//    Output: false
+
+//    Input: x = 10
+//    Output: false
+    fun isPalindrome(x: Int): Boolean {
+        if(x < 0){
+            return false
+        }
+
+        var xVal = x
+
+        var rhs = 0
+        while(xVal != 0){
+            rhs = rhs * 10 + (xVal % 10)
+            xVal = xVal/10
+        }
+
+        return x == rhs
+    }
+
+//    Input: nums = [4,2,4,5,6]
+//    Output: 17
+//    Explanation: The optimal subarray here is [2,4,5,6].
+
+//    Input: nums = [5,2,1,2,5,2,1,2,5]
+//    Output: 8
+//    Explanation: The optimal subarray here is [5,2,1] or [1,2,5].
+
+//    Input: nums = [10000,1,10000,1,1,1,1,1,1]
+//    Output: 10001
+    fun maximumAscOrDescSubarray(nums: IntArray): Int {
+        var maxSum = 0
+        var isAscending = false
+        var sum = nums[0]
+        for(i in 1 until nums.size){
+            if(nums[i-1] < nums[i]){
+                if(isAscending){
+                    sum += nums[i]
+                }else{
+                    sum = nums[i] + nums[i-1]
+                }
+                isAscending = true
+            }else if(nums[i-1] > nums[i]){
+                if(!isAscending){
+                    sum += nums[i]
+                }else{
+                    sum = nums[i] + nums[i-1]
+                }
+                isAscending = false
+            }
+            if(isAscending){
+                sum += nums[i]
+            }else{
+                sum = nums[i] + nums[i-1]
+            }
+
+            if(sum > maxSum){
                 maxSum = sum
             }
         }
         return maxSum
     }
 
-    fun maximumSumSlidingProblemBetterApproach(arr: IntArray, m: Int): Int {
-        var maxSum = 0
-        var windowSum = 0
-        for (i in 0 until m) {
-            maxSum += arr[i]
+
+
+//    Maximum Erasure Value
+//    You are given an array of positive integers nums and want to erase a subarray containing unique elements. The score you get by erasing the subarray is equal to the sum of its elements.
+
+//    Input: nums = [4,2,4,5,6]
+//    Output: 17
+//    Explanation: The optimal subarray here is [2,4,5,6].
+
+//    Input: nums = [5,2,1,2,5,2,1,2,5]
+//    Output: 8
+//    Explanation: The optimal subarray here is [5,2,1] or [1,2,5].
+
+//    Input: nums = [10000,1,10000,1,1,1,1,1,1]
+//    Output: 10001
+
+//    Input: nums = [1,2,3,4]
+//    Output: [24,12,8,6]
+
+//    Input: nums = [-1,1,0,-3,3]
+//    Output: [0,0,9,0,0]
+    fun productExceptSelf(nums: IntArray): IntArray {
+        var prod = 1
+        val ans = IntArray(nums.size) { 1 }
+        for(i in 0 until nums.size) {
+            ans[i] = prod
+            prod *= nums[i]
         }
-        windowSum = maxSum
-        for (i in m until arr.size) {
-            windowSum = windowSum + (arr[i] - arr[i - m])
-            maxSum = Math.max(windowSum, maxSum)
+        prod = 1
+        for(i in nums.size-1 downTo 0) {
+            ans[i] *= prod
+            prod *= nums[i]
         }
-        return maxSum
+        return ans
     }
 
-    //4, 1, 3, 5, 1, 2, 3, 2, 1, 1, 5
-    fun slidingWindowMaximumUSingDeque(arr: IntArray, k: Int):IntArray{
-        val n = arr.size
-        val resultArray = IntArray(arr.size - k + 1)
-        var resultCounter = 0
-        val dq = ArrayDeque<Int>(k)
-        var i = 0
-        while (i < k){
-            while (!dq.isEmpty() && arr[i] > arr[dq.last()]){
-                dq.removeLast()
-            }
-            dq.addLast(i)
-            i++
-        }
 
-        while (i < n){
-            resultArray[resultCounter++] = arr[dq.first()]
-            while (!dq.isEmpty() && dq.first <= i-k){
-                dq.removeFirst()
-            }
-            while (!dq.isEmpty() && arr[i] > arr[dq.last()]){
-                dq.removeLast()
-            }
-            dq.addLast(i)
-            i++
-        }
-
-        resultArray[resultCounter++] = arr[dq.first]
-        return resultArray
-    }
-
-//    Input: height = [1,8,6,2,5,4,8,3,7]
+    //    Input: height = [1,8,6,2,5,4,8,3,7]
 //    Output: 49
 //    Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7].
 //    In this case, the max area of water (blue section) the container can contain is 49.
 
-//    Input: height = [1,1]
+    //    Input: height = [1,1]
 //    Output: 1
     fun containerMostWater(arr: IntArray):Int{
         var maxArea = 0
@@ -428,822 +990,5 @@ class ArrayPrograms {
         return sum
     }
 
-    //aproach4
-    fun TrappingRainWater_4(height: IntArray): Int {
-        val size = height.size
-        var sum = 0
-        val stack = Stack<Int>()
-        for(i in 0 until size){
-            while(stack.isNotEmpty() && height[i] >  height[stack.peek()]){
-                val pop_height = height[stack.pop()]
-                if(stack.isEmpty()){
-                    break;
-                }
-                val dist = i - stack.peek() - 1
-                val min_height = Math.min(height[stack.peek()], height[i]) - pop_height
-                sum += (min_height * dist)
-            }
-            stack.push(i)
-        }
-        return sum
-    }
-
-
-    fun smallestElementInAnArray(arr: IntArray) {
-        var smallestElement = 0
-        var l = 0
-        var r= arr.size - 1
-        while (l < r){
-            if(arr[l] < arr[r]){
-                smallestElement = arr[l]
-                r--
-            }else{
-                smallestElement = arr[r]
-                l++
-            }
-        }
-        println("smallest element is >>> $smallestElement")
-    }
-
-    fun largestElementInAnArray(arr: IntArray) {
-        var largestElement = 0
-        var l = 0
-        var r= arr.size - 1
-        while (l < r){
-            if(arr[l] < arr[r]){
-                largestElement = arr[r]
-                l++
-            }else{
-                largestElement = arr[l]
-                r--
-            }
-        }
-        println("largest element is >>> $largestElement")
-    }
-
-    fun towerOfHanoi(from:Char, to:Char, aux:Char, n:Int){
-        if(n == 0)
-            return
-        towerOfHanoi(from, aux, to, n-1)
-        println("move the $n block from $from to $to")
-        towerOfHanoi(aux, to, from, n-1)
-    }
-
-    fun minAndMax(arr: IntArray):Pair<Int, Int>{
-        var largestElement = Int.MIN_VALUE
-        var smallestElement = Int.MAX_VALUE
-        var l = 0
-        var r= arr.size - 1
-        while (l < r){
-            if(arr[l] < arr[r]){
-                smallestElement = arr[l]
-                if(arr[r] > largestElement) {
-                    largestElement = arr[r]
-                }
-                r--
-            }else{
-                smallestElement = arr[r]
-                if(arr[l] > largestElement) {
-                    largestElement = arr[l]
-                }
-                l++
-            }
-        }
-        println("largest element is >>> $largestElement")
-        println("smallest element is >>> $smallestElement")
-        return Pair(smallestElement, largestElement)
-    }
-
-
-    //1, 4, 2, 10, 2, 3, 1, 0, 20
-    fun runningMedian(arr: IntArray, n: Int) {
-        val output = IntArray(arr.size)
-        var outputCount = 0
-        var i: Int; var j: Int; var pos: Int; var num: Int; var count = 1;
-        println("""Median after reading >>>  ${arr[0]} is $count """)
-        output[outputCount++] = count
-        i = 1
-        while (i < n) {
-            var median: Float
-            j = i - 1
-            num = arr[i]
-
-            // find position to insert current element in sorted
-            // part of array
-            pos = binarySearch(arr, num, 0, j)
-
-            // move elements to right to create space to insert
-            // the current element
-            while (j >= pos) {
-                arr[j + 1] = arr[j]
-                j--
-            }
-            arr[j + 1] = num
-
-            // increment count of sorted elements in array
-            count++
-
-            // if odd number of integers are read from stream
-            // then middle element in sorted order is median
-            // else average of middle elements is median
-            median = if (count % 2 != 0) {
-                arr[count / 2].toFloat()
-            } else {
-                ((arr[count / 2 - 1] + arr[count / 2]) / 2).toFloat()
-            }
-            output[outputCount++] = median.toInt()
-            println("""Median after reading ${i + 1} is $median 
-""")
-            i++
-        }
-        println(output)
-    }
-
-    fun findMedianOfSortedArraysLength(nums1: IntArray, nums2: IntArray): Double {
-        var i = 0; var j = 0
-        var mergeArray = IntArray(nums1.size + nums2.size)
-        var counter = 0
-        while(i < nums1.size && j < nums2.size){
-            if(nums1[i] < nums2[j]){
-                mergeArray[counter++] = nums1[i++]
-            }else{
-                mergeArray[counter++] = nums2[j++]
-            }
-        }
-
-        while(i < nums1.size){
-            mergeArray[counter++] = nums1[i++]
-        }
-
-        while(j < nums2.size){
-            mergeArray[counter++] = nums2[j++]
-        }
-
-        val middle = (mergeArray.size - 1)/2
-
-        var double = 0.0
-        if(mergeArray.size % 2 == 0){
-            double = (mergeArray[middle].toDouble() + mergeArray[middle + 1].toDouble())/2
-        }else{
-            double = mergeArray[middle].toDouble()
-        }
-
-        return double
-    }
-
-    fun binarySearch(arr: IntArray, item: Int): Int {
-        return binarySearch(arr, item, 0, arr.size-1)
-    }
-
-    fun binarySearch(arr: IntArray, item: Int, low: Int, high: Int): Int {
-        if (low >= high) {
-            return if (item > arr[low])
-                low + 1
-            else
-                low
-        }
-
-        val mid = (low + high) / 2
-
-        if (item == arr[mid])
-            return mid + 1 //returns position from index, so plus one
-
-        return if (item > arr[mid])
-            binarySearch(arr, item, mid + 1, high)
-        else
-            binarySearch(arr, item, low, mid - 1)
-    }
-
-
-
-    fun gameOfLife(arr: Array<IntArray>) {
-        val m = arr.size
-        val n: Int = arr[0].size
-        val changed = Array(m) {
-            BooleanArray(
-                n
-            )
-        }
-        for (i in 0 until m) {
-            for (j in 0 until n) {
-                var currentVal = arr[i][j]
-                val countOfLives = count(arr, i, j, m, n, changed) //count live neighbours
-                if (currentVal == 0) {
-                    if (countOfLives == 3) {
-                        changed[i][j] = true
-                        currentVal = 1
-                    }
-                } else {
-                    if (countOfLives < 2) {
-                        changed[i][j] = true
-                        currentVal = 0
-                    } else if (countOfLives > 3) {
-                        changed[i][j] = true
-                        currentVal = 0
-                    }
-                }
-                arr[i][j] = currentVal
-            }
-        }
-    }
-
-    //function for counting the live neighbours of current cell
-    fun count(arr: Array<IntArray>, i: Int, j: Int, m: Int, n: Int, changed: Array<BooleanArray>?): Int {
-        val dis = arrayOf(
-            intArrayOf(-1, -1),
-            intArrayOf(-1, 0),
-            intArrayOf(-1, 1),
-            intArrayOf(0, -1),
-            intArrayOf(0, 1),
-            intArrayOf(1, -1),
-            intArrayOf(1, 0),
-            intArrayOf(1, 1)
-        )
-        var cnt = 0
-        for (k in 0..7) {
-            val x = i + dis[k][0]
-            val y = j + dis[k][1]
-            if (x >= 0 && y >= 0 && x < m && y < n && arr[x][y] == 1) {
-                cnt++
-            }
-        }
-        return cnt
-    }
-
-    //3Sum With Multiplicity
-    //    Input: arr = [1,1,2,2,3,3,4,4,5,5], target = 8
-    //    Output: 20
-    //    Explanation:
-    //    Enumerating by the values (arr[i], arr[j], arr[k]):
-    //    (1, 2, 5) occurs 8 times;
-    //    (1, 3, 4) occurs 8 times;
-    //    (2, 2, 4) occurs 2 times;
-    //    (2, 3, 3) occurs 2 times.
-
-    //    Input: arr = [1,1,2,2,2,2], target = 5
-    //    Output: 12
-    //    Explanation:
-    //    arr[i] = 1, arr[j] = arr[k] = 2 occurs 12 times:
-    //    We choose one 1 from [1,1] in 2 ways,
-    //    and two 2s from [2,2,2,2] in 6 ways.
-
-    //    Input: arr = [2,1,3], target = 6
-    //    Output: 1
-    //    Explanation: (1, 2, 3) occured one time in the array so we return 1.
-    //CountTriplets O(n3)
-    //    i < j < k and a[k] < a[i] < a[j]
-    fun countTripletsBruteForce(arr: IntArray): Int {
-        val n = arr.size
-        var cnt = 0
-        for (i in 0 until n)
-            for (j in i + 1 until n)
-                for (k in j + 1 until n) { // If it satisfy the
-                    // given conditions
-                    if (arr[k] < arr[i] && arr[i] < arr[j]) {
-                        cnt++
-                    }
-                }
-
-        // Return the final count
-        return cnt
-    }
-
-    fun tripletSum(arr: IntArray, target: Int): Int {
-//        val mod = 1000000007
-        var sum = 0
-        var map = HashMap<Int, Int>()
-        map.put(arr[0], 1)
-        for(i in 1 until arr.size){
-            for(j in i+1 until arr.size){
-                val diff = target - (arr[i] + arr[j])
-                if(map.containsKey(diff)){
-                    sum = sum + map.get(diff)!!
-//                    sum = ((sum % mod) + (map.get(diff)!! % mod)) % mod
-                }
-            }
-
-            if(map.containsKey(arr[i])){
-                map.put(arr[i], map.get(arr[i])!! + 1)
-            }else{
-                map.put(arr[i], 1)
-            }
-        }
-        return sum
-    }
-
-    //CountTriplets Better Approach O(n2)
-    //    i < j < k and a[k] < a[i] < a[j]
-    fun countTriplets(arr: IntArray):Int{
-        var tripletCounter = 0
-        for (i in 0 until arr.size){
-            var counter = 0
-            for (j in i+1 until arr.size){
-                if(arr[j] > arr[i]){
-                    counter++
-                }else{
-                    tripletCounter += counter
-                }
-            }
-        }
-        return tripletCounter
-    }
-
-
-    //    Input: nums = [-1,0,1,2,-1,-4]
-//    Output: [[-1,-1,2],[-1,0,1]]
-//    Explanation:
-//    nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
-//    nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
-//    nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
-//    The distinct triplets are [-1,0,1] and [-1,-1,2].
-//    Notice that the order of the output and the order of the triplets does not matter.
-
-//    Input: nums = [0,1,1]
-//    Output: []
-//    Explanation: The only possible triplet does not sum up to 0.
-
-    //    Input: nums = [0,0,0]
-//    Output: [[0,0,0]]
-//    Explanation: The only possible triplet sums up to 0.
-    //unsorted array
-    fun threeSumToSumZero(numbers: IntArray): List<List<Int>>{
-        //-1, 0, 1, 2, -1, -4
-        //-4, -1, -1, 0, 1, 2
-        numbers.sort()
-        val target = 0
-        val list = mutableListOf<List<Int>>()
-        //running till last but two is sufficient as last summing with last two items is of no use
-        for (i in 0 until numbers.size - 2){
-            val currentItem = numbers[i]
-            var l = i + 1
-            var r = numbers.size - 1
-
-            //#main logic 1 > to avoid duplicate
-            if(i > 0 && currentItem == numbers[i-1])
-                continue
-
-            while (l < r) {
-                val sum = numbers[l] + numbers[r] + currentItem
-                if (sum == target) {
-                    list.add(listOf(numbers[l], numbers[r], currentItem))
-                    l++
-                    //#main logic 2 > to avoid duplicate
-                    while (numbers[l] ==  numbers[l - 1] && l < r){
-                        l++
-                    }
-                } else if (sum > target) {
-                    r--
-                } else {
-                    l++
-                }
-            }
-        }
-        return list
-    }
-
-    //unsorted array
-    fun twoSumUnsortedArray(nums: IntArray, target: Int): IntArray {
-        var outputArray = IntArray(2)
-        var map:HashMap<Int, Int> = HashMap<Int, Int>()
-        for(i in 0 until nums.size){
-            val diff = target - nums[i]
-            if(map.containsKey(diff)){
-                outputArray[0] = i
-                outputArray[1] = map.get(diff)!!
-            }else{
-                map.put(nums[i], i)
-            }
-        }
-        return outputArray
-    }
-
-    fun twoSumSortedArray(numbers: IntArray, target: Int): IntArray? {
-        val array = IntArray(2)
-        var l = 0
-        var r = numbers.size - 1
-        while (l <= r) {
-            val sum = numbers[l] + numbers[r]
-            if (sum == target) {
-                array[0] = l + 1
-                array[1] = r + 1
-                break
-            } else if (sum > target) {
-                r--
-            } else {
-                l++
-            }
-        }
-        return array
-    }
-
-
-//    Input: nums = [2,6,4,8,10,9,15]
-//    Output: 5
-//    Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.
-
-//    Input: nums = [1,2,3,4]
-//    Output: 0
-//    array is already sorted
-    fun findUnsortedSubarray(nums: IntArray): Int {
-        val len = nums.size
-        var max = Int.MIN_VALUE ; var min = Int.MAX_VALUE
-        var start = -1 ; var end = -1
-        for (i in 0 until len) {
-            max = Math.max(max, nums[i]) //from left to right, search the current max
-            min = Math.min(min, nums[len - i - 1]) //from right to left, search the current min
-            if (nums[i] < max)
-                end = i
-            if (nums[len - i - 1] > min)
-                start = len - i - 1
-        }
-        return if (start == -1)
-            0
-        else
-            end - start + 1
-    }
-
-//    Input: nums = [1,2,3,4], k = 5
-//    Output: 2
-//    Explanation: Starting with nums = [1,2,3,4]:
-//    - Remove numbers 1 and 4, then nums = [2,3]
-//    - Remove numbers 2 and 3, then nums = []
-//    There are no more pairs that sum up to 5, hence a total of 2 operations.
-
-//    Input: nums = [3,1,3,4,3], k = 6
-//    Output: 1
-//    Explanation: Starting with nums = [3,1,3,4,3]:
-//    - Remove the first two 3's, then nums = [1,4,3]
-//    There are no more pairs that sum up to 6, hence a total of 1 operation.
-    fun maxOperationsKSumPair(nums: IntArray, k: Int): Int {
-        val map = HashMap<Int, Int>()
-        var count = 0
-        for (i in 0 until nums.size) {
-            if (map.containsKey(nums[i])) {
-                count++
-                map.remove(nums[i])
-            } else {
-                map.put(k - nums[i], 0)
-            }
-        }
-        return count
-    }
-
-    fun maxOperationsKSumPair2(nums: IntArray, k: Int): Int {
-        val map = HashMap<Int, Int>()
-        var count = 0
-        for(i in 0 until nums.size){
-            if(map.containsKey(nums[i])){
-                count++
-                val value = map.get(nums[i])!!
-                map.remove(nums[i])
-                if(value > 1){
-                    map.put(nums[i], value - 1)
-                }
-            }else{
-                if(map.containsKey(k-nums[i])){
-                    map.put(k-nums[i], map.get(k-nums[i])!! + 1)
-                }else{
-                    map.put(k-nums[i], 1)
-                }
-            }
-        }
-        return count
-    }
-
-//    Input: x = 123
-//    Output: 321
-
-//    Input: x = -123
-//    Output: -321
-
-//    Input: x = 120
-//    Output: 21
-    //reverseTheInteger
-    fun reverseTheInteger(x: Int): Int {
-        if(x > Int.MAX_VALUE || x <= Int.MIN_VALUE){
-            return 0
-        }
-        var num = x
-        var sum:Long = 0
-
-        while (num != 0){
-            val rem = num % 10
-            num /= 10
-            sum = (sum*10) + rem
-        }
-
-        if(sum > Int.MAX_VALUE || sum <= (Int.MIN_VALUE)){
-            return 0
-        }else {
-            return sum.toInt()
-        }
-    }
-
-//    Input: s = "42"
-//    Output: 42
-//
-//    Input: s = "   -42"
-//    Output: -42
-//
-//    Input: s = "4193 with words"
-//    Output: 4193
-    fun stringToInteger(s: String): Int {
-        val str = s.trim()
-        if(str.isEmpty())return 0
-        var num:Long = 0
-        var isNegative = false
-        var index = 0
-        if(str[0] == '-'){
-            isNegative = true
-            index++
-        }else if(str[0] == '+'){
-            index++
-        }
-
-        for (i in index until str.length){
-            if(str[i] in '0'..'9'){
-                num = num*10 + str[i].toString().toInt()
-            }else{
-                break;
-            }
-            if(num > Int.MAX_VALUE || num < Int.MIN_VALUE){
-                break
-            }
-        }
-
-        if(isNegative){
-            num = -num
-        }
-
-        if(num > Int.MAX_VALUE){
-            return Int.MAX_VALUE
-        }else if(num < Int.MIN_VALUE){
-            return Int.MIN_VALUE
-        }else{
-            return num.toInt()
-        }
-    }
-
-//    Input: x = 121
-//    Output: true
-//
-//    Input: x = -121
-//    Output: false
-
-//    Input: x = 10
-//    Output: false
-    fun isPalindrome(x: Int): Boolean {
-        if(x < 0){
-            return false
-        }
-
-        var xVal = x
-
-        var rhs = 0
-        while(xVal != 0){
-            rhs = rhs * 10 + (xVal % 10)
-            xVal = xVal/10
-        }
-
-        return x == rhs
-    }
-
-
-//    Minimum Operations to Reduce X to Zero
-//    Input: nums = [1,1,4,2,3], x = 5
-//    Output: 2
-//    Explanation: The optimal solution is to remove the last two elements to reduce x to zero.
-
-//    Input: nums = [5,6,7,8,9], x = 4
-//    Output: -1
-
-//    Input: nums = [3,2,20,1,1,3], x = 10
-//    Output: 5
-
-    //this test case failed
-//    [5207,5594,477,6938,8010,7606,2356,6349,3970,751,5997,6114,9903,3859,6900,7722,2378,1996,
-//    8902,228,4461,90,7321,7893,4879,9987,1146,8177,1073,7254,5088,402,4266,6443,3084,1403,5357,
-//    2565,3470,3639,9468,8932,3119,5839,8008,2712,2735,825,4236,3703,2711,530,9630,1521,2174,5027,
-//    4833,3483,445,8300,3194,8784,279,3097,1491,9864,4992,6164,2043,5364,9192,9649,9944,7230,7224,
-//    585,3722,5628,4833,8379,3967,5649,2554,5828,4331,3547,7847,5433,3394,4968,9983,3540,9224,6216,
-//    9665,8070,31,3555,4198,2626,9553,9724,4503,1951,9980,3975,6025,8928,2952,911,3674,6620,3745,6548,
-//    4985,5206,5777,1908,6029,2322,2626,2188,5639], x = 565610
-//    Output: -1
-    fun minimumOperationsToZero(nums: IntArray, x: Int):Int{
-        var x_op = x
-        var count = 0
-        var left = 0; var right = nums.size - 1
-        while (left <= right && x_op != 0){
-            val left_op = x_op- nums[left]
-            val right_op = x_op- nums[right]
-            if(left_op == 0 || right_op == 0){
-                count++
-                return count
-            } else if(left_op >= 0 && left_op <= right_op){
-                x_op -= nums[left]
-                count++
-                left++
-            }else if (right_op >= 0){
-                x_op -= nums[right]
-                count++
-                right--
-            }else{
-                return -1
-            }
-        }
-        return if(x_op == 0)
-                    count
-                else
-                    -1
-    }
-
-    //all test cases passed
-    fun minimumOperationsToZero1(nums: IntArray, x: Int):Int{
-        var sum = 0
-        nums.forEach{
-            sum += it
-        }
-        val sumMinusX = sum - x
-
-        var l = 0; var r = 0; var currentSum = 0; var maxLength = -1
-        while(r < nums.size){
-            currentSum += nums[r]
-            while(l<=r && currentSum >sumMinusX){
-                currentSum -= nums[l++]
-            }
-            if(currentSum == sumMinusX){
-                maxLength = Math.max(maxLength, r-l+1)
-            }
-            r++
-        }
-        return if(maxLength == -1)
-            -1
-        else
-            nums.size - maxLength
-    }
-
-//    Input: nums = [4,2,4,5,6]
-//    Output: 17
-//    Explanation: The optimal subarray here is [2,4,5,6].
-
-//    Input: nums = [5,2,1,2,5,2,1,2,5]
-//    Output: 8
-//    Explanation: The optimal subarray here is [5,2,1] or [1,2,5].
-
-//    Input: nums = [10000,1,10000,1,1,1,1,1,1]
-//    Output: 10001
-    fun maximumAscOrDescSubarray(nums: IntArray): Int {
-        var maxSum = 0
-        var isAscending = false
-        var sum = nums[0]
-        for(i in 1 until nums.size){
-            if(nums[i-1] < nums[i]){
-                if(isAscending){
-                    sum += nums[i]
-                }else{
-                    sum = nums[i] + nums[i-1]
-                }
-                if(sum > maxSum){
-                    maxSum = sum
-                }
-                isAscending = true
-            }else if(nums[i-1] > nums[i]){
-                if(!isAscending){
-                    sum += nums[i]
-                }else{
-                    sum = nums[i] + nums[i-1]
-                }
-                if(sum > maxSum){
-                    maxSum = sum
-                }
-                isAscending = false
-            }
-        }
-        return maxSum
-    }
-
-    //    Maximum Erasure Value
-//    You are given an array of positive integers nums and want to erase a subarray containing unique elements. The score you get by erasing the subarray is equal to the sum of its elements.
-
-//    Input: nums = [4,2,4,5,6]
-//    Output: 17
-//    Explanation: The optimal subarray here is [2,4,5,6].
-
-//    Input: nums = [5,2,1,2,5,2,1,2,5]
-//    Output: 8
-//    Explanation: The optimal subarray here is [5,2,1] or [1,2,5].
-
-    //    Input: nums = [10000,1,10000,1,1,1,1,1,1]
-//    Output: 10001
-
-
-    //    Input: nums = 20,19,20,1,2,3,4,5
-//    Output: 54
-    fun maximumUniqueSubAraySum(nums: IntArray): Int{
-        var i = 0 ; var j = 0
-        var maxSum = 0 ; var currSum = 0
-        val set: MutableSet<Int> = HashSet()
-        while (i < nums.size && j < nums.size) {
-            if (!set.contains(nums[j])) {
-                currSum += nums[j]
-                maxSum = Math.max(maxSum, currSum)
-                set.add(nums[j])
-                j++
-            } else {
-                currSum = currSum - nums[i]
-                set.remove(nums[i])
-                i++
-            }
-        }
-        return maxSum
-    }
-
-    fun projectBids(projects:IntArray, bids:IntArray):Int{
-        var sum = 0
-        val map:HashMap<Int, Int> = HashMap(projects.size)
-        for (i in 0 until projects.size){
-            var value = bids[i]
-            if(map.containsKey(projects[i])){
-                value = Math.min(value, map.get(projects[i])!!)
-            }
-            map.put(projects[i], value)
-        }
-        return sum
-    }
-
-    fun topKFrequent(nums: IntArray, k: Int): IntArray {
-        val map = HashMap<Int, Int>()
-        for (element in nums) {
-            if (map.contains(element)) {
-                map.put(element, map[element]!! + 1)
-            } else {
-                map.put(element, 1)
-            }
-        }
-
-        val subMap = map.toList().sortedByDescending { it.second }
-        return subMap.subList(0, k).map { it.first }.toIntArray()
-    }
-
-//    Input: nums = [1,2,3,4]
-//    Output: [24,12,8,6]
-
-//    Input: nums = [-1,1,0,-3,3]
-//    Output: [0,0,9,0,0]
-    fun productExceptSelf(nums: IntArray): IntArray {
-        var prod = 1
-        val ans = IntArray(nums.size) { 1 }
-        for(i in 0 until nums.size) {
-            ans[i] = prod
-            prod *= nums[i]
-        }
-        prod = 1
-        for(i in nums.size-1 downTo 0) {
-            ans[i] *= prod
-            prod *= nums[i]
-        }
-        return ans
-    }
-
-    fun longestConsecutive(nums: IntArray): Int {
-        var length = 0
-        val set: MutableSet<Int> = HashSet()
-        for (i in nums) set.add(i)
-        for (i in nums) {
-            var max = 0
-            var prevVal = i - 1
-            var nextVal = i + 1
-            while (set.contains(prevVal)) {
-                max++
-                set.remove(prevVal--)
-            }
-
-            while (set.contains(nextVal)) {
-                max++
-                set.remove(nextVal++)
-            }
-            length = Math.max(length, max)
-        }
-        return length
-    }
-
-    fun longestConsecutiveSlightBetter(nums: IntArray): Int {
-        var length = 0
-        val set: MutableSet<Int> = HashSet()
-        for (i in nums) set.add(i)
-        for (i in nums) {
-            if(!set.contains(i-1)){
-                var currentItem = i
-                var currentLength = 1
-                while(set.contains(currentItem+1)){
-                    currentItem++
-                    currentLength++
-                }
-                length = Math.max(length, currentLength)
-            }
-        }
-        return length
-    }
-
-
+    //############### approach4 in stack problems #######################
 }

@@ -85,7 +85,6 @@
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name="lifecycle.activities.launchModes.FirstActivity"
-            android:launchMode="singleInstance"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name="lifecycle.activities.launchModes.SecondActivity"

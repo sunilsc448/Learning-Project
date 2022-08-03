@@ -1,4 +1,4 @@
-package KotlinSamples
+package DSAlgo
 
 class SortingSample {
     init {

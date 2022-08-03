@@ -1,4 +1,4 @@
-package KotlinSamples;
+package DSAlgo;
 
 import java.util.ArrayList;
 import java.util.Arrays;

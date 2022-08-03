@@ -1,4 +1,4 @@
-package KotlinSamples
+package DSAlgo
 
 import java.util.*
 import kotlin.collections.ArrayDeque
@@ -7,6 +7,16 @@ class QueueSamples {
     init {
         MyQueueUseCase()
 //        maxSlidingWindow(intArrayOf(4, 1, 3, 5, 1, 2, 3, 2, 1, 1, 5), 11)
+
+
+        //Dequeue(doublesided queue)
+//        val dq = MyDequeue<Int>()
+//        dq.addFirst(1)
+//        dq.addFirst(2)
+//        dq.addLast(3)
+//        dq.removeLast()
+//        dq.removeLast()
+//        println("dequeue >>"+dq)
     }
 
     private fun MyQueueUseCase() {
@@ -116,5 +126,99 @@ class MyQueue<T>{
     private fun doubleTheQueue() {
         size *= 2
         array = Arrays.copyOf(array, size)
+    }
+}
+
+
+class MyDequeue<T>{
+    private val size = 6
+    private val array = Array<Any>(size){}
+    private var rear = 0
+    private var front = -1
+
+    fun addFirst(input:T){
+        if(isFull())
+            return
+
+        if(front == -1){
+            front = 0
+            rear = 0
+        }else if(front == 0){
+            front = size - 1
+        }else{
+            front--
+        }
+
+        array[front] =  input as Any
+    }
+
+    fun removeFirst(){
+        if(isEmpty()){
+            return
+        }
+
+        if(front == rear){
+            front = -1
+            rear = -1
+        } else if(front == size - 1){
+            front = 0
+        }else{
+            front++
+        }
+    }
+
+    fun addLast(input:T){
+        if(isFull())
+            return
+
+        if(front == -1){
+            front = 0
+            rear = 0
+        }else if(rear == size-1){
+            rear = 0
+        }else{
+            rear++
+        }
+
+        array[rear] = input as Any
+    }
+
+    fun removeLast(){
+        if(isEmpty()){
+            return
+        }
+
+        if(front == rear){
+            front = -1
+            rear = -1
+        }else if(rear == 0){
+            rear = size - 1
+        }else{
+            rear--
+        }
+    }
+
+    private fun isEmpty(): Boolean {
+        return (front == -1)
+    }
+
+    private fun isFull(): Boolean {
+        return ((front == 0 && rear == -1) || front == rear + 1)
+    }
+
+    fun getFirst():T{
+        if(!isEmpty()){
+            return array[front] as T
+        }else{
+            throw StackOverflowError("Queue is Empty")
+        }
+    }
+
+    fun getLast():T{
+        if(!isEmpty()){
+            return array[rear] as T
+        }else{
+            throw StackOverflowError("Queue is Empty")
+        }
     }
 }

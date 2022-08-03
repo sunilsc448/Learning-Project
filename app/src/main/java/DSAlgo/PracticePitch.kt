@@ -1,4 +1,4 @@
-package KotlinSamples
+package DSAlgo
 
 import android.os.Build
 import android.view.View
@@ -21,12 +21,12 @@ class PracticePitch {
 //        map.put("D", "Dose")
 //        map.put("E", "Elakki")
 
-        val input2DArray = arrayOf(intArrayOf(5, 0, 7), intArrayOf(3, 8, 1), intArrayOf(4, 9, 6))
+//        val input2DArray = arrayOf(intArrayOf(5, 0, 7), intArrayOf(3, 8, 1), intArrayOf(4, 9, 6))
 
-        val inputArray = intArrayOf(4, 1, 3, 5, 1, 2, 3, 2, 1, 1, 5)
+//        val inputArray = intArrayOf(4, 1, 3, 5, 1, 2, 3, 2, 1, 1, 5)
 //        ArrayPrograms().sortAsWaveArray(inputArray)
 
-        val arrayWithOnesAndZeros = arrayOf(intArrayOf(1, 1, 1), intArrayOf(1, 0 ,1), intArrayOf(1, 1, 1))
+//        val arrayWithOnesAndZeros = arrayOf(intArrayOf(1, 1, 1), intArrayOf(1, 0 ,1), intArrayOf(1, 1, 1))
 //        MatrixSamples().zeroMatrix(arrayWithOnesAndZeros)
 
 //        MatrixSamples().rotateArrayBy90ClockWise(input2DArray)
@@ -89,7 +89,7 @@ class PracticePitch {
 //          MatrixSamples().generatePascalTriangle(5)
 
 //        ArrayPrograms().tripletSum(intArrayOf(1,1,2,2,3,3), 6)
-//        ArrayPrograms().tripletSum(intArrayOf(1,1,2,2,3,3,4,4,5,5), 8)
+
 
 //        StringProblems().zigzagConversionStringBuilder("PAYPALISHIRING", 5)
 
@@ -136,7 +136,7 @@ class PracticePitch {
 //        CouroutineSamples()
 //        FilterAndMapSample()
 //        ArrayPrograms().nextGreatestElement(intArrayOf(4, 5, 2, 25))
-        StringProblems().longestSubStringWithoutDuplicate("pwwkew")
+//        StringProblems().longestSubStringWithoutDuplicate("pwwkew")
 //        val projects = intArrayOf(1,1)
 //        val bids = intArrayOf(4,7)
 //        ArrayPrograms().projectBids(projects, bids)
@@ -169,17 +169,41 @@ class PracticePitch {
 //       val encodedString = StringProblems().encode(arrayListOf("lint", "code", "love", "you"))
 //       StringProblems().decode(encodedString)
 
-        ArrayPrograms().longestConsecutiveSlightBetter(intArrayOf(100, 4, 200, 1, 3, 2))
+//        ArrayPrograms().longestConsecutiveSlightBetter(intArrayOf(100, 4, 200, 1, 3, 2))
 
-        var arr = intArrayOf(7,6,4,3,1)
-        arr = intArrayOf(7,1,5,3,6,4)
-        arr = intArrayOf(3,2,6,5,0,3)
+//        var arr = intArrayOf(7,6,4,3,1)
+//        arr = intArrayOf(7,1,5,3,6,4)
+//        arr = intArrayOf(3,2,6,5,0,3)
 //        arr = intArrayOf(2,1,2,1,0,1,2)
 //        arr = intArrayOf(0,1,1)
 //        arr = intArrayOf(0,0,0)
 //        ArrayPrograms().threeSumToSumZero(arr)
 //          ArrayPrograms().TrappingRainWater_4(arr)
-        SlidingWindowProblems().longestSubStringSlidingWindow("abcbde")
+//        SlidingWindowProblems().longestSubStringSlidingWindow("abcbde")
+        "hello"
+        "ooolleoooleh"
+        "adc"
+        "dcda"
+//        SlidingWindowProblems().checkInclusionMyApproach("hello", "ooolleoooleh")
+//        SlidingWindowProblems().minWindow("ADOBECODEBANC", "ABC")
+
+//        val mat_arr = arrayOf(intArrayOf(1,2,3,4), intArrayOf(5,6,7,8), intArrayOf(10,11,12,13))
+//        BinarySearchProblems().searchMatrix(mat_arr, 10)
+//        arr = intArrayOf(3,6,7,11)
+//        arr = intArrayOfntArrayOf(312884470)
+//        BinarySearchProblems().searchInSortedRotated(arr, 0)
+//        arr = intArrayOf(3,4,5,1,2)
+//        BinarySearchProblems().searchMinInSortedRotated(arr)
+//        ArrayPrograms().pascalsTriangle(5)
+//        val position = BinarySearchProblems().binarySearchPositionToInsert(intArrayOf(1, 2, 4, 5, 6, 7, 8, 9), 0, 7, 3)
+//        println(position)
+//        SortingSample().mergeSort(intArrayOf(5, 4, 3, 2, 1))
+//        ArrayPrograms().findUnsortedSubarray(intArrayOf(2,6,4,8,10,9,15))
+//        ArrayPrograms().runningMedian(intArrayOf(5, 15, 1, 3, 2, 8, 7, 9, 10, 6, 11, 4), 12)
+//        BinarySearchProblems().searchMinInSortedRotated(intArrayOf(3,4,5,1,2))
+//        StringProblems().longestPalindromStringLength("aebcba")
+//        StringProblems().codingChallenge(arrayOf("baseball", "a,all,b,ball,bas,base,cat,code,d,e,quit,z"))
+        StringProblems().findAnagrams_slidingWindow("cbaebabacd", "abc")
     }
 }
 

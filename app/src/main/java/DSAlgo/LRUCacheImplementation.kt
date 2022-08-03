@@ -1,4 +1,4 @@
-package KotlinSamples
+package DSAlgo
 
 class LRUCacheImplementation{
     init {
@@ -27,8 +27,8 @@ class LRUCacheDoublyLinkedList<K, V>(capacity:Int){
 
     private class DoublyLinkedList<K, V>(private val capacity: Int){
        private val map = HashMap<K, DLLNode<K, V>>()
-       private val head:DLLNode<K, V> = DLLNode(Unit as K, Unit as V)
-       private val tail:DLLNode<K, V> = DLLNode(Unit as K, Unit as V)
+       private val head: DLLNode<K, V> = DLLNode(Unit as K, Unit as V)
+       private val tail: DLLNode<K, V> = DLLNode(Unit as K, Unit as V)
        private var count = 0
 
        init {
@@ -60,7 +60,7 @@ class LRUCacheDoublyLinkedList<K, V>(capacity:Int){
           }
        }
 
-       private fun addFirst(node:DLLNode<K,V>) {
+       private fun addFirst(node: DLLNode<K, V>) {
           val next = head.next
           head.next = node
           node.prev = head
@@ -92,7 +92,7 @@ class LRUCacheDoublyLinkedList<K, V>(capacity:Int){
        }
    }
 
-    private class DLLNode<K, V>(val key: K, var value: V, var prev:DLLNode<K, V>? = null, var next:DLLNode<K, V>? = null)
+    private class DLLNode<K, V>(val key: K, var value: V, var prev: DLLNode<K, V>? = null, var next: DLLNode<K, V>? = null)
 }
 
 //using LinkedHashmap

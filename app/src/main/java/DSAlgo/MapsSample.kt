@@ -1,6 +1,4 @@
-package KotlinSamples
-
-import java.util.ArrayList
+package DSAlgo
 
 class MapsSample {
     init {

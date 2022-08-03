@@ -1,11 +1,11 @@
-package KotlinSamples
+package DSAlgo
 
 import java.lang.StringBuilder
 import java.util.*
 
 class HMSample{
     init {
-        val aHashMap:HMCustom<String, String> = HMCustom()
+        val aHashMap: HMCustom<String, String> = HMCustom()
         aHashMap.put("A", "Apple")
         aHashMap.put("B", "Ball")
         aHashMap.put("C", "Charlie")

@@ -1,8 +1,4 @@
-package KotlinSamples
-
-import android.util.MutableInt
-import java.lang.StringBuilder
-import kotlin.math.sign
+package DSAlgo
 
 class MatrixSamples {
     init {

@@ -1,4 +1,4 @@
-package KotlinSamples
+package DSAlgo
 
 import java.lang.StringBuilder
 import java.util.*
@@ -55,15 +55,6 @@ class StackSamples {
 //        println("stack top ${stack.backTop()}")
 //        stack.pushToFront(5)
 //        stack.pushToFront(6)
-
-        //Dequeue(doublesided queue)
-//        val dq = MyDequeue<Int>()
-//        dq.addFirst(1)
-//        dq.addFirst(2)
-//        dq.addLast(3)
-//        dq.removeLast()
-//        dq.removeLast()
-//        println("dequeue >>"+dq)
 
         //Spans
 //          findingSpans_stack(intArrayOf(6, 3, 4, 5 , 2))
@@ -190,11 +181,9 @@ class StackSamples {
         val arr_save = Array<Int>(size){0}
         val stack = Stack<Int>()
         for (i in size-1 downTo 0){
-//            if(stack.isNotEmpty()) {
                 while (stack.isNotEmpty() && arr[i] > stack.peek()) {
                     stack.pop()
                 }
-//            }
             arr_save[i] = if(stack.isEmpty()) -1 else stack.peek()
             stack.push(arr[i])
         }
@@ -228,7 +217,8 @@ class StackSamples {
                 area_with_top = hist[tp] * if (s.empty()) i else i - s.peek() - 1
 
                 // update max area, if needed
-                if (max_area < area_with_top) max_area = area_with_top
+                if (max_area < area_with_top)
+                    max_area = area_with_top
             }
         }
 
@@ -238,7 +228,8 @@ class StackSamples {
             tp = s.peek()
             s.pop()
             area_with_top = hist[tp] * if (s.empty()) i else i - s.peek() - 1
-            if (max_area < area_with_top) max_area = area_with_top
+            if (max_area < area_with_top)
+                max_area = area_with_top
         }
         return max_area
     }
@@ -282,6 +273,28 @@ class StackSamples {
             sum += stackInt.pop()
         }
 
+        return sum
+    }
+
+//    Input: height = [4,2,0,3,2,5]
+//    Output: 9
+    //aproach1 : Sliding window with stack, approac2 and approach3 in arrays
+    fun TrappingRainWater_4(height: IntArray): Int {
+        val size = height.size
+        var sum = 0
+        val stack = Stack<Int>()
+        for(i in 0 until size){
+            while(stack.isNotEmpty() && height[i] >  height[stack.peek()]){
+                val pop_height = height[stack.pop()]
+                if(stack.isEmpty()){
+                    break;
+                }
+                val dist = i - stack.peek() - 1
+                val min_height = Math.min(height[stack.peek()], height[i]) - pop_height
+                sum += (min_height * dist)
+            }
+            stack.push(i)
+        }
         return sum
     }
 }
@@ -437,7 +450,7 @@ class TwoStacks<T>{
 }
 
 class DoubleSidedStack<T>{
-   private var head:Node2<T>? = null
+   private var head: Node2<T>? = null
 
     fun pushToBack(input:T){
         val newNode = Node2(input)
@@ -493,98 +506,5 @@ class DoubleSidedStack<T>{
             temp = temp?.next
         }
         return sb.toString()
-    }
-}
-
-class MyDequeue<T>{
-    private val size = 6
-    private val array = Array<Any>(size){}
-    private var last = 0
-    private var first = -1
-
-    fun addFirst(input:T){
-        if(isFull())
-            return
-
-        if(first == -1){
-            first = 0
-            last = 0
-        }else if(first == 0){
-            first = size - 1
-        }else{
-            first--
-        }
-
-        array[first] =  input as Any
-    }
-
-    fun removeFirst(){
-        if(isEmpty()){
-            return
-        }
-
-        if(first == last){
-            first = -1
-            last = -1
-        } else if(first == size - 1){
-            first = 0
-        }else{
-            first++
-        }
-    }
-
-    fun addLast(input:T){
-        if(isFull())
-            return
-
-        if(first == -1){
-            first = 0
-            last = 0
-        }else if(last == size-1){
-            last = 0
-        }else{
-            last++
-        }
-
-        array[last] = input as Any
-    }
-
-    fun removeLast(){
-        if(isEmpty()){
-            return
-        }
-
-        if(first == last){
-            first = -1
-            last = -1
-        }else if(last == 0){
-            last = size - 1
-        }else{
-            last--
-        }
-    }
-
-    private fun isEmpty(): Boolean {
-        return (first == -1)
-    }
-
-    private fun isFull(): Boolean {
-        return ((first == 0 && last == -1) || first == last + 1)
-    }
-
-    fun getFirst():T{
-        if(!isEmpty()){
-            return array[first] as T
-        }else{
-            throw StackOverflowError("Queue is Empty")
-        }
-    }
-
-    fun getLast():T{
-        if(!isEmpty()){
-            return array[last] as T
-        }else{
-            throw StackOverflowError("Queue is Empty")
-        }
     }
 }

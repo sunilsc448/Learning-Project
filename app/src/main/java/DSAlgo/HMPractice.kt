@@ -1,4 +1,4 @@
-package KotlinSamples
+package DSAlgo
 
 import java.util.*
 
@@ -6,7 +6,7 @@ class HMPractice<K, V>{
     private var entriesSize = 4
     private var counter = 0
     private var entries:Array<Entry<K, V>?> = arrayOfNulls(entriesSize)
-    private var entries_linkedlist:Array<LinkedList<Entry<K, V>>> = Array(entriesSize){LinkedList<Entry<K ,V>>()}
+    private var entries_linkedlist:Array<LinkedList<Entry<K, V>>> = Array(entriesSize){LinkedList<Entry<K, V>>()}
     val loadFactor = 0.9
 
     /* Collision issue

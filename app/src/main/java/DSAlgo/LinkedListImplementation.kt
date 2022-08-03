@@ -1,4 +1,4 @@
-package KotlinSamples
+package DSAlgo
 
 class LinkedListImplementation {
     init {
@@ -56,8 +56,8 @@ class LinkedListImplementation {
 }
 
 class MyLinkedList<T>{
-    private var head:Node<T>? = null
-    private var tail:Node<T>? = null
+    private var head: Node<T>? = null
+    private var tail: Node<T>? = null
     private var size = 0
 
     fun isEmpty() = (size == 0)
@@ -67,7 +67,7 @@ class MyLinkedList<T>{
     }
 
     //TC : O(1)
-    fun push(input:T):MyLinkedList<T>{
+    fun push(input:T): MyLinkedList<T> {
         head = Node(input, head)
         if(tail == null)
             tail = head
@@ -90,7 +90,7 @@ class MyLinkedList<T>{
     }
 
     //TC : O(index)
-    fun nodeAt(index:Int):Node<T>?{
+    fun nodeAt(index:Int): Node<T>?{
         var currentNode = head
         var currentIndex = 0
         while (currentNode != null && currentIndex < index){
@@ -101,7 +101,7 @@ class MyLinkedList<T>{
     }
 
     //TC : O(1)
-    fun insertAfter(input:T, afterNode:Node<T>):Node<T>{
+    fun insertAfter(input:T, afterNode: Node<T>): Node<T> {
         if(afterNode == tail){
             append(input)
             return tail!!
@@ -143,7 +143,7 @@ class MyLinkedList<T>{
         return current.value
     }
 
-    fun removeAfter(input:Node<T>):T?{
+    fun removeAfter(input: Node<T>):T?{
         val result = input.next?.value
         if (input.next == tail) {
             tail = input
@@ -156,7 +156,7 @@ class MyLinkedList<T>{
         return result
     }
 
-    fun remove(input:Node<T>){
+    fun remove(input: Node<T>){
         if(input == head){
             head = head?.next
             return
@@ -176,7 +176,7 @@ class MyLinkedList<T>{
     }
 }
 
-class Node<T>(val value:T, var next:Node<T>? = null){
+class Node<T>(val value:T, var next: Node<T>? = null){
     override fun toString(): String {
         return if (next == null)
             value.toString()
@@ -185,7 +185,7 @@ class Node<T>(val value:T, var next:Node<T>? = null){
     }
 }
 
-class Node2<T>(val value: T, var next: Node2<T>? = null ,var prev:Node2<T>? = null){
+class Node2<T>(val value: T, var next: Node2<T>? = null, var prev: Node2<T>? = null){
 //    override fun toString(): String {
 //        return if(next == null){
 //            value.toString()

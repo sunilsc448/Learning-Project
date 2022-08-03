@@ -1,11 +1,11 @@
-package KotlinSamples
+package DSAlgo
 
 import java.lang.StringBuilder
 import java.util.*
 
 class HashMapSample(){
     init {
-        val aHashMap:HashMapCustom<String, String> = HashMapCustom()
+        val aHashMap: HashMapCustom<String, String> = HashMapCustom()
 
         aHashMap.put("AA", "AAgastya")
         aHashMap.put("BB", "BBahubali")
@@ -62,7 +62,7 @@ class HashMapCustom<K, V> {
 //   private val entries:Array<Entry<K, V>?> = arrayOfNulls(arraySize)
 
     //After Collision
-    private var entries:Array<LinkedList<Entry<K,V>>> = Array(arraySize){ LinkedList<Entry<K,V>>() }
+    private var entries:Array<LinkedList<Entry<K, V>>> = Array(arraySize){ LinkedList<Entry<K, V>>() }
 
     fun get(key: K):V?{
        val index = calculateHashCode(key)

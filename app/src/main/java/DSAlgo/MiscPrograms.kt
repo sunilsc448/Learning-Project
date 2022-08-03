@@ -1,4 +1,4 @@
-package KotlinSamples
+package DSAlgo
 
 class MiscPrograms {
     init {

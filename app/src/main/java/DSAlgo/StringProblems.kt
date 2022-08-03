@@ -1,14 +1,12 @@
-package KotlinSamples
+package DSAlgo
 
-import android.util.Log
 import java.lang.StringBuilder
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
-import kotlin.math.min
 
-class StringProblems {
+class StringProblems{
     init {
 //        val str = "paapaap"
 //        println("is input string $str a Palindrome >>> ${isPalindrome(str)}")
@@ -103,6 +101,12 @@ class StringProblems {
         println("the final output is $result")
     }
 
+//    Input : "mdaam"
+//    Output : "madam" or "amdma"
+//    Input : "abb"
+//    Output : "bab"
+//    Input : "geeksforgeeks"
+//    Output : "No Palindrome"
     fun makeAPalindrome(input:String):String{
         val map = mutableMapOf<Char, Int>()
 //        var map = HashMap<Char, Int>()
@@ -146,21 +150,6 @@ class StringProblems {
             leftPart + rightPart
     }
 
-    fun longestUniqueSubsttr(str: String): Int {
-        val n = str.length
-
-        // Result
-        var res = 0
-        for (i in 0 until n) {
-            for (j in i until n) {
-                if (areDistinct(str, i, j)) {
-                    res = Math.max(res, j - i + 1)
-                }
-            }
-        }
-        return res
-    }
-
 //    Input: s = "abcabcbb"
 //    Output: 3
 //    Explanation: The answer is "abc", with the length of 3.
@@ -192,20 +181,6 @@ class StringProblems {
         return result
     }
 
-    private fun areDistinct(inputString:String, i:Int, j:Int) : Boolean{
-        var counter = 0
-        val visited = BooleanArray(26)
-        for (k in i until j){
-            println("counter >>> $counter++")
-            val ascii = inputString.elementAt(k) - 'a'
-            if(visited[ascii]){
-                return false
-            }
-
-            visited[ascii] = true
-        }
-        return true
-    }
 
     private fun isPalindrome(input:String):Boolean{
         var left = 0; var right = input.length - 1
@@ -218,6 +193,7 @@ class StringProblems {
         }
         return true
     }
+
 
     //Using boolean matrix >>>> TC : O(n2)   SC : O(n2)
     //aebcbda > 3(bcb)
@@ -264,7 +240,7 @@ class StringProblems {
 //    Input: s = "cbbd"
 //    Output: "bb"
     //Using two pointer approach >>> TC O(n2)   SC: O(1)
-    private fun longestPalindromeSubString2(s: String):String {
+    fun longestPalindromeSubString2(s: String):String {
         val n = s.length
         var low = 0
         var high = 0
@@ -296,13 +272,13 @@ class StringProblems {
     }
 
 
+    //    Input: S = "aebcbda" Output: 2, Explanation: Remove characters 'e'and 'd'.
+    //    Input: S = "geeksforgeeks" Output: 8, Explanation: One of the possible resultstring can be "eefee", so 13 - 5 = 8.
     fun longestPalindromString_withMinimumDeletions(S: String): Int {
         val length_longest_palindrome = longestPalindromStringLength(S)
         return S.length - length_longest_palindrome
     }
 
-    //    Input: S = "aebcbda" Output: 2, Explanation: Remove characters 'e'and 'd'.
-    //    Input: S = "geeksforgeeks" Output: 8, Explanation: One of the possible resultstring can be "eefee", so 13 - 5 = 8.
     fun longestPalindromStringLength(str: String): Int {
         val n = str.length
 
@@ -390,7 +366,7 @@ class StringProblems {
 
         for (i in index until str.length){
             if(str[i] in '0'..'9'){
-                num = num*10 + str[i].toString().toInt()
+                num = num*10 + (str[i] - '0')
             }else{
                 break
             }
@@ -442,11 +418,28 @@ class StringProblems {
         return result
     }
 
+//    Have the function WordSplit(strArr) read the array off strings stored in strArr,
+//    which will contain 2 elements: the first element will be a sequence of characters,
+//    and the second element will be a long string of comma-seperated words,
+//    in alphabetical order, that represents a dictionary of some arbitrary length.
+//
+//    For example: strArr can be: ["hellocat", "apple, bat,cat,goodbye,hello,yellow,why"].
+//
+//    Your goal is to determine if the first element in the input can be split into two words,
+//    where both words in the dictionary that is provided in the second input. In this example,
+//    the firs element can be split into two words: hello and cat because both of those words are in the dictionary.
+//
+//    Your program should return the two words that exist in the dictionary seperated by a comma.
+//    So for the example above, your program should return hello,cat.
+//    There will only be one correcy way to split the first element of characters into two words.
+//    I f there is no way to split string into two words that exist in the dictionary, return the string not possible.
+//    The first element itself will never exist in the dictionary as a real word.
+
 //    codingChallenge(arrayOf("baseball", "a,all,b,ball,bas,base,cat,code,d,e,quit,z"))
 //    output >> "base,ball"
 //    codingChallenge(arrayOf("abcgefd", "a,ab,abc,abcg,b,c,dog,e,efd,zzzz"))
 //    output >> "abcg,efd"
-    private fun codingChallenge(list: Array<String>):String {
+     fun codingChallenge(list: Array<String>):String {
         val wordToCompare = list[0]
         val stringDictionary = list[1]
         val singleStrings = stringDictionary.split(',')
@@ -1028,7 +1021,7 @@ class StringProblems {
         return arr
     }
 
-     fun String.customCompareTo(anotherString: String): Int {
+    fun String.customCompareTo(anotherString: String): Int {
         val len1: Int = this.length
         val len2: Int = anotherString.length
         val minLength = Math.min(len1, len2)

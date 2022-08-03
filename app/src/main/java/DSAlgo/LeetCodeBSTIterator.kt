@@ -1,10 +1,10 @@
-package KotlinSamples
+package DSAlgo
 
 import pojos.TreeNode
 
 class LeetCodeBSTIterator {
     init {
-        val root =  BinarySearchTree.getBSTree(intArrayOf(7, 3, 15, 9, 20))
+        val root = BinarySearchTree.getBSTree(intArrayOf(7, 3, 15, 9, 20))
         val bSTIterator = BSTIterator(root)
     }
 }

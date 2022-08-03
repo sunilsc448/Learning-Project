@@ -1,8 +1,7 @@
 package com.example.kotlintutorial
 
 import KotlinSamples.CouroutineSamples
-import KotlinSamples.HighLevelFunctions
-import KotlinSamples.PracticePitch
+import DSAlgo.PracticePitch
 import RXJava.RXJavaActivity
 import android.Manifest
 import movies.view.MoviesActivity

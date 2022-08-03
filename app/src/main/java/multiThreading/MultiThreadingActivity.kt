@@ -29,7 +29,7 @@ class MultiThreadingActivity : AppCompatActivity() {
 //          joinThreadSample()
 //            joinDeadlockSample()
 //          yieldandJoinThreadSample()
-//        interruptThreadSample()
+        interruptThreadSample()
 //        synchronizedSample()
 //        synchronizedSample2()
 //        threadProblemStatement1()

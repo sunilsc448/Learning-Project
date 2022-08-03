@@ -1,10 +1,10 @@
-package KotlinSamples
+package DSAlgo
 
 import pojos.TreeNode
 
 class LeetCodeRecoverBST {
     init {
-        val finalNode = BinarySearchTree.getBSTree(intArrayOf(1,2,3,4,5,6,7, 8, 9, 10, 11))
+        val finalNode = BinarySearchTree.getBSTree(intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11))
     }
 }
 

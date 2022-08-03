@@ -1,4 +1,4 @@
-package com.example.kotlintutorial.KotlinSamples
+package DSAlgo
 
 class LeetCodeIteratorSample {
     init {
@@ -42,7 +42,7 @@ class NestedIterator(nestedList: List<NestedInteger>) {
         }
     }
 
-    fun addItemToList(item:NestedInteger){
+    fun addItemToList(item: NestedInteger){
         if(item.isInteger()){
             list.add(item.getInteger())
         }else{
