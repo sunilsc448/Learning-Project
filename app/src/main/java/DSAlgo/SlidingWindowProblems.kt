@@ -334,4 +334,68 @@ class SlidingWindowProblems {
         else
             nums.size - maxLength
     }
+
+    //    Input: s = "cbaebabacd", p = "abc"
+//    Output: [0,6]
+//    Explanation:
+//    The substring with start index = 0 is "cba", which is an anagram of "abc".
+//    The substring with start index = 6 is "bac", which is an anagram of "abc".
+//
+//    Input: s = "abab", p = "ab"
+//    Output: [0,1,2]
+//    Explanation:
+//    The substring with start index = 0 is "ab", which is an anagram of "ab".
+//    The substring with start index = 1 is "ba", which is an anagram of "ab".
+//    The substring with start index = 2 is "ab", which is an anagram of "ab".
+    fun findAnagrams_slidingWindow(s:String, p:String): List<Int> {
+        val charCounts = IntArray(26) { 0 }
+        var startIdx = 0
+        var endIdx = p.length - 1
+        val result = mutableListOf<Int>()
+        // initial count
+        for (i in 0 until p.length-1) {
+            charCounts[s[i] - 'a']++
+        }
+
+        while (endIdx < s.length) {
+            charCounts[s[endIdx]-'a']++
+            if (isValidAnagram(charCounts.clone(), p)) {
+                result.add(startIdx)
+            }
+            charCounts[s[startIdx]-'a']--
+            endIdx++
+            startIdx++
+        }
+        return result
+    }
+
+    private fun isValidAnagram(charCounts: IntArray, p: String): Boolean {
+        // check if valid
+        for (i in p.indices) {
+            val idx = p[i] - 'a'
+            charCounts[idx]--
+            if (charCounts[idx] < 0)
+                return false
+        }
+        return true
+    }
+
+    //[2,6,4,8,10,9,15]
+    //[2,1]
+    //[5,4,3,2,1]
+    //[1,2,3,4]
+    fun findUnsortedSubarray(nums: IntArray): Int {
+        val len = nums.size
+        var max = Int.MIN_VALUE ; var min = Int.MAX_VALUE
+        var start = -1 ; var end = -1
+        for (i in 0 until len) {
+            max = Math.max(max, nums[i]) //from left to right, search the current max
+            min = Math.min(min, nums[len - i - 1]) //from right to left, search the current min
+            if (nums[i] < max)
+                end = i
+            if (nums[len - i - 1] > min)
+                start = len - i - 1
+        }
+        return if (start == -1) 0 else end - start + 1
+    }
 }

@@ -71,7 +71,7 @@ class BinarySearchProblems {
         val n: Int = matrix[0].size
         var i = 0 ; val j = n - 1
 
-        /*Compare last element of each row with the target to identify the row in which the targetnumber might exist */
+        /*Compare last element of each row with the target to identify the row in which the target number might exist */
         while (i < m && matrix[i][j] < target) {
             i++
         }

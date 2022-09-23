@@ -30,7 +30,7 @@ class HighLevelFunctions {
 //        Function Reference this::isEmpty
 //        Property Reference ::someVal.isInitialized
 //        Constructor Reference ::MyClass
-        SqrtClass(::sq_rt)
+        SqrtClass(::sq_rt).printSqrt(2)
 
         //function returning function
         val add = returnMeAddFunction()
@@ -73,6 +73,12 @@ class HighLevelFunctions {
 
     private fun returnMeAddFunction():(Int, Int)->Int{
         return ::add
+    }
+
+    private fun encloseExtensionToLambda(sb : StringBuilder, attr : String, action : StringBuilder.() -> Unit) : String{
+        sb.append("<$attr>")
+        sb.append("</$attr>")
+        return sb.toString()
     }
 }
 

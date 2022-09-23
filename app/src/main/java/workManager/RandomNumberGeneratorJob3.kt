@@ -29,6 +29,7 @@ class RandomNumberGeneratorJob3(context: Context, workParams: WorkerParameters) 
 
     override fun doWork(): ListenableWorker.Result {
         startRandomNumberGeneration()
+//        setProgressAsync(Builder().putInt(PROGRESS, 0).build())
         return ListenableWorker.Result.success()
     }
 

@@ -59,8 +59,8 @@ class ScopeFunctionsSample {
         val numbersListWith = mutableListOf(1,2,3,4,5)
         println("numbersListWith > $numbersListWith")
         val itemWithResult = with(numbersListWith){
-            numbersListWith.removeAt(2)
-            numbersListWith.elementAt(2)
+            this.removeAt(2)
+            this.elementAt(2)
         }
         println("numbersListWith's updated 2nd position $itemWithResult as 2nd item is removed inside with")
         println("updated numbersListWith count is ${numbersListWith.size} as one item is removed inside with")

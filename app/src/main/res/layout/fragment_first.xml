@@ -14,6 +14,7 @@
         android:text="First Fragment" />
 
     <Button
+        android:layout_marginTop="@dimen/dimen_8dp"
         android:id="@+id/btn"
         android:text="Go to Second"
         android:layout_gravity="center_horizontal|center_vertical"

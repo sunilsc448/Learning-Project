@@ -552,4 +552,23 @@ public final class JavaSamples {
 
         return res;
     }
+
+
+    public void printAllPathsFromRooToLeaf(TreeNode<Integer> root , int[] pathArr, Integer pathIndex){
+        if(root == null)
+            return;
+
+        pathArr[pathIndex++] =  root.getData();
+
+        if(root.getLeft() == null && root.getRight() == null){
+            System.out.print("path ");
+            for (int i = 0; i < pathArr.length; i++){
+                System.out.print(pathArr[i]+" ");
+            }
+            System.out.println();
+        }else{
+            printAllPathsFromRooToLeaf(root.getLeft(), pathArr, pathIndex);
+            printAllPathsFromRooToLeaf(root.getRight(), pathArr, pathIndex);
+        }
+    }
 }

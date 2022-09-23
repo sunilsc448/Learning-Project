@@ -95,18 +95,17 @@ class HashingSamples {
         var map = HashMap<Int, Int>()
         map.put(arr[0], 1)
         for(i in 1 until arr.size){
-            for(j in i+1 until arr.size){
-                val diff = target - (arr[i] + arr[j])
-                if(map.containsKey(diff)){
-                    sum = sum + map.get(diff)!!
-//                    sum = ((sum % mod) + (map.get(diff)!! % mod)) % mod
-                }
-            }
-
             if(map.containsKey(arr[i])){
                 map.put(arr[i], map.get(arr[i])!! + 1)
             }else{
                 map.put(arr[i], 1)
+            }
+            for(j in i+1 until arr.size){
+                val diff = target - (arr[i] + arr[j])
+                if(map.containsKey(diff)){
+                    sum += map.get(diff)!!
+//                    sum = ((sum % mod) + (map.get(diff)!! % mod)) % mod
+                }
             }
         }
         return sum
@@ -130,5 +129,53 @@ class HashingSamples {
 
         val subMap = map.toList().sortedByDescending { it.second }
         return subMap.subList(0, k).map { it.first }.toIntArray()
+    }
+
+    //2,5,4,4,1,3,4,4,1,4,4,1,2,1,2,2,3,2,4,2  k=3
+    fun maxOperations(nums: IntArray, k: Int): Int {
+        val map = HashMap<Int, Int>()
+        var count = 0
+        for(i in nums.indices){
+            if(map.containsKey(nums[i])){
+                count++
+                map.remove(map.get(nums[i])!! - 1)
+            }else{
+                if(map.containsKey(k-nums[i])){
+                    map.put(k-nums[i], map.get(k-nums[i])!! + 1)
+                }
+                map.put(k-nums[i], 1)
+            }
+        }
+        return count
+    }
+
+    //    Input: nums = [1,2,3,1]
+    //    Output: true
+    //
+    //    Input: nums = [1,2,3,4]
+    //    Output: false
+
+    //using Map or List
+    //using sets it is one liner
+    fun isDuplicateItem(nums: IntArray):Boolean{
+        val map = HashMap<Int, Int>()
+        nums.forEach {
+            if(map.containsKey(it)){
+                return true
+            }else{
+                map.put(it, it)
+            }
+        }
+        return false
+
+//        val map = ArrayList<Int>()
+//        nums.forEach {
+//            if(map.contains(it)){
+//                return true
+//            }else{
+//                map.add(it)
+//            }
+//        }
+//        return false
     }
 }

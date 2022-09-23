@@ -1,6 +1,5 @@
 package KotlinSamples
 
-import android.text.TextUtils.isEmpty
 import pojos.KotlinTestFile
 import java.lang.StringBuilder
 
@@ -44,6 +43,7 @@ final class ExtensionFunctionSample {
 
         val name = "Sunil"
         val nameWithTitle = name.MrPersonal
+        println(nameWithTitle)
 
         //Best Extension function example 4
         val connection = Connection(Host("www.google.com"), 80)

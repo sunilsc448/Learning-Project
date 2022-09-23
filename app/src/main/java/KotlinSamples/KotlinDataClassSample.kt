@@ -1,5 +1,24 @@
 package KotlinSamples
 
+//Error class must have one primary constructor param
+//data class DC1{
+//
+//}
+
+////abstract is incompatible with data class
+//abstract data class DC1(val value: String){
+//
+//}
+
+////open is incompatible with data class
+//open data class DC1(val value: String){
+//
+//}
+
+////sealed is incompatible with data class
+//sealed data class DC1(val value: String){
+//
+//}
 class KotlinDataClassSample {
     init {
         //data class works and prints only with the primary constructor values

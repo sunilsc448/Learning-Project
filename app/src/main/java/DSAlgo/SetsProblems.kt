@@ -29,32 +29,13 @@ class SetsProblems {
 //    Output: 4
 //    Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
 
+    //    Input: nums = [100,2,1,4,200,1,3]
+    //output = 4
+
     //    Input: nums = [0,3,7,2,5,8,4,6,0,1]
 //    Output: 9
     //unsorted array
     fun longestConsecutive(nums: IntArray): Int {
-        var length = 0
-        val set: MutableSet<Int> = HashSet()
-        for (i in nums) set.add(i)
-        for (i in nums) {
-            var max = 0
-            var prevVal = i - 1
-            var nextVal = i + 1
-            while (set.contains(prevVal)) {
-                max++
-                set.remove(prevVal--)
-            }
-
-            while (set.contains(nextVal)) {
-                max++
-                set.remove(nextVal++)
-            }
-            length = Math.max(length, max)
-        }
-        return length
-    }
-
-    fun longestConsecutiveSlightBetter(nums: IntArray): Int {
         var length = 0
         val set: MutableSet<Int> = HashSet()
         for (i in nums) set.add(i)
@@ -70,5 +51,10 @@ class SetsProblems {
             }
         }
         return length
+    }
+
+    //using Set
+    fun isDuplicateItem2(nums: IntArray):Boolean{
+        return nums.size != nums.toSet().size
     }
 }

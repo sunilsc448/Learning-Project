@@ -166,7 +166,7 @@ class StringProblems{
         var result = 0
         val n = s.length
         for(i in 0 until n){
-            var visitedArray = BooleanArray(128)
+            val visitedArray = BooleanArray(128)
             for(j in i until n){
                 val asciival = s.elementAt(j).toInt()
                 if(visitedArray[asciival] == true){
@@ -176,7 +176,6 @@ class StringProblems{
                     visitedArray[asciival] = true
                 }
             }
-            visitedArray[s.elementAt(i).toInt()] = false
         }
         return result
     }
@@ -214,7 +213,7 @@ class StringProblems{
             }
         }
 
-        for (k in 3 .. n){
+        for (k in 3 .. n) {
             var i = 0
             while(i < n - k + 1){
                 val j = i + k -1
@@ -261,7 +260,6 @@ class StringProblems{
             }
 
             val length = high - low - 1
-
             if (length > maxLength){
                 maxLength = length
                 startIndex=low+1
@@ -304,8 +302,7 @@ class StringProblems{
                 else if (areCharsEqual)
                     bookmarkArray[i][j] = bookmarkArray[i + 1][j - 1] + 2
                 else
-                    bookmarkArray[i][j] = Math.max(bookmarkArray[i][j - 1], bookmarkArray[i + 1][j]
-                )
+                    bookmarkArray[i][j] = Math.max(bookmarkArray[i + 1][j], bookmarkArray[i][j - 1])
             }
         }
 
@@ -550,7 +547,7 @@ class StringProblems{
         strs.forEach {
             val sortedString = it.toCharArray().sorted().joinToString("")
             if(map.containsKey(sortedString)){
-                val list = map.get(sortedString)!!.add(it)
+                map.get(sortedString)!!.add(it)
             }else{
                 map.put(sortedString, arrayListOf(it))
             }

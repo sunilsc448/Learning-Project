@@ -2,8 +2,9 @@ package DSAlgo
 
 class SortingSample {
     init {
+        quickSort(intArrayOf(7, 2, 9, 1, 6, 10, 3))
 //        bubbleSort(intArrayOf(1, 9, 6, 7, 11, 2, 5, 3))
-        findUnsortedSubarray(intArrayOf(1,2,3,4))
+//        findUnsortedSubarray(intArrayOf(1,2,3,4))
     }
 
     fun bubbleSort(nums:IntArray){
@@ -19,6 +20,28 @@ class SortingSample {
         println("items are bubble sorted as >>> ")
         nums.forEach {
           print("\t $it")
+        }
+        println()
+    }
+
+    fun bubbleSortOptimised(nums:IntArray){
+        for(i in 0 until nums.size - 1){
+            var isChanged = false
+            for(j in i+1 until nums.size){
+                if(nums[j] < nums[i]){
+                    val temp = nums[i]
+                    nums[i] = nums[j]
+                    nums[j] = temp
+                    isChanged = true
+                }
+            }
+            if(!isChanged){
+                break
+            }
+        }
+        println("items are bubble sorted as >>> ")
+        nums.forEach {
+            print("\t $it")
         }
         println()
     }
@@ -70,12 +93,6 @@ class SortingSample {
          mergeSort(nums, 0, nums.size-1)
     }
 
-    fun quickSort(nums:IntArray){
-        val low = 0
-        val high = nums.size - 1
-        quickSort(nums, low, high)
-    }
-
     //merge sort
     fun mergeSort(nums:IntArray, start:Int, end:Int){
         if(start < end){
@@ -121,8 +138,43 @@ class SortingSample {
         }
     }
 
+    fun quickSort(nums:IntArray){
+        val low = 0
+        val high = nums.size - 1
+        quickSort(nums, low, high)
+    }
+
+    fun quickSort(nums: IntArray, low: Int, high: Int){
+        if (low < high) {
+            val pi = partition(nums, low, high)
+            quickSort(nums, low, pi - 1)
+            quickSort(nums, pi + 1, high)
+        }
+    }
+
     //quick sort
-    fun quickSort(nums:IntArray, low:Int, high:Int){
+    fun quickSortLittleOptimised(nums:IntArray, low:Int, high:Int){
+        var lowLocal = low
+        var highLocal = high
+        while(lowLocal < highLocal){
+            if(low < high) {
+                val pi = partition(nums, lowLocal, highLocal)
+                quickSortLittleOptimised(nums, lowLocal, pi-1) //left partition
+                quickSortLittleOptimised(nums, pi+1, high) //right partition
+                 lowLocal = pi + 1
+                 if (pi - lowLocal < highLocal - pi) {
+                     quickSortLittleOptimised(nums, lowLocal, pi - 1)
+                    lowLocal = pi + 1
+                } else {
+                     quickSortLittleOptimised(nums, pi + 1, high)
+                    highLocal = pi - 1
+                }
+            }
+        }
+    }
+
+    //quick sort
+    fun quickSortBetterOptimised(nums:IntArray, low:Int, high:Int){
         var lowLocal = low
         var highLocal = high
         while(lowLocal < highLocal){    //if(low < high)     ////removed for best optimisation
@@ -131,10 +183,10 @@ class SortingSample {
             // quickSort(nums, pi+1, high) //right partition  //removed for best optimisation
             // lowLocal = pi + 1 //removed for further bettrer optimisation
             if(pi - lowLocal < highLocal - pi){
-                quickSort(nums, lowLocal, pi-1)
+                quickSortBetterOptimised(nums, lowLocal, pi-1)
                 lowLocal = pi + 1
             }else{
-                quickSort(nums, pi + 1, high)
+                quickSortBetterOptimised(nums, pi + 1, high)
                 highLocal = pi - 1
             }
         }

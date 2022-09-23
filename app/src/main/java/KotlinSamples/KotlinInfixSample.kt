@@ -8,6 +8,10 @@ class KotlinInfixSample {
        println("warrior2's updated XP ${warrior2.xp}")
        warrior1 attackInfix  warrior2
        println("warrior2's updated XP ${warrior2.xp}")
+
+       val boy = Boy()
+       val girl = Girl()
+       boy gift girl
    }
 }
 
@@ -19,4 +23,14 @@ class Warrior(var xp:Int, var hp:Int){
     infix fun attackInfix(warrior:Warrior){
         warrior.xp -= hp
     }
+}
+
+class Boy{
+    infix fun gift(girl: Girl){
+
+    }
+}
+
+class Girl{
+
 }

@@ -14,7 +14,7 @@ class StackSamples {
 //        myStack.empty() // return False)
 //        println()
 
-        val stack = MyStack<String>()
+//        val stack = MyStack<String>()
 //        stack.push("Hi")
 //        stack.push("Hello")
 //        stack.push("How")
@@ -70,9 +70,75 @@ class StackSamples {
 //            println("stack elements after reverse ${stack.toString()}")
 
         //Misc Problems
-        nextGreatestElementUsingStack(intArrayOf(13, 7, 6, 12))
+//        nextGreatestElementUsingStack(intArrayOf(13, 7, 6, 12))
 //        nextGreatestElementCorrectOrder(intArrayOf(1, 3, 4, 2))
 //        oneThreeTwoPattern(intArrayOf(1,2,3,4))
+
+
+//        val myStack = MyStack<Int>()
+//        myStack.push(1)
+//        myStack.push(2)
+//        myStack.push(3)
+//        myStack.push(4)
+//        myStack.push(5)
+//        myStack.push(6)
+//        myStack.push(7)
+//        deleteTheMiddleStackItem(myStack, 7, 0)
+//        while (!myStack.isEmpty()) {
+//            println("stack item is ${myStack.pop()}")
+//        }
+
+//        val stackWithMiddleOps = StackWithMiddleOps<Int>()
+//        stackWithMiddleOps.push(1)
+//        println(stackWithMiddleOps.getMid())
+//        stackWithMiddleOps.push(2)
+//        println(stackWithMiddleOps.getMid())
+//        stackWithMiddleOps.push(3)
+//        println(stackWithMiddleOps.getMid())
+//        stackWithMiddleOps.push(4)
+//        println(stackWithMiddleOps.getMid())
+//        stackWithMiddleOps.push(5)
+//        println(stackWithMiddleOps.getMid())
+//        stackWithMiddleOps.deleteMid()
+//        println(stackWithMiddleOps.getMid())
+//        stackWithMiddleOps.pop()
+//        println(stackWithMiddleOps.getMid())
+    }
+
+    fun isValid(s: String): Boolean {
+        val stack = Stack<Char>()
+        s.forEach {
+            if(it == '(' || it == '{' || it == '['){
+                stack.push(it)
+            }else if(it == ')' || it == '}' || it == ']'){
+                if(stack.isEmpty()){
+                    return false
+                }else{
+                    if(!isPairMatching(stack.pop(), it)){
+                        return false
+                    }
+                }
+            }
+        }
+
+        return stack.isEmpty()
+    }
+
+    private fun isPairMatching(symbol1: Char, symbol2: Char): Boolean {
+        return (symbol1 == '(' && symbol2 == ')') || (symbol1 == '{' && symbol2 == '}') || (symbol1 == '[' && symbol2 == ']')
+    }
+
+    private fun deleteTheMiddleStackItem(stack: MyStack<Int>, size: Int, currentIndex: Int) {
+        if (stack.isEmpty() || currentIndex == size)
+            return
+
+        val poppedItem = stack.pop()!!
+
+        deleteTheMiddleStackItem(stack, size, currentIndex + 1)
+
+        if(currentIndex != size / 2){
+            stack.push(poppedItem)
+        }
     }
 
     private fun reverseTheStack(stack: Stack<Int>) {
@@ -297,6 +363,42 @@ class StackSamples {
         }
         return sum
     }
+
+//    Input: tokens = ["2","1","+","3","*"]
+//    Output: 9
+//    Explanation: ((2 + 1) * 3) = 9
+//
+//    Input: tokens = ["4","13","5","/","+"]
+//    Output: 6
+//    Explanation: (4 + (13 / 5)) = 6
+
+    //Evaluate Reverse Polish Notation
+    fun evalRPN(tokens: Array<String>): Int {
+        val stack = Stack<String>()
+        fun isOperator(str:String):Boolean{
+            return str == "+" || str == "-" || str == "*" ||  str == "/"
+        }
+        tokens.forEach{
+            if(!isOperator(it)){
+                stack.push(it)
+            }else{
+                val pop1 = stack.pop()!!.toInt()
+                val pop2 = stack.pop()!!.toInt()
+                when(it){
+                    "+" -> stack.push((pop1 + pop2).toString())
+                    "-" -> stack.push((pop2 - pop1).toString())
+                    "*" -> stack.push((pop2 * pop1).toString())
+                    "/" -> stack.push((pop2 / pop1).toString())
+                }
+            }
+        }
+
+        return if(!stack.isEmpty()){
+            stack.pop().toInt()
+        }else{
+            -1
+        }
+    }
 }
 
 class MyStack<T>{
@@ -335,6 +437,29 @@ class MyStack<T>{
     }
 
     fun isEmpty() =  (top == -1)
+}
+
+data class MinStackNode(val value: Int, val min: Int,var next: MinStackNode? = null)
+class MinStack() {
+    var top: MinStackNode? = null
+    fun push(`val`: Int) {
+        val min: Int = top?.min?.let { if (`val` < it) `val` else it } ?: `val`
+        val node = MinStackNode(`val`, min)
+        node.next = top
+        top = node
+    }
+
+    fun pop() {
+        top = top?.next
+    }
+
+    fun top(): Int {
+        return top?.value ?: throw IllegalStateException("Stack is empty.")
+    }
+
+    fun getMin(): Int {
+        return top?.min ?: throw IllegalStateException("Stack is empty.")
+    }
 }
 
 class MyStack2 {
@@ -508,3 +633,76 @@ class DoubleSidedStack<T>{
         return sb.toString()
     }
 }
+
+class StackWithMiddleOps<T>{
+    private var head:StackLLNode<T>? = null
+    private var mid:StackLLNode<T>? = null
+    private var size = 0
+
+    fun push(data:T){
+        val newNode = StackLLNode<T>(data)
+        if(size == 0){
+            head = newNode
+            mid = newNode
+        }else{
+            head?.next = newNode
+            newNode.prev = head
+            head = head?.next
+            if(size % 2 != 0){
+                mid = mid?.next
+            }
+        }
+        size++
+    }
+
+    fun pop():T?{
+        var data:T? = null
+        if(size > 0){
+            if (size == 1) {
+                head = null
+                mid = null
+            }else{
+                data = head?.data
+                head = head?.prev
+                head?.next = null
+                if (size % 2 == 0) {
+                    mid = mid?.prev;
+                }
+            }
+            size--
+        }else{
+            println("Stack underflow")
+        }
+        return data
+    }
+
+    fun getMid():T?{
+        return mid?.data
+    }
+
+    fun deleteMid(){
+        if(size > 0){
+            if(size == 1){
+                head = null
+                mid = null
+            }else if(size == 2){
+                head = head?.prev
+                mid = mid?.prev
+                head?.next = null
+            }else{
+                val midPrev = mid?.prev
+                val midNext = mid?.next
+                midNext?.prev = midPrev
+                midPrev?.next = midNext
+                if(size % 2 == 0){
+                    mid = midPrev
+                }else{
+                    mid = midNext
+                }
+            }
+            size--
+        }
+    }
+}
+
+data class StackLLNode<T>(val data: T, var next:StackLLNode<T>? = null, var prev:StackLLNode<T>? = null)

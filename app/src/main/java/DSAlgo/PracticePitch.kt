@@ -1,5 +1,6 @@
 package DSAlgo
 
+import KotlinSamples.StructuralAndReferralEquitySample
 import android.os.Build
 import android.view.View
 import android.widget.Button
@@ -169,7 +170,7 @@ class PracticePitch {
 //       val encodedString = StringProblems().encode(arrayListOf("lint", "code", "love", "you"))
 //       StringProblems().decode(encodedString)
 
-//        ArrayPrograms().longestConsecutiveSlightBetter(intArrayOf(100, 4, 200, 1, 3, 2))
+//        SetsProblems().longestConsecutive(intArrayOf(100,2,1,4,200,1,3))
 
 //        var arr = intArrayOf(7,6,4,3,1)
 //        arr = intArrayOf(7,1,5,3,6,4)
@@ -180,22 +181,18 @@ class PracticePitch {
 //        ArrayPrograms().threeSumToSumZero(arr)
 //          ArrayPrograms().TrappingRainWater_4(arr)
 //        SlidingWindowProblems().longestSubStringSlidingWindow("abcbde")
-        "hello"
-        "ooolleoooleh"
-        "adc"
-        "dcda"
 //        SlidingWindowProblems().checkInclusionMyApproach("hello", "ooolleoooleh")
 //        SlidingWindowProblems().minWindow("ADOBECODEBANC", "ABC")
 
-//        val mat_arr = arrayOf(intArrayOf(1,2,3,4), intArrayOf(5,6,7,8), intArrayOf(10,11,12,13))
-//        BinarySearchProblems().searchMatrix(mat_arr, 10)
+//        val matArr = arrayOf(intArrayOf(1,2,3,4), intArrayOf(5,6,7,8), intArrayOf(10,11,12,13))
+//        BinarySearchProblems().searchMatrix(matArr, 10)
 //        arr = intArrayOf(3,6,7,11)
 //        arr = intArrayOfntArrayOf(312884470)
-//        BinarySearchProblems().searchInSortedRotated(arr, 0)
+//        BinarySearchProblems().searchInSortedRotated(intArrayOf(4,5,6,7,0,1,2), 0)
 //        arr = intArrayOf(3,4,5,1,2)
 //        BinarySearchProblems().searchMinInSortedRotated(arr)
 //        ArrayPrograms().pascalsTriangle(5)
-//        val position = BinarySearchProblems().binarySearchPositionToInsert(intArrayOf(1, 2, 4, 5, 6, 7, 8, 9), 0, 7, 3)
+//        val position = BinarySearchProblems().binarySearchPositionToInsert(intArrayOf(1,2,3,8,9), 0, 4, 7)
 //        println(position)
 //        SortingSample().mergeSort(intArrayOf(5, 4, 3, 2, 1))
 //        ArrayPrograms().findUnsortedSubarray(intArrayOf(2,6,4,8,10,9,15))
@@ -203,7 +200,31 @@ class PracticePitch {
 //        BinarySearchProblems().searchMinInSortedRotated(intArrayOf(3,4,5,1,2))
 //        StringProblems().longestPalindromStringLength("aebcba")
 //        StringProblems().codingChallenge(arrayOf("baseball", "a,all,b,ball,bas,base,cat,code,d,e,quit,z"))
-        StringProblems().findAnagrams_slidingWindow("cbaebabacd", "abc")
+//        StringProblems().findAnagrams_slidingWindow("cbaebabacd", "abc")
+//        StructuralAndReferralEquitySample()
+//        StringProblems().findAnagrams_slidingWindow("cbaebabacd", "abc")
+//        TreesProblems()
+//        StackSamples()
+//        BinarySearchProblems().monkeyBananaProblem(intArrayOf(30,11,23,4,20), 6)
+
+//        ArrayPrograms().LongestIncreasingSubSequence(intArrayOf(10,9,2,5,3,7,101,18))
+//
+//        val sevenNode = TreeNode(7)
+//        val sixNode = TreeNode(6)
+//        val fiveNode = TreeNode(5)
+//        val fourNode = TreeNode(4)
+//
+//        val threeNode = TreeNode(3, sixNode, sevenNode)
+//        val twoNode = TreeNode(2, fourNode, fiveNode)
+//        val oneNode = TreeNode(1, twoNode, threeNode)
+//        JavaSamples().printAllPathsFromRooToLeaf(oneNode, IntArray(10), 0)
+
+//        SortingSample()
+//        ArrayPrograms().pascalsTriangle(5)
+//        ArrayPrograms().maximumAscOrDescSubArray(intArrayOf(5,2,1,2,5,2,1,2,5))
+//        ArrayPrograms().rotateArrayInPlace(intArrayOf(4,5,6,7,0,1,2))
+//        ArrayPrograms().separateEvenAndOddNumbers(intArrayOf(3 ,5, 2, 11, 6, 7, 4, 9, 10))
+        StackSamples().nextSmallestElement(intArrayOf(4, 8, 5, 2, 25))
     }
 }
 

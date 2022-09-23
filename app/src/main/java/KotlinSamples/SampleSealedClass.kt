@@ -59,6 +59,12 @@ fun checkShapeSealed(shape: Shape):String {
        is ShapeChild -> {
            shape.print()
        }
+       is Shape.Circle -> TODO()
+       Shape.NoShape -> TODO()
+       is Shape.Rectangle -> TODO()
+       is ShapeChild -> TODO()
+       is Shape.Square -> TODO()
+       else -> TODO()
    }
 }
 
@@ -84,6 +90,7 @@ sealed class Shape(){
             return "nothing for me"
         }
     }
+
 }
 
 class ShapeChild:Shape(){

@@ -40,16 +40,14 @@ class ReifiedInlineCrossLineSample {
         doSomethingCrossLine()
     }
 
-    /*
-    Error: Overloading can only done for input params and not on return type
-    Solution would be a reified keyword with inline function
-    fun showMessage(marks: Int): Int {
-        return marks
-    }
-    fun showMessage(marks: Int): String {
-        return "Congratulations! you scored more than 90%";
-    }
-    */
+////    Error: Overloading can only done for input params and not on return type
+////    Solution would be a reified keyword with inline function
+//    fun showMessage(marks: Int): Int {
+//        return marks
+//    }
+//    fun showMessage(marks: Int): String {
+//        return "Congratulations! you scored more than 90%";
+//    }
 
     inline fun<reified T> showMarks(marks:Int):T{
         return when(marks::class){

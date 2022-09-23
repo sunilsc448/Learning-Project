@@ -23,10 +23,12 @@ import android.content.pm.PackageManager
 
 import android.app.Activity
 import android.os.*
+import androidx.fragment.app.FragmentActivity
 import daggerTutorial.SampleActivity
 import firebase.NotificationActivity
 import kotlinFlow.FlowActivity
 import lifecycle.activities.launchModes.FirstActivity
+import lifecycle.fragments.FragmentLifeCycleActivity
 import multiThreading.MultiThreadingActivity
 import pojos.Player
 import services.ServiceActivity
@@ -142,7 +144,8 @@ class Activity3 : AppCompatActivity() {
 //        ServiceActivityOnClick()
 //        workManagerActivityOnClick()
 //        rxJavaActivity()
-//          launchModesActivity()
+          launchModesActivity()
+          fragmentsLifeCycle()
 //        launchNotificationActivity()
 //        launchMultiThreadingActivity()
 //          launchSampleActivity()
@@ -150,6 +153,12 @@ class Activity3 : AppCompatActivity() {
         PracticePitch()
 
 
+    }
+
+    private fun fragmentsLifeCycle() {
+        btn.setOnClickListener {
+            startActivity(Intent(this, FragmentLifeCycleActivity::class.java))
+        }
     }
 
     private fun launchFlowActivity() {

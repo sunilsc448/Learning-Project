@@ -23,6 +23,12 @@ class ArrayPrograms {
 //        minimumOperationsToZero(intArrayOf(3,2,20,1,1,3), 10)
     }
 
+    fun isPowerOfFour(n: Int): Boolean {
+        if(n == 0) return false
+        if(n == 1) return true
+        if(n % 4 != 0) return false
+        return isPowerOfFour(n/4)
+    }
 
 //    Input: nums = [4,5,6,7,0,1,2]
 //    Output: nums = [0,1,2,4,5,6,7]
@@ -422,7 +428,6 @@ class ArrayPrograms {
         println("Median after reading 1" + " element is " + arr[0])
         i = 1
         while (i < n) {
-            var median: Float
             j = i - 1
             num = arr[i]
 
@@ -444,7 +449,7 @@ class ArrayPrograms {
             // if odd number of integers are read from stream
             // then middle element in sorted order is median
             // else average of middle elements is median
-            median = if (count % 2 != 0) {
+            var median: Float = if (count % 2 != 0) {
                 arr[count / 2].toFloat()
             } else {
                 ((arr[count / 2 - 1] + arr[count / 2]) / 2).toFloat()
@@ -513,7 +518,7 @@ class ArrayPrograms {
         }
     }
     //function for counting the live neighbours of current cell
-    fun count(arr: Array<IntArray>, i: Int, j: Int, m: Int, n: Int, changed: Array<BooleanArray>?): Int {
+    fun count(arr: Array<IntArray>, i: Int, j: Int, m: Int, n: Int, changed: Array<BooleanArray>): Int {
         val dis = arrayOf(
             intArrayOf(-1, -1),
             intArrayOf(-1, 0),
@@ -528,8 +533,9 @@ class ArrayPrograms {
         for (k in 0..7) {
             val x = i + dis[k][0]
             val y = j + dis[k][1]
-            if (x >= 0 && y >= 0 && x < m && y < n && arr[x][y] == 1) {
+            if (x >= 0 && y >= 0 && x < m && y < n && arr[x][y] == 1 && changed[x][y]) {
                 cnt++
+                changed[x][y] = true
             }
         }
         return cnt
@@ -678,12 +684,12 @@ class ArrayPrograms {
 
 //    Input: nums = [2,6,4,8,10,9,15]
 //    Output: 5
-//    Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.
+//    Problem explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.
 
 //    Input: nums = [1,2,3,4]
 //    Output: 0
 //    array is already sorted
-    fun findUnsortedSubarray(nums: IntArray): Int {
+    fun findUnsortedSubArrayLength(nums: IntArray): Int {
         val len = nums.size
         var max = Int.MIN_VALUE ; var min = Int.MAX_VALUE
         var start = -1 ; var end = -1
@@ -700,10 +706,10 @@ class ArrayPrograms {
         else
             end - start + 1
     }
-
-//    Input: x = 123
 //    Output: 321
 
+
+//    Input: x = 123
 //    Input: x = -123
 //    Output: -321
 
@@ -755,7 +761,7 @@ class ArrayPrograms {
             if(str[i] in '0'..'9'){
                 num = num*10 + str[i].toString().toInt()
             }else{
-                break;
+                break
             }
             if(num > Int.MAX_VALUE || num < Int.MIN_VALUE){
                 break
@@ -809,7 +815,10 @@ class ArrayPrograms {
 
 //    Input: nums = [10000,1,10000,1,1,1,1,1,1]
 //    Output: 10001
-    fun maximumAscOrDescSubarray(nums: IntArray): Int {
+
+    //Refer Sets for Unique sub array sum
+
+    fun maximumAscOrDescSubArray(nums: IntArray): Int {
         var maxSum = 0
         var isAscending = false
         var sum = nums[0]
@@ -828,11 +837,12 @@ class ArrayPrograms {
                     sum = nums[i] + nums[i-1]
                 }
                 isAscending = false
-            }
-            if(isAscending){
-                sum += nums[i]
-            }else{
-                sum = nums[i] + nums[i-1]
+            }else {
+                if (isAscending) {
+                    sum += nums[i]
+                } else {
+                    sum = nums[i] + nums[i - 1]
+                }
             }
 
             if(sum > maxSum){
@@ -841,8 +851,6 @@ class ArrayPrograms {
         }
         return maxSum
     }
-
-
 
 //    Maximum Erasure Value
 //    You are given an array of positive integers nums and want to erase a subarray containing unique elements. The score you get by erasing the subarray is equal to the sum of its elements.
@@ -879,6 +887,10 @@ class ArrayPrograms {
     }
 
 
+//    Input: array = [1, 5, 4, 3]
+//    Output: 6
+//    Explanation : 5 and 3 are distance 2 apart. So the size of the base = 2.Height of container = min(5, 3) = 3.So total area = 3 * 2 = 6
+
     //    Input: height = [1,8,6,2,5,4,8,3,7]
 //    Output: 49
 //    Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7].
@@ -886,9 +898,11 @@ class ArrayPrograms {
 
     //    Input: height = [1,1]
 //    Output: 1
+
+//    https://www.geeksforgeeks.org/container-with-most-water/
     fun containerMostWater(arr: IntArray):Int{
         var maxArea = 0
-        for (i in 0 until arr.size){
+        for (i in arr.indices){
             for (j in i+1 until arr.size){
                 maxArea = Math.max(maxArea, Math.min(arr[i], arr[j]) * (j - i))
             }
@@ -914,15 +928,25 @@ class ArrayPrograms {
         return maxArea
     }
 
+//    Input: arr[] = {2, 0, 2}
+//    Output: 2
+//    We can trap 2 units of water in the middle gap.
 
-    //    Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+//    Input: arr[]   = {3, 0, 2, 0, 4}
+//    Output: 7
+//    We can trap “3 units” of water between 3 and 2, “1 unit” on top of bar 2 and “3 units” between 2 and 4.
+
+//    Input: arr[] = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}
 //    Output: 6
-//    Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+//    Trap “1 unit” between first 1 and 2, “4 units” between first 2 and 3 and “1 unit” between second last 1 and last 2
 //
 //    Input: height = [4,2,0,3,2,5]
 //    Output: 9
+
+//    https://www.geeksforgeeks.org/trapping-rain-water/
+
 //        approach 1
-    fun TrappingRainWater(height: IntArray): Int {
+    fun trappingRainWater(height: IntArray): Int {
         val size = height.size
         var sum = 0
         for (i in 1 until size - 1) {
@@ -940,7 +964,7 @@ class ArrayPrograms {
     }
 
     //approach2
-    fun TrappingRainWater_2(height: IntArray): Int {
+    fun trappingRainWater2(height: IntArray): Int {
         val size = height.size
         var sum = 0
 
@@ -965,7 +989,7 @@ class ArrayPrograms {
     }
 
     //approach3
-    fun TrappingRainWater_3(height: IntArray): Int {
+    fun trappingRainWater3(height: IntArray): Int {
         val size = height.size
         var sum = 0
         var left = 0; var right = size-1
@@ -991,4 +1015,20 @@ class ArrayPrograms {
     }
 
     //############### approach4 in stack problems #######################
+
+    fun separateEvenAndOddNumbers(arr: IntArray){
+        var left = 0; var right = arr.size - 1
+        while(left < right){
+            while (arr[left] % 2 == 0){
+                left++
+            }
+            while (arr[right] % 2 != 0){
+                right--
+            }
+            if(left < right){
+                swap(arr, left, right)
+            }
+        }
+        println(arr)
+    }
 }

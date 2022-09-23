@@ -3,6 +3,7 @@ package com.example.kotlintutorial;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import pojos.Samplettestclass;
@@ -13,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
 //        isVersionEligible(null, null);
 
@@ -206,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
 //        KotlinSampleFile file = new KotlinSampleFile();
     }
 
-    static int count_Triplets(int[] A, int N){
+    static int count_Triplets(int[] A, int N) {
         int max_val = 0;
         for (int i = 0; i < N; i++)
             max_val = Math.max(max_val, A[i]);

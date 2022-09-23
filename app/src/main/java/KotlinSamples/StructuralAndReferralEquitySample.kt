@@ -11,7 +11,7 @@ class StructuralAndReferralEquitySample {
 //        println("debug: Structural Equity ${user1 == user2}")
 //        println("debug: Referential Equity ${user1 === user2}")
 
-        println("debug: Structural Equity ${user1::class == user2::class}")
+        println("debug: Structural Equity ${user1 == user2}")
         println("debug: Referential Equity ${user1::class === user2::class}")
 
 //        println("debug: Structural Equity ${user1 == user3}")
