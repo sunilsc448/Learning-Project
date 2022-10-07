@@ -996,6 +996,7 @@ class ArrayPrograms {
         var left_max = 0; var right_max = 0
         while (left < right){
             if(height[left] < height[right]){
+                left_max = Math.max(left_max, height[left])
                 if(height[left] > left_max){
                     left_max = height[left]
                 }else{

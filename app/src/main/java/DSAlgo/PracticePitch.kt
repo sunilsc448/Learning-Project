@@ -1,14 +1,7 @@
 package DSAlgo
 
-import KotlinSamples.StructuralAndReferralEquitySample
 import android.os.Build
-import android.view.View
-import android.widget.Button
 import androidx.annotation.RequiresApi
-import com.example.kotlintutorial.AppClass
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.N)
 class PracticePitch {
@@ -224,7 +217,55 @@ class PracticePitch {
 //        ArrayPrograms().maximumAscOrDescSubArray(intArrayOf(5,2,1,2,5,2,1,2,5))
 //        ArrayPrograms().rotateArrayInPlace(intArrayOf(4,5,6,7,0,1,2))
 //        ArrayPrograms().separateEvenAndOddNumbers(intArrayOf(3 ,5, 2, 11, 6, 7, 4, 9, 10))
-        StackSamples().nextSmallestElement(intArrayOf(4, 8, 5, 2, 25))
+
+//        QueueSamples().maxSlidingWindowDeque(intArrayOf(1,3,-1,-3,5,3,6,7), 3)
+//          SlidingWindowProblems().minimumOperationsToZero(intArrayOf(1,1,4,2,3), 5)
+//        SlidingWindowProblems().findAnagramsSlidingWindow("cbaebabacd", p = "abc")
+
+//        val stack = Stack<Int>()
+//        stack.push(1);stack.push(2);stack.push(3);stack.push(4);stack.push(5);stack.push(6);stack.push(7)
+//        StackSamples().deleteTheMiddleStackItem(stack, 7, 0)
+//        println(stack)
+
+//        Neetcode().groupAnagrams(arrayOf("eat","tea","tan","ate","nat","bat"))
+//        Neetcode().topKFrequent(intArrayOf(1, 1, 1, 2, 2, 3), 2)
+//        Neetcode().productExceptSelf(intArrayOf(1, 2, 3, 4))
+//        val encodedStr = Neetcode().encode(listOf("lint","code","love","you"))
+//        Neetcode().decode(encodedStr)
+//        Neetcode().longestConsecutive(intArrayOf(0,3,7,2,5,8,4,6,0,1))
+//        Neetcode().isPalindromeBetterApproach("A man, a plan, a canal: Panama")
+//        Neetcode().characterReplacement("AABABBA", 1)
+//        val isPermutation = Neetcode().checkInclusion("ab", "eldboaooba")
+//        println(isPermutation)
+//        val result = Neetcode().minWindow("ADOBECODEBANC", "ABC")
+//        println(result)
+//        Neetcode().maxSlidingWindow(intArrayOf(1, 3, -1, -3, 5, 3, 6, 7), 3)
+//        Neetcode.SlidingWindow().minimumOperationsToZero(intArrayOf(3,2,20,1,1,3), 10)
+//        Neetcode.SlidingWindow().findAnagramsSlidingWindow("abab", p = "ab")
+//        Neetcode.Stacks().generateParenthesis(3)
+//        Neetcode.Stacks().carFleet(position = intArrayOf(10, 8, 0, 5, 3), speed = intArrayOf(2, 4, 1, 1, 3), target = 12)
+//        Neetcode.Stacks().largestRectangleArea(intArrayOf(2,1,5,6,2,3))
+//        val stack = Stack<Int>()
+//        stack.push(1);stack.push(2);stack.push(3);stack.push(4);stack.push(5);stack.push(6)
+//        Neetcode.Stacks().reverseTheStack(stack)
+//        println(stack)
+//        val mid = Neetcode.Stacks().middleOfStack(stack)
+//        println(mid)
+//        Neetcode.Stacks().deleteMiddleOfStack(stack)
+//        println(stack)
+//        Neetcode.Stacks().findingSpans(intArrayOf(100,80, 60, 70, 60, 75, 85))
+
+//        val timeMap = Neetcode.BinarySearch.TimeMap()
+//        timeMap.set("foo", "bar", 1)//timestamp 1
+//        timeMap.get("foo", 1);         // return "bar"
+//        timeMap.get("foo", 3);         // return "bar", since there is no value corresponding
+//    // to foo at timestamp 3 and timestamp 2, then the only value is at timestamp 1 is "bar".
+//        timeMap.set("foo", "bar2", 4); // store the key "foo" and value "bar2" along with timestamp = 4.
+//        timeMap.get("foo", 4);         // return "bar2"
+//        timeMap.get("foo", 5);         // return "bar2"
+//
+//        Neetcode.ArraysAndHashing().maxCars(arrivals =  intArrayOf(900, 940, 1100, 950, 1500, 1800),
+//            departures =  intArrayOf(910, 1200, 1130, 1220, 1900, 2000))
     }
 }
 

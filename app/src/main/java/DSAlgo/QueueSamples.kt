@@ -1,25 +1,27 @@
 package DSAlgo
 
 import java.util.*
-import kotlin.collections.ArrayDeque
 
 class QueueSamples {
     init {
-        MyQueueUseCase()
+//        myQueueUseCase()
+          myDequeueUseCase()
 //        maxSlidingWindow(intArrayOf(4, 1, 3, 5, 1, 2, 3, 2, 1, 1, 5), 11)
-
-
-        //Dequeue(doublesided queue)
-//        val dq = MyDequeue<Int>()
-//        dq.addFirst(1)
-//        dq.addFirst(2)
-//        dq.addLast(3)
-//        dq.removeLast()
-//        dq.removeLast()
-//        println("dequeue >>"+dq)
     }
 
-    private fun MyQueueUseCase() {
+    private fun myDequeueUseCase() {
+        val dq = MyDequeue<Int>()
+        dq.addLast(0)
+        dq.removeLast()
+        dq.addLast(1)
+        dq.addLast(2)
+        dq.getFirst()
+        dq.addLast(3)
+        dq.removeFirst()
+        println("dequeue >>$dq")
+    }
+
+    private fun myQueueUseCase() {
         val queue = MyQueue<String>()
         queue.enqueue("anil")
         queue.enqueue("sunil")
@@ -33,59 +35,33 @@ class QueueSamples {
         println("front item is ${queue.dequeue()}")
     }
 
-    fun maxSlidingWindow(nums: IntArray, k: Int): IntArray {
-        var priorityQueue = PriorityQueue<Int>(k, Collections.reverseOrder())
-
-        var resultCounter = 0
-        var resultArray = IntArray(nums.size-k+1)
-        var i = 0
-        while (i < k){
-            priorityQueue.add(nums[i])
-            i++
-        }
-        resultArray[resultCounter++] = priorityQueue.peek()!!
-        priorityQueue.remove(nums[0])
-
-        while (i < nums.size){
-            priorityQueue.add(nums[i])
-            resultArray[resultCounter++] = priorityQueue.peek()!!
-            priorityQueue.remove(nums[i-k+1])
-            i++
-        }
-        return resultArray
-    }
-
     fun maxSlidingWindowDeque(nums: IntArray, k: Int): IntArray {
-        var priorityQueue = ArrayDeque<Int>()
-        var resultArray = IntArray(nums.size-k+1)
+        val dq = ArrayDeque<Int>()
+        val resultArray = IntArray(nums.size-k+1)
         var resultCounter = 0
         var i = 0
         while (i < k){
-            while (!priorityQueue.isEmpty() && nums[i] >= nums[priorityQueue.last()]){
-                priorityQueue.removeLast()
+            while (!dq.isEmpty() && nums[i] >= nums[dq.last()]){
+                dq.removeLast()
             }
-            priorityQueue.addLast(i)
+            dq.addLast(i)
             i++
         }
-
-        //[0,1,2,3,4,5,6,7,8,9,10]
-        //[4,1,3,5,1,2,3,2,1,1,5]
 
         while (i < nums.size){
-            resultArray[resultCounter++] = nums[priorityQueue.first()]
-            while (!priorityQueue.isEmpty() && priorityQueue.first() <= i-k){
-                priorityQueue.removeFirst()
+            resultArray[resultCounter++] = nums[dq.first()]
+            while (!dq.isEmpty() && dq.first() <= i-k){
+                dq.removeFirst()
             }
 
-            while (!priorityQueue.isEmpty() && nums[i] >= nums[priorityQueue.last()]){
-                priorityQueue.removeLast()
+            while (!dq.isEmpty() && nums[i] >= nums[dq.last()]){
+                dq.removeLast()
             }
-            priorityQueue.addLast(i)
+            dq.addLast(i)
             i++
         }
 
-        resultArray[resultCounter++] = nums[priorityQueue.first()]
-
+        resultArray[resultCounter] = nums[dq.first()]
         return resultArray
     }
 }
@@ -129,7 +105,7 @@ class MyQueue<T>{
     }
 }
 
-
+//Dequeue(double sided queue)
 class MyDequeue<T>{
     private val size = 6
     private val array = Array<Any>(size){}
@@ -137,8 +113,9 @@ class MyDequeue<T>{
     private var front = -1
 
     fun addFirst(input:T){
-        if(isFull())
+        if(isFull()) {
             return
+        }
 
         if(front == -1){
             front = 0
@@ -174,7 +151,7 @@ class MyDequeue<T>{
         if(front == -1){
             front = 0
             rear = 0
-        }else if(rear == size-1){
+        }else if(rear == size-1){ //mostly unwanted check
             rear = 0
         }else{
             rear++
@@ -191,7 +168,7 @@ class MyDequeue<T>{
         if(front == rear){
             front = -1
             rear = -1
-        }else if(rear == 0){
+        }else if(rear == 0){ //mostly unwanted check
             rear = size - 1
         }else{
             rear--
@@ -203,7 +180,7 @@ class MyDequeue<T>{
     }
 
     private fun isFull(): Boolean {
-        return ((front == 0 && rear == -1) || front == rear + 1)
+        return ((front == 0 && rear == size - 1) || front == rear + 1)
     }
 
     fun getFirst():T{

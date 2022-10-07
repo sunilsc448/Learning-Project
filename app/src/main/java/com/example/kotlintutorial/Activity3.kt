@@ -151,8 +151,6 @@ class Activity3 : AppCompatActivity() {
 //          launchSampleActivity()
 //        launchFlowActivity()
         PracticePitch()
-
-
     }
 
     private fun fragmentsLifeCycle() {

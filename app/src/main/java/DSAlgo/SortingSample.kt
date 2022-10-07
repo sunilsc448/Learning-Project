@@ -210,23 +210,4 @@ class SortingSample {
         arr[i] = arr[j]
         arr[j] = temp
     }
-
-    //[2,6,4,8,10,9,15]
-    //[2,1]
-    //[5,4,3,2,1]
-    //[1,2,3,4]
-    fun findUnsortedSubarray(nums: IntArray): Int {
-        val len = nums.size
-        var max = Int.MIN_VALUE ; var min = Int.MAX_VALUE
-        var start = -1 ; var end = -1
-        for (i in 0 until len) {
-            max = Math.max(max, nums[i]) //from left to right, search the current max
-            min = Math.min(min, nums[len - i - 1]) //from right to left, search the current min
-            if (nums[i] < max)
-                end = i
-            if (nums[len - i - 1] > min)
-                start = len - i - 1
-        }
-        return if (start == -1) 0 else end - start + 1
-    }
 }
